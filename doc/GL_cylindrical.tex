@@ -445,4 +445,83 @@ i.e.
     \Omega_3=\frac{\hbar}{MR^2}\frac{5}{2}\qq{for}m=2\rightarrow m=3\\
     ...
 \end{align}
+
+\section{Numerical solution}
+
+From the bulk free energy term we can get the bulk order parameter
+$\eta_0 = \frac{1}{2}\sqrt\frac{|\alpha|}{\beta_1}$.
+We also define the coherence length $\xi = \sqrt{\kappa_1/|\alpha|}$.
+
+In weak-coupling limit, the GL equations in cylindrical basis are
+\begin{align}
+    \alpha\eta_k+2\beta_1\eta_i\eta_i^*\eta_k
+    +\beta_1\eta_i^2\eta_k^*
+    -\kappa_1\left(\partial_i^2\eta_k
+    +\partial_k\partial_i\eta_i
+    +\partial_j\partial_k\eta_j\right)\nonumber\\
+    -\frac{\kappa_1}{r}\left[3\frac{\partial_\phi}{r}
+    \left(\eta_r\delta_{k\phi}-\eta_\phi\delta_{kr}\right)+\partial_r\eta_k
+    +2\partial_k\eta_r\right]\nonumber\\
+    +\frac{\kappa_1}{r^2}\left[\eta_k+2\eta_r\delta_{kr}\right]=0.
+\end{align}
+
+The dimensionless GL equations in cylindrical basis are
+\begin{align}
+    -\eta_k+\frac{1}{2}\eta_i\eta_i^*\eta_k
+    +\frac{1}{4}\eta_i^2\eta_k^*
+    -(\partial_i^2\eta_k
+    +\partial_k\partial_i\eta_i
+    +\partial_j\partial_k\eta_j)\nonumber\\
+    -\frac{1}{r}\left[3\frac{\partial_\phi}{r}
+    \left(\eta_r\delta_{k\phi}-\eta_\phi\delta_{kr}\right)+\partial_r\eta_k
+    +2\partial_k\eta_r\right]\nonumber\\
+    +\frac{1}{r^2}\left[\eta_k+2\eta_r\delta_{kr}\right]=0.
+\end{align}
+
+The $r$ component of the GL equations is
+\begin{align}
+    -\eta_r+\frac{1}{2}\eta_i\eta_i^*\eta_r
+    +\frac{1}{4}\eta_i^2\eta_r^*
+    -(\partial_i^2\eta_r
+    +\partial_r\partial_i\eta_i
+    +\partial_j\partial_r\eta_j)
+    -\frac{1}{r}\left[-3\frac{\partial_\phi}{r}\eta_\phi
+    +3\partial_r\eta_r\right]
+    +\frac{3}{r^2}\eta_r=0 \nonumber\\
+    -\eta_r+\frac{1}{2}\eta_i\eta_i^*\eta_r
+    +\frac{1}{4}\eta_i^2\eta_r^*
+    -(\partial_i^2\eta_r
+    +\partial_r\partial_i\eta_i
+    +\partial_j\partial_r\eta_j)
+    +3\left[\frac{1}{r^2}\partial_\phi\eta_\phi
+    -\frac{1}{r}\partial_r\eta_r + \frac{\eta_r}{r^2}\right]=0 \nonumber\\
+    -\eta_r + \frac{3}{4}\eta_r^2\eta_r^*
+    +\frac{1}{2}\eta_\phi\eta_\phi^*\eta_r
+    +\frac{1}{4}\eta_\phi^2\eta_r^*
+    -3\partial_r^2\eta_r - \frac{1}{r^2}\partial_\phi^2\eta_r
+    -\frac{2}{r}\partial_r\partial_\phi\eta_\phi
+    +\frac{4}{r^2}\partial_\phi\eta_\phi
+    -\frac{3}{r}\partial_r\eta_r + \frac{3}{r^2}\eta_r=0 \nonumber
+\end{align}
+
+The $\phi$ component of the GL equations is
+\begin{align}
+    -\eta_\phi+\frac{1}{2}\eta_i\eta_i^*\eta_\phi
+    +\frac{1}{4}\eta_i^2\eta_\phi^*
+    -\left(\partial_i^2\eta_\phi
+    +\frac{\partial_\phi}{r}\partial_i\eta_i
+    +\partial_j\frac{\partial_\phi}{r}\eta_j\right)
+    -\frac{1}{r}\left[5\frac{\partial_\phi}{r}\eta_r
+    +\partial_r\eta_\phi\right]
+    +\frac{1}{r^2}\eta_\phi=0\nonumber\\
+    -\eta_\phi+\frac{3}{4}\eta_\phi^2\eta_\phi^*
+    +\frac{1}{2}\eta_r\eta_r^*\eta_\phi
+    +\frac{1}{4}\eta_r^2\eta_\phi^*
+    -3\frac{1}{r^2}\partial_\phi^2\eta_\phi
+    -\partial_r^2\eta_\phi
+    -\frac{2}{r}\partial_r\partial_\phi\eta_r
+    -\frac{4}{r^2}\partial_\phi\eta_r
+    -\frac{1}{r}\partial_r\eta_\phi
+    +\frac{1}{r^2}\eta_\phi=0\nonumber
+\end{align}
 \end{document}

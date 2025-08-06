@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex GL_cylindrical"] 0 "GL_cylindrical.aux" "GL_cylindrical.bbl" "GL_cylindrical" 1754459505.45499 -1
-  "./GL_cylindricalNotes.bib" 1754459505.23435 0 d41d8cd98f00b204e9800998ecf8427e ""
+["bibtex GL_cylindrical"] 1754472139.24606 "GL_cylindrical.aux" "GL_cylindrical.bbl" "GL_cylindrical" 1754474497.71967 0
+  "./GL_cylindricalNotes.bib" 1754474497.50333 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/revtex/apsrev4-2.bst" 1601932770 69609 e9dea59f0e753ccda3ddc8f5806d846d ""
-  "GL_cylindrical.aux" 1754459505.33036 903 912c8f6fb6c4d5e6b45fce5f3bdd5bf5 "pdflatex"
+  "GL_cylindrical.aux" 1754474497.60733 986 319efc2045ea4158aa5bbe7a31a472f1 "pdflatex"
   (generated)
   "GL_cylindrical.bbl"
   "GL_cylindrical.blg"
   (rewritten before read)
-["pdflatex"] 1754459504.98943 "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" "GL_cylindrical.pdf" "GL_cylindrical" 1754459505.45559 0
+["pdflatex"] 1754474497.18569 "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" "GL_cylindrical.pdf" "GL_cylindrical" 1754474497.72055 0
   "/etc/texmf/web2c/texmf.cnf" 1750647232.98129 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" 1754459504.70426 22045 1a9457a385a232c42a959a14cbbd1bc0 ""
+  "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" 1754474496.85532 25036 88794229651fc8fcb4ea8191f38cb393 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1246382020 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1246382020 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -72,9 +72,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1754168205.18031 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1754168222 6830998 4bb695fc5afc282c750aeece51cfb901 ""
-  "GL_cylindrical.aux" 1754459505.33036 903 912c8f6fb6c4d5e6b45fce5f3bdd5bf5 "pdflatex"
-  "GL_cylindrical.bbl" 1754456656.58074 1983 47924564a5d1a262930f145f52f7f0b7 "bibtex GL_cylindrical"
-  "GL_cylindrical.tex" 1754459504.70426 22045 1a9457a385a232c42a959a14cbbd1bc0 ""
+  "GL_cylindrical.aux" 1754474497.60733 986 319efc2045ea4158aa5bbe7a31a472f1 "pdflatex"
+  "GL_cylindrical.bbl" 1754472139.27787 1983 47924564a5d1a262930f145f52f7f0b7 "bibtex GL_cylindrical"
+  "GL_cylindrical.tex" 1754474496.85532 25036 88794229651fc8fcb4ea8191f38cb393 ""
   (generated)
   "GL_cylindrical.aux"
   "GL_cylindrical.log"
