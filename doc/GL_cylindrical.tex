@@ -160,7 +160,7 @@ and
 
 \section{Euler-Lagrange equations}
 
-The GL differential equations $\delta F/\delta\eta_i^*=0$.
+The GL differential equations $\delta F/\delta\eta_k^*=0$.
 
 If we do the functional variation of the free energy in cylindrical basis, we will get
 \begin{align}
@@ -312,8 +312,18 @@ The $\kappa_3$ term is
 
 
 \section{Physical observables}
-
-The superfluid mass current density or the momentum density in the cylindrical basis is
+In Cartesian basis we denote $\vb{r} = (x, y)$.
+A Galilean boost with velocity $\vb{u}$ introduce a local gauge transformation
+$\eta_i(\vb{r}) \xrightarrow{\vb{u}} \eta_i(\vb{r}) e^{-iM\vb{u}\vdot\vb{r}/\hbar}$,
+where $M$ is the mass of a pair of Helium atoms. The phase gradient correspond to a velocity field
+$\vb{v} = \frac{\hbar}{M}\grad{\theta}$ which transform as
+$\vb{v} \xrightarrow{\vb{u}} \vb{v} - \vb{u}$ under the Galilean boost. We also have
+$\partial_i \xrightarrow{\vb{u}} \partial_i - iMu_i/\hbar$.
+The GL free energy density also transforms as
+$f\xrightarrow{\vb{u}}f - \vb{j}\vdot\vb{u} + \order{u^2}$, where
+$\vb{j}_k = \frac{2M}{\hbar}\Im{\kappa_1\eta_j^*\partial_k\eta_j + \kappa_2\eta_k^*\partial_j\eta_j + \kappa_3\eta_j^*\partial_j\eta_k}$
+is the superfluid mass current density or the momentum density.
+We transform it to cylindrical basis and get
 \begin{align}\label{j}
     \vb{j}_k=\frac{2M}{\hbar}\bigg[\Im{\kappa_1\eta_j^*\partial_k\eta_j+\kappa_2\eta_k^*\partial_j\eta_j+\kappa_3\eta_j^*\partial_j\eta_k}\nonumber\\
     +\Im{(2\kappa_1+\kappa_2+\kappa_3)\delta_{k\phi}\eta_\phi^*\eta_r/r}\bigg],
