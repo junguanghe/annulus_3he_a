@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex GL_cylindrical"] 1754456656.54768 "GL_cylindrical.aux" "GL_cylindrical.bbl" "GL_cylindrical" 1754456715.4664 0
-  "./GL_cylindricalNotes.bib" 1754456715.2425 0 d41d8cd98f00b204e9800998ecf8427e ""
+["bibtex GL_cylindrical"] 0 "GL_cylindrical.aux" "GL_cylindrical.bbl" "GL_cylindrical" 1754459505.45499 -1
+  "./GL_cylindricalNotes.bib" 1754459505.23435 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/revtex/apsrev4-2.bst" 1601932770 69609 e9dea59f0e753ccda3ddc8f5806d846d ""
-  "GL_cylindrical.aux" 1754456715.3515 903 912c8f6fb6c4d5e6b45fce5f3bdd5bf5 "pdflatex"
+  "GL_cylindrical.aux" 1754459505.33036 903 912c8f6fb6c4d5e6b45fce5f3bdd5bf5 "pdflatex"
   (generated)
   "GL_cylindrical.bbl"
   "GL_cylindrical.blg"
   (rewritten before read)
-["pdflatex"] 1754456714.99219 "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" "GL_cylindrical.pdf" "GL_cylindrical" 1754456715.46676 0
+["pdflatex"] 1754459504.98943 "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" "GL_cylindrical.pdf" "GL_cylindrical" 1754459505.45559 0
   "/etc/texmf/web2c/texmf.cnf" 1750647232.98129 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" 1754456714.67261 21566 6a3152aaa44b753f840ae2e32950912c ""
+  "/home/jhe/annulus_3he_a/doc/GL_cylindrical.tex" 1754459504.70426 22045 1a9457a385a232c42a959a14cbbd1bc0 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1246382020 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1246382020 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -44,6 +44,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb" 1248133631 36912 b448ef9ad9d7228ec3c6e71005136d55 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
@@ -71,9 +72,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1754168205.18031 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1754168222 6830998 4bb695fc5afc282c750aeece51cfb901 ""
-  "GL_cylindrical.aux" 1754456715.3515 903 912c8f6fb6c4d5e6b45fce5f3bdd5bf5 "pdflatex"
+  "GL_cylindrical.aux" 1754459505.33036 903 912c8f6fb6c4d5e6b45fce5f3bdd5bf5 "pdflatex"
   "GL_cylindrical.bbl" 1754456656.58074 1983 47924564a5d1a262930f145f52f7f0b7 "bibtex GL_cylindrical"
-  "GL_cylindrical.tex" 1754456714.67261 21566 6a3152aaa44b753f840ae2e32950912c ""
+  "GL_cylindrical.tex" 1754459504.70426 22045 1a9457a385a232c42a959a14cbbd1bc0 ""
   (generated)
   "GL_cylindrical.aux"
   "GL_cylindrical.log"
