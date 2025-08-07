@@ -359,12 +359,6 @@ $\vb{v} = v\vu{\phi}$ and $v(r) = \frac{\hbar}{Mr}\partial_\phi{\theta}$, the or
     \bm{\eta}(r, \phi, v_s) = \bm{\eta}(r, v_s)e^{iMvr\phi/\hbar} = \bm{\eta}(r, v_s)e^{i(\partial_\phi\theta)\phi} 
 \end{align}
 
-% When the flow field is large, we denote the superfluid flow field at the inner radius as $v_s = \frac{\hbar}{MR}\partial_\phi\theta$, and
-% \begin{align}
-%     \bm{\eta}(r, \phi, v_s) = \bm{\eta}(r, v_s)e^{i(\partial_\phi\theta)\phi} = \bm{\eta}(r, v_s)e^{i\frac{v_s R}{v_c \xi}\phi}
-% \end{align}
-% where the critical flow field $v_c = \hbar/M\xi$ and $\xi^2=\kappa_1/|\alpha|$.
-
 When the flow field is small, we denote
 \begin{align}
     \bm{\eta}(r, \phi, v_s) = \bm{\eta}(r, v_s)e^{i(\partial_\phi\theta)\phi} = e^{\pm i\phi}\left(\eta_r^{(m)}(r), \pm i\eta_\phi^{(m)}(r)\right)e^{im\phi}\label{uniform_flow_eta}
@@ -523,5 +517,51 @@ The $\phi$ component of the GL equations is
     -\frac{4}{r^2}\partial_\phi\eta_r
     -\frac{1}{r}\partial_r\eta_\phi
     +\frac{1}{r^2}\eta_\phi=0\nonumber
+\end{align}
+
+For the uniform flow approximation,
+\begin{align}
+    \bm{\eta}^{(n)}(r, \phi) = \left(\eta_r^{(n)}(r), \eta_\phi^{(n)}(r)\right) e^{in\phi}
+\end{align}
+which means that $\partial_\phi \rightarrow in$. The solutions of $n=1$
+may corresponds to the
+$(p_x + ip_y, m=0)$ state, or the $(p_x - ip_y, m=2)$ state.
+
+\section{Large flow}
+
+When the flow field is large, we denote the superfluid flow field at the inner radius as
+$v_s = \frac{\hbar}{MR}\partial_\phi\theta$, and
+\begin{align}
+    \bm{\eta}(r, \phi, v_s)
+    = \bm{\eta}^{(n)}(r) e^{in\phi} = \bm{\eta}(r, v_s)e^{i(\partial_\phi\theta)\phi}
+    = \bm{\eta}(r, v_s)e^{i\frac{v_s R}{v_c \xi}\phi}
+\end{align}
+where the critical flow field $v_c = \hbar/M\xi$ and $\xi^2=\kappa_1/|\alpha|$.
+We also have $n=\frac{v_s}{v_c}\frac{R}{\xi}$.
+
+\section{Cartesian basis}
+
+In Cartesian basis, weak-coupling limit dimensionless GL equations are
+\begin{align}
+    -\eta_k+\frac{1}{2}\eta_i\eta_i^*\eta_k
+    +\frac{1}{4}\eta_i^2\eta_k^*-\left(\partial_i^2\eta_k
+    +\partial_k\partial_i\eta_i
+    +\partial_j\partial_k\eta_j\right) = 0
+\end{align}
+The $x$ component of the GL equations is
+\begin{align}
+    -\eta_x+\frac{3}{4}\eta_x^2\eta_x^*
+    +\frac{1}{2}\eta_y\eta_y^*\eta_x
+    +\frac{1}{4}\eta_y^2\eta_x^*
+    -3\partial_x^2\eta_x - \partial_y^2\eta_x
+    -2\partial_y\partial_x\eta_y = 0
+\end{align}
+The $y$ component of the GL equations is
+\begin{align}
+    -\eta_y+\frac{3}{4}\eta_y^2\eta_y^*
+    +\frac{1}{2}\eta_x\eta_x^*\eta_y
+    +\frac{1}{4}\eta_x^2\eta_y^*
+    -3\partial_y^2\eta_y - \partial_x^2\eta_y
+    -2\partial_x\partial_y\eta_x = 0
 \end{align}
 \end{document}
