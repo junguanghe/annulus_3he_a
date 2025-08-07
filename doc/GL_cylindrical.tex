@@ -489,9 +489,8 @@ The $r$ component of the GL equations is
     +\partial_j\partial_r\eta_j)
     +3\left[\frac{1}{r^2}\partial_\phi\eta_\phi
     -\frac{1}{r}\partial_r\eta_r + \frac{\eta_r}{r^2}\right]=0 \nonumber\\
-    -\eta_r + \frac{3}{4}\eta_r^2\eta_r^*
-    +\frac{1}{2}\eta_\phi\eta_\phi^*\eta_r
-    +\frac{1}{4}\eta_\phi^2\eta_r^*
+    -\eta_r+\frac{1}{2}\eta_i\eta_i^*\eta_r
+    +\frac{1}{4}\eta_i^2\eta_r^*
     -3\partial_r^2\eta_r - \frac{1}{r^2}\partial_\phi^2\eta_r
     -\frac{2}{r}\partial_r\partial_\phi\eta_\phi
     +\frac{4}{r^2}\partial_\phi\eta_\phi
@@ -508,9 +507,8 @@ The $\phi$ component of the GL equations is
     -\frac{1}{r}\left[5\frac{\partial_\phi}{r}\eta_r
     +\partial_r\eta_\phi\right]
     +\frac{1}{r^2}\eta_\phi=0\nonumber\\
-    -\eta_\phi+\frac{3}{4}\eta_\phi^2\eta_\phi^*
-    +\frac{1}{2}\eta_r\eta_r^*\eta_\phi
-    +\frac{1}{4}\eta_r^2\eta_\phi^*
+    -\eta_\phi+\frac{1}{2}\eta_i\eta_i^*\eta_\phi
+    +\frac{1}{4}\eta_i^2\eta_\phi^*
     -3\frac{1}{r^2}\partial_\phi^2\eta_\phi
     -\partial_r^2\eta_\phi
     -\frac{2}{r}\partial_r\partial_\phi\eta_r
@@ -521,10 +519,27 @@ The $\phi$ component of the GL equations is
 
 For the uniform flow approximation,
 \begin{align}
-    \bm{\eta}^{(n)}(r, \phi) = \left(\eta_r^{(n)}(r), \eta_\phi^{(n)}(r)\right) e^{in\phi}
+    \bm{\eta}(r, \phi) = \left(\eta_r^{(n)}(r), \eta_\phi^{(n)}(r)\right) e^{in\phi}
 \end{align}
-which means that $\partial_\phi \rightarrow in$. The solutions of $n=1$
-may corresponds to the
+which means that $\partial_\phi \rightarrow in$. We have
+\begin{align}
+    -\eta_r+\frac{1}{2}\eta_i\eta_i^*\eta_r
+    +\frac{1}{4}\eta_i^2\eta_r^*
+    -3\partial_r^2\eta_r + \frac{n^2}{r^2}\eta_r
+    -\frac{2in}{r}\partial_r\eta_\phi
+    +\frac{4in}{r^2}\eta_\phi
+    -\frac{3}{r}\partial_r\eta_r + \frac{3}{r^2}\eta_r=0 \nonumber\\
+    -\eta_\phi+\frac{1}{2}\eta_i\eta_i^*\eta_\phi
+    +\frac{1}{4}\eta_i^2\eta_\phi^*
+    +\frac{3n^2}{r^2}\eta_\phi
+    -\partial_r^2\eta_\phi
+    -\frac{2in}{r}\partial_r\eta_r
+    -\frac{4in}{r^2}\eta_r
+    -\frac{1}{r}\partial_r\eta_\phi
+    +\frac{1}{r^2}\eta_\phi=0\nonumber
+\end{align}
+We ignore the $(n)$ superscript for the sake of simplicity.
+The solutions of $n=1$ may corresponds to the
 $(p_x + ip_y, m=0)$ state, or the $(p_x - ip_y, m=2)$ state.
 
 \section{Large flow}
