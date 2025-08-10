@@ -122,7 +122,7 @@ def plot_results(eta1, eta2, j1, j2, f, r, dtheta):
 
 ############################### Input
 nr = 301 # number of grid points along radial direction
-R0 = 1e10 # inner radius of the annulus
+R0 = 1e6 # inner radius of the annulus
 dtheta = 1#0.35*R0 # d(theta)/d(phi) which should be an integer(winding number) # n=1 is the ground state!!!!! i.e. dtheta=1 
 h = 0.1 # step size
 tol =1e-10
