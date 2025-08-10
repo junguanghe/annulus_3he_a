@@ -3,6 +3,7 @@
 \usepackage{physics}
 \usepackage{bm}
 \usepackage{cancel}
+\usepackage{graphicx}
 
 \bibliographystyle{apsrev4-2}
 
@@ -462,6 +463,23 @@ Exact numerical solution pf Eq. (\ref{omega_m_approx}) gives
 \begin{align}
     \Omega_1^\pm \approx \frac{\hbar}{MR^2}\left(\frac{1}{2}\pm 0.122\right)
 \end{align}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../figures/numerator.png}
+    \caption{Comparison of 
+    $y=3\left(\eta^{(0)}_\phi\right)^2 + \left(\eta^{(0)}_r\right)^2-4\eta^{(0)}_r\eta^{(0)}_\phi$
+    and $y=\eta_0^2\tanh(ax/\xi)$ for $a=1/3$ and $D=30\xi$.}
+    \label{fig:numerator}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../figures/denominator.png}
+    \caption{Comparison of
+    $y=3\left(\eta^{(0)}_\phi\right)^2 + \left(\eta^{(0)}_r\right)^2$
+    and $y=4\eta_0^2$ for $D=30\xi$.}
+    \label{fig:denominator}
+\end{figure}
 
 \section{London approximation}
 We assume $\eta_i^{(m)}(r) = \eta_0$.
