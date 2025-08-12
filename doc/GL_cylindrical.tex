@@ -418,13 +418,13 @@ where $h$ is the $z$ direction thickness, and we have
         \frac{\ev{3\left(\eta^{(0)}_\phi\right)^2 + \left(\eta^{(0)}_r\right)^2-4\eta^{(0)}_r\eta^{(0)}_\phi}_r}
         {\ev{3\left(\eta^{(0)}_\phi\right)^2 + \left(\eta^{(0)}_r\right)^2}_r}\right]
 \end{align}
-If we use London approximation for
-$\ev{3\left(\eta^{(0)}_\phi\right)^2 + \left(\eta^{(0)}_r\right)^2}_r\approx 4\eta_0^2D$,
+If we approximate
+$\ev{3\left(\eta^{(0)}_\phi\right)^2 + \left(\eta^{(0)}_r\right)^2}_r\approx 4\eta_0^2(D + b\xi)$,
 then
 \begin{align}
     \Omega_m^\pm & \approx \frac{\hbar}{MR^2}
     \left[\left(m-\frac{1}{2}\right)\pm
-        \left(1-\frac{\ev{\eta^{(0)}_r\eta^{(0)}_\phi}_r}{\eta_0^2D}\right)\right]
+        \left(1-\frac{\ev{\eta^{(0)}_r\eta^{(0)}_\phi}_r}{\eta_0^2(D+b\xi)}\right)\right]
 \end{align}
 If we assume $\eta^{(0)}_r$ and $\eta^{(0)}_\phi$ are even functions
 with respect to $r=R+D/2$, then we have
@@ -446,15 +446,15 @@ Note that $\cosh(x)=\frac{e^x+e^{-x}}{2}\approx e^x/2$ when $x\gg 1$.
 If we assume $D/\xi\gg 1$, then
 \begin{align}
     \ev{\eta^{(0)}_r\eta^{(0)}_\phi}_r
-     & \approx \frac{2}{a}\eta_0^2\xi\left(\frac{aD}{2\xi} - \ln(2)\right)
-    = \eta_0^2D - \frac{2}{a}\ln(2)\eta_0^2\xi
+    \approx \frac{2}{a}\eta_0^2\xi\left(\frac{aD}{2\xi} - \ln(2)\right)
+    = \eta_0^2\left(D - \frac{2}{a}\ln(2)\xi\right)
 \end{align}
 which gives
 \begin{align}
     \Omega_m^\pm \approx \frac{\hbar}{MR^2}\left[\left(m-\frac{1}{2}\right)
-        \pm\frac{2}{a}\ln(2)\frac{\xi}{D}\right]
+        \pm\left(\frac{2}{a}\ln(2)+b\right)\frac{\xi}{D}\right]
 \end{align}
-when $a=1/3$ and $D=30\xi$, we have
+when $a=1/3, b=0$ and $D=30\xi$, we have
 \begin{align}
     \Omega_1^\pm & \approx \frac{\hbar}{MR^2}\left(\frac{1}{2}\pm\frac{\ln(2)}{5}\right) \\
     \Omega_1^\pm & \approx \frac{\hbar}{MR^2}\left(\frac{1}{2}\pm 0.139\right)
