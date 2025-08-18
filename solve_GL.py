@@ -93,7 +93,7 @@ def calc_j_f_L(eta1, eta2, dtheta, r, h):
         ees + 2 * eta2 * np.conj(eta2)
     )  # extra terms besides the terms in Cartesian basis
 
-    F = integrate.trapz(r * f, dx=h) * 2 * np.pi
+    F = integrate.trapezoid(r * f, dx=h) * 2 * np.pi
 
     j1_phi = (
         3 * np.conj(eta1) * eta1 * d1
@@ -120,11 +120,11 @@ def calc_j_f_L(eta1, eta2, dtheta, r, h):
 
     l = r * j1.imag
 
-    L = integrate.trapz(r * l, dx=h) * 2 * np.pi  # in unit of
+    L = integrate.trapezoid(r * l, dx=h) * 2 * np.pi  # in unit of
 
-    L_phi = integrate.trapz(r**2 * j1_phi.imag, dx=h) * 2 * np.pi
+    L_phi = integrate.trapezoid(r**2 * j1_phi.imag, dx=h) * 2 * np.pi
 
-    L_r = integrate.trapz(r**2 * j1_r.imag, dx=h) * 2 * np.pi
+    L_r = integrate.trapezoid(r**2 * j1_r.imag, dx=h) * 2 * np.pi
 
     return j1, j2, f, F, l, L, L_phi, L_r
 
