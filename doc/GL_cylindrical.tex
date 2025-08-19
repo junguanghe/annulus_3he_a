@@ -176,7 +176,7 @@ If we do the functional variation of the free energy in cylindrical basis, we wi
     =0.
 \end{align}
 For the $\kappa_1$ term in first line of Eq. (\ref{fgrad})
-\begin{align}
+\begin{align}\label{surf_term}
     F\sim\iint (\partial_i\eta_j)(\partial_i\eta_j)^* r\dd\phi\dd r
     = & \qq{surface term} - \iint \eta_j^*\partial_i(r\partial_i\eta_j) \dd\phi\dd r             \\
     = & \qq{surface term} - \iint \eta_j^*\frac{1}{r}\partial_i(r\partial_i\eta_j) r\dd\phi\dd r
@@ -614,6 +614,31 @@ which means that $\partial_\phi \rightarrow in$. We have
 We ignore the $(n)$ superscript for the sake of simplicity.
 The solutions of $n=1$ may corresponds to the
 $(p_x + ip_y, m=0)$ state, or the $(p_x - ip_y, m=2)$ state.
+
+For boundary conditions, we have $\eta_r = 0$, and $\partial_r\eta_\phi = \frac{\eta_\phi}{r}$.
+We can derive this by requiring the sum of all the surface terms to vanish
+when deriving the Euler-Lagrange equations. Take Eq. (\ref{surf_term}) for example,
+\begin{align}
+    \qq{surface term}
+     & = \iint\partial_i\bigg((\partial_i\eta_j)\eta_j^* r\bigg)\dd\phi\dd r                      \\
+     & = \iint\bigg[\partial_r\bigg(r\eta_j^*(\partial_r\eta_j)\bigg)
+    + \frac{\partial_\phi}{r}\bigg(r\eta_j^*\frac{\partial_\phi}{r}\eta_j\bigg)\bigg]\dd\phi\dd r \\
+     & = \iint\bigg[\frac{1}{r}\partial_r\bigg(r\eta_j^*(\partial_r\eta_j)\bigg)
+    + \frac{\partial_\phi}{r}\bigg(\eta_j^*\frac{\partial_\phi}{r}\eta_j\bigg)\bigg]r\dd\phi\dd r \\
+     & =\iint\div\vb{F}\dd A  = \oint \vb{F} \vdot \vu{n} \dd s
+\end{align}
+where $\vb{F} = (F_r, F_\phi) = \bigg(\eta_j^*\partial_r\eta_j, \eta_j^*\frac{\partial_\phi}{r}\eta_j\bigg)$.
+In an annulus, the boundaries are at $r=R$ and $r=R+D$, and
+\begin{align}
+    \qq{surface term}
+     & = \oint_{r=R+D} F_r r\dd\phi-\oint_{r=R} F_r r\dd\phi
+\end{align}
+On boundaries we have $\eta_r=0$ and $F_r=\eta_\phi^*\partial_r\eta_\phi$.
+When $\partial_r\eta_\phi = \frac{\eta_\phi}{r}$, we have
+\begin{align}
+    \qq{surface term} = 2\pi \bigg(|\eta_\phi(R+D)|^2 - |\eta_\phi(R)|^2\bigg)
+\end{align}
+If we sum all the surface terms they should vanish. Detailed derivation to be added...
 
 \section{$\eta_\pm$ basis}
 
