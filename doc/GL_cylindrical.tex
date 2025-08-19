@@ -628,17 +628,15 @@ when deriving the Euler-Lagrange equations. Take Eq. (\ref{surf_term}) for examp
      & =\iint\div\vb{F}\dd A  = \oint \vb{F} \vdot \vu{n} \dd s
 \end{align}
 where $\vb{F} = (F_r, F_\phi) = \bigg(\eta_j^*\partial_r\eta_j, \eta_j^*\frac{\partial_\phi}{r}\eta_j\bigg)$.
-In an annulus, the boundaries are at $r=R$ and $r=R+D$, and
+In an annulus or a cylinder, the boundary normal vector $\vu{n}=\pm\vu{r}$, and
+on boundaries we have $\eta_r=0$, $F_r=\eta_\phi^*\partial_r\eta_\phi$, and $\dd s=r\dd\phi$, which gives
 \begin{align}
-    \qq{surface term}
-     & = \oint_{r=R+D} F_r r\dd\phi-\oint_{r=R} F_r r\dd\phi
+    \qq{surface term} = \oint_+ \eta_\phi^*(\partial_r\eta_\phi) r\dd\phi
+    - \oint_- \eta_\phi^*(\partial_r\eta_\phi) r\dd\phi
 \end{align}
-On boundaries we have $\eta_r=0$ and $F_r=\eta_\phi^*\partial_r\eta_\phi$.
-When $\partial_r\eta_\phi = \frac{\eta_\phi}{r}$, we have
-\begin{align}
-    \qq{surface term} = 2\pi \bigg(|\eta_\phi(R+D)|^2 - |\eta_\phi(R)|^2\bigg)
-\end{align}
-If we sum all the surface terms they should vanish. Detailed derivation to be added...
+The only remaining nonzero surface term is the $\kappa_3$ in the second line of Eq. (\ref{fgrad}),
+which correspond to $F_r = -\frac{\eta_\phi^*\eta_\phi}{r}$. In weak-coupling limit,
+when $\partial_r\eta_\phi = \frac{\eta_\phi}{r}$, these two surface terms cancel each other.
 
 \section{$\eta_\pm$ basis}
 
