@@ -1,0 +1,327 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import integrate, optimize
+
+
+def boundary_cond(eta1, eta2, BC):
+    if BC:
+        eta1[0] = eta1[1]
+        eta1[-1] = eta1[-2]
+        eta2[0] = 0
+        eta2[-1] = 0
+    else:
+        eta1[0] = 0
+        eta1[-1] = 0
+        eta2[0] = 0
+        eta2[-1] = 0
+    return eta1, eta2
+
+
+def GL(u, h, n, r, BC):
+    eta1 = u[0, :] + u[1, :] * 1j
+    eta2 = u[2, :] + u[3, :] * 1j
+
+    eta1, eta2 = boundary_cond(eta1, eta2, BC)
+
+    ees = eta1 * np.conj(eta1) + eta2 * np.conj(eta2)
+    ee = eta1**2 + eta2**2
+
+    de1 = np.gradient(eta1, h)
+    de2 = np.gradient(eta2, h)
+
+    G1 = (
+        -eta1
+        + 0.5 * ees * eta1
+        + 0.25 * ee * np.conj(eta1)
+        + (1 + 3 * n**2) * eta1 / r**2
+        - 4 * 1j * n * eta2 / r**2
+        - (de1 / r + 2 * 1j * n * de2 / r)
+    )
+    G2 = (
+        -eta2
+        + 0.5 * ees * eta2
+        + 0.25 * ee * np.conj(eta2)
+        + (3 + n**2) * eta2 / r**2
+        + 4 * 1j * n * eta1 / r**2
+        - (3 * de2 / r + 2 * 1j * n * de1 / r)
+    )
+    G1[1:-1] -= np.diff(eta1, n=2) / h**2
+    G2[1:-1] -= 3 * np.diff(eta2, n=2) / h**2
+
+    G1[0] = 0
+    G1[-1] = 0
+    G2[0] = 0
+    G2[-1] = 0
+
+    G = np.array([G1.real, G1.imag, G2.real, G2.imag])
+    return G
+
+
+def calc_j_f_L(eta1, eta2, dtheta, r, h):
+    ees = eta1 * np.conj(eta1) + eta2 * np.conj(eta2)
+    ee = eta1**2 + eta2**2
+
+    de1 = np.gradient(eta1, h)
+    de2 = np.gradient(eta2, h)
+
+    d1 = 1j * dtheta / r
+    dd1 = -(dtheta**2) / r**2
+
+    f = (
+        -ees
+        + 0.25 * ees**2
+        + 0.125 * ee * np.conj(ee)
+        - ees * dd1
+        + de1 * np.conj(de1)
+        + 3 * de2 * np.conj(de2)
+        - 2 * eta1 * np.conj(eta1) * dd1
+        + d1
+        * (
+            eta1 * np.conj(de2)
+            + eta2 * np.conj(de1)
+            - np.conj(eta1) * de2
+            - np.conj(eta2) * de1
+        )
+    )
+
+    f += 2 / r * (
+        3 * np.conj(eta2) * eta1 * d1
+        - np.conj(eta1) * eta2 * d1
+        + np.conj(eta2) * de2
+        - np.conj(eta1) * de1
+    ).real + 1 / r**2 * (
+        ees + 2 * eta2 * np.conj(eta2)
+    )  # extra terms besides the terms in Cartesian basis
+
+    F = integrate.trapezoid(r * f, dx=h) * 2 * np.pi
+
+    j1_phi = (
+        3 * np.conj(eta1) * eta1 * d1
+        + np.conj(eta2) * eta2 * d1
+        + 4 * np.conj(eta1) * eta2 / r
+    )
+
+    j1_r = np.conj(eta2) * de1 + np.conj(eta1) * de2
+
+    j1 = (
+        3 * np.conj(eta1) * eta1 * d1
+        + np.conj(eta2) * eta2 * d1
+        + np.conj(eta2) * de1
+        + np.conj(eta1) * de2
+        + 4 * np.conj(eta1) * eta2 / r
+    )
+
+    j2 = (
+        3 * np.conj(eta2) * de2
+        + np.conj(eta1) * de1
+        + np.conj(eta1) * eta2 * d1
+        + np.conj(eta2) * eta1 * d1
+    )
+
+    l = r * j1.imag
+
+    L = integrate.trapezoid(r * l, dx=h) * 2 * np.pi  # in unit of
+
+    L_phi = integrate.trapezoid(r**2 * j1_phi.imag, dx=h) * 2 * np.pi
+
+    L_r = integrate.trapezoid(r**2 * j1_r.imag, dx=h) * 2 * np.pi
+
+    return j1, j2, f, F, l, L, L_phi, L_r
+
+
+def plot_results(eta1, eta2, j1, j2, f, r, dtheta):
+    plt.figure()
+
+    plt.subplot(411)
+    plt.plot(r, np.abs(eta1), "-", lw=2, label=r"$\eta_\phi$")
+    plt.plot(r, np.abs(eta2), "-", lw=2, label=r"$\eta_r$")
+    plt.ylabel(r"$|\eta|/\eta_0$")
+    plt.legend()
+    frame1 = plt.gca()
+    frame1.axes.xaxis.set_ticklabels([])
+    plt.title(r"$\partial_\phi\theta=$" + str(dtheta) + r", $\phi=0$")
+
+    plt.subplot(412)
+    plt.plot(r[1:-1], (np.angle(eta1[1:-1])) / np.pi, label=r"$\theta_\phi$")
+    plt.plot(r[1:-1], (np.angle(eta2[1:-1])) / np.pi, label=r"$\theta_r$")
+    plt.ylabel(r"$\theta/\pi$")
+    plt.legend()
+    frame2 = plt.gca()
+    frame2.axes.xaxis.set_ticklabels([])
+
+    plt.subplot(413)
+    plt.plot(r, j1.imag, "-", lw=2, label=r"$j_\phi$")
+    plt.plot(r, j2.imag, "-", lw=2, label=r"$j_r$")
+    plt.ylabel(r"j /$j_0$")
+    plt.legend()
+    frame3 = plt.gca()
+    frame3.axes.xaxis.set_ticklabels([])
+
+    plt.subplot(414)
+    plt.plot(r, f.real, "-", lw=2)
+    plt.plot(r, np.zeros_like(r), "--k", lw=1)
+    plt.ylabel(r"f /$f_0$")
+    plt.xlabel(r"r/$\xi$")
+
+    plt.show()
+    return
+
+
+def L_n_chiral(n):
+    eta0 = np.array(
+        [1j * np.ones_like(r), np.tanh(D / 2 - np.abs(r - R0 - D / 2))], dtype=complex
+    )  # chiral phase p+ip
+    ############################### solve GL
+    u0 = np.array([eta0[0, :].real, eta0[0, :].imag, eta0[1, :].real, eta0[1, :].imag])
+    sol = optimize.root(
+        GL,
+        u0,
+        args=(h, n, r, BC),
+        method="krylov",
+        options={"disp": False, "xatol": tol},
+    )
+    u = sol.x
+
+    eta1 = u[0, :] + u[1, :] * 1j  # eta_phi
+    eta2 = u[2, :] + u[3, :] * 1j  # eta_r
+
+    ############################ set boundary values of order parameters
+    eta1, eta2 = boundary_cond(eta1, eta2, BC)
+    L = calc_j_f_L(eta1, eta2, n, r, h)[5] / (V2 - V1)
+    F = calc_j_f_L(eta1, eta2, n, r, h)[3] / (V2 - V1)
+    return L, F
+
+
+def L_n_mix(n):
+    eta0 = np.array(
+        [-1j * np.tanh(r - R0 - D / 2), np.tanh(D / 2 - np.abs(r - R0 - D / 2))],
+        dtype=complex,
+    )  # p+ip vs p-ip
+    ############################### solve GL
+    u0 = np.array([eta0[0, :].real, eta0[0, :].imag, eta0[1, :].real, eta0[1, :].imag])
+    sol = optimize.root(
+        GL,
+        u0,
+        args=(h, n, r, BC),
+        method="krylov",
+        options={"disp": True, "xatol": tol},
+    )
+    u = sol.x
+
+    eta1 = u[0, :] + u[1, :] * 1j  # eta_phi
+    eta2 = u[2, :] + u[3, :] * 1j  # eta_r
+
+    ############################ set boundary values of order parameters
+    eta1, eta2 = boundary_cond(eta1, eta2, BC)
+    L = calc_j_f_L(eta1, eta2, n, r, h)[5] / (V2 - V1)
+    F = calc_j_f_L(eta1, eta2, n, r, h)[3] / (V2 - V1)
+    return L, F
+
+
+def L_n_rmix(n):
+    eta0 = np.array(
+        [1j * np.tanh(r - R0 - D / 2), np.tanh(D / 2 - np.abs(r - R0 - D / 2))],
+        dtype=complex,
+    )  # p-ip vs p+ip
+    ############################### solve GL
+    u0 = np.array([eta0[0, :].real, eta0[0, :].imag, eta0[1, :].real, eta0[1, :].imag])
+    sol = optimize.root(
+        GL,
+        u0,
+        args=(h, n, r, BC),
+        method="krylov",
+        options={"disp": False, "xatol": tol},
+    )
+    u = sol.x
+
+    eta1 = u[0, :] + u[1, :] * 1j  # eta_phi
+    eta2 = u[2, :] + u[3, :] * 1j  # eta_r
+
+    ############################ set boundary values of order parameters
+    eta1, eta2 = boundary_cond(eta1, eta2, BC)
+    L = calc_j_f_L(eta1, eta2, n, r, h)[5] / (V2 - V1)
+    F = calc_j_f_L(eta1, eta2, n, r, h)[3] / (V2 - V1)
+    return L, F
+
+
+############################### Input
+nr = 1501  # number of grid points along radial direction
+R0 = 1e10  # inner radius of the annulus
+# dtheta = 0.1*R0 # d(theta)/d(phi) which should be an integer(winding number)
+h = 0.02  # step size
+tol = 1e-6
+BC = True  # True = minimal pair-breaking, False = maximal pair-breaking
+
+############################### calculate parameters
+D = (nr - 1) * h  # width of the annulus
+r = R0 + np.linspace(0, D, nr)  # radial coordinates r
+V1 = np.pi * R0**2
+V2 = np.pi * (R0 + D) ** 2
+
+# ############################### initial guess
+# # eta0 = np.array([1j*np.ones_like(r), np.tanh(D/2-np.abs(r-R0-D/2))], dtype=complex)   # chiral phase p+ip
+# # eta0 = np.array([1j*np.tanh(r-R0-D/2), np.tanh(D/2-np.abs(r-R0-D/2))], dtype=complex)   # p-ip vs p+ip
+# eta0 = np.array([-1j*np.tanh(r-R0-D/2), np.tanh(D/2-np.abs(r-R0-D/2))], dtype=complex)   # -p+ip vs p+ip
+# # eta0 = np.array([1j*np.ones_like(r), np.zeros_like(r)], dtype=complex)   # polar
+
+# ############################### solve GL
+# u0 = np.array([eta0[0,:].real, eta0[0,:].imag, eta0[1,:].real, eta0[1,:].imag])
+# sol = optimize.root(GL, u0, args=(h,dtheta,r,BC), method='krylov',options={'disp':True, 'xatol':tol})
+# u = sol.x
+
+# eta1 = u[0,:]+u[1,:]*1j # eta_phi
+# eta2 = u[2,:]+u[3,:]*1j # eta_r
+
+# ############################ set boundary values of order parameters
+# eta1, eta2 = boundary_cond(eta1, eta2, BC)
+
+# ############################ calculate mass current, free energy and angular momentum
+# j1, j2, f, F, l, L, L_phi, L_r = calc_j_f_L(eta1, eta2, dtheta, r, h)
+# print("average Free Energy density=", F/(V2-V1))
+# print("Angular momentum L =", L/(V2-V1))
+# print("Angular momentum L_phi =", L_phi/(V2-V1))
+# print("Angular momentum L_r =", L_r/(V2-V1))
+
+# ############################ plot results
+# plot_results(eta1, eta2, j1, j2, f, r, dtheta)
+
+dtheta = np.linspace(0, 0.5) * R0
+dtheta_chiral = np.linspace(0, 0.34) * R0
+L_chiral = np.zeros_like(dtheta)
+L_mix = np.zeros_like(dtheta)
+# L_rmix = np.zeros_like(dtheta)
+F_chiral = np.zeros_like(dtheta)
+F_mix = np.zeros_like(dtheta)
+# F_rmix = np.zeros_like(dtheta)
+for ii in range(len(dtheta)):
+    L_chiral[ii], F_chiral[ii] = L_n_chiral(dtheta_chiral[ii])
+    L_mix[ii], F_mix[ii] = L_n_mix(dtheta[ii])
+    # L_rmix[ii], F_rmix[ii] = L_n_rmix(dtheta_chiral[ii])
+    print(ii)
+
+plt.rcParams.update({"text.usetex": True, "font.family": "cm"})
+fig, ax = plt.subplots(2, 1, figsize=(4, 3))
+ax[0].plot(
+    dtheta_chiral / R0, L_chiral / R0, label="chiral"
+)  # angular momentum in unit of R*j0*V where V is the volume pi[(R+D)^2-R^2], j0 is the mass current density
+ax[0].plot((dtheta / R0), L_mix / R0, label="axial DW")
+# ax[0].plot((dtheta_chiral/R0), L_rmix/R0, label=r'$\eta_-|\eta_+$')
+ax[1].plot(dtheta_chiral / R0, F_chiral)
+ax[1].plot((dtheta / R0), F_mix)
+# ax[1].plot((dtheta_chiral/R0), F_rmix)
+ax[1].set_xlabel(r"$v_s/v_c$")
+ax[1].set_ylabel(r"$F(v_s)/F_0$")
+# ax[0].set_ylabel(r'$L(v_s)/Rj_0V$')
+ax[0].set_ylabel(r"$\mathcal{L}(v_s)/(\frac{R}{\xi})$")
+ax[0].plot(
+    np.ones(50) * 0.147, np.linspace(L_mix[0] / R0, L_chiral[-1] / R0), linestyle="--"
+)
+ax[1].plot(np.ones(50) * 0.147, np.linspace(F_chiral[0], F_mix[-1]), linestyle="--")
+ax[0].legend()
+ax[0].grid(True)
+ax[1].grid(True)
+
+ax[0].plot(np.linspace(0, 0.2), 4 * np.linspace(0, 0.2), linestyle="--")
+
+plt.tight_layout()
+fig.savefig("L_v.pdf")
