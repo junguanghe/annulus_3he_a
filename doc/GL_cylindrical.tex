@@ -262,51 +262,54 @@ If we transform it to cylindrical basis, we can also get
 \end{align}
 The $\kappa_1$ term is just a Laplacian term
 \begin{align}
-    \partial_i^\text{Car}\partial_i^\text{Car}\eta_k^\text{Car}= & R_{il}\partial_l(R_{im}\partial_m(R_{kn}\eta_n))                                                                      \\
-    =                                                            & R_{il}(\partial_lR_{im})\partial_m(R_{kn}\eta_n) + R_{il}R_{im}\partial_l\partial_m(R_{kn}\eta_n)                     \\
-    =                                                            & \frac{1}{r}\partial_r(R_{kn}\eta_n) + \partial_l^2(R_{kn}\eta_n)                                                      \\
-    =                                                            & R_{kn}\frac{1}{r}\partial_r\eta_n + R_{kn}\partial_l^2\eta_n + 2(\partial_lR_{kn})(\partial_l\eta_n)
-    + \eta_n\partial_l^2R_{kn}                                                                                                                                                           \\
-    =                                                            & R_{kn}\left(\frac{1}{r}\partial_r\eta_n + \partial_l^2\eta_n + \frac{2}{r}R^{\pi/2}_{nm}\frac{\partial_\phi}{r}\eta_m
-    -\frac{1}{r^2}\eta_n\right)                                                                                                                                                          \\
-    =                                                            & R_{kn}\left(\frac{1}{r}\partial_r\eta_n + \partial_l^2\eta_n + \frac{2}{r}\delta_{n\phi}\frac{\partial_\phi}{r}\eta_r
+    \partial_i^\text{Car}\partial_i^\text{Car}\eta_k^\text{Car}
+    = & R_{il}\partial_l(R_{im}\partial_m(R_{kn}\eta_n))                                                                      \\
+    = & R_{il}(\partial_lR_{im})\partial_m(R_{kn}\eta_n) + R_{il}R_{im}\partial_l\partial_m(R_{kn}\eta_n)                     \\
+    = & \frac{1}{r}\partial_r(R_{kn}\eta_n) + \partial_l^2(R_{kn}\eta_n)                                                      \\
+    = & R_{kn}\frac{1}{r}\partial_r\eta_n + R_{kn}\partial_l^2\eta_n + 2(\partial_lR_{kn})(\partial_l\eta_n)
+    + \eta_n\partial_l^2R_{kn}                                                                                                \\
+    = & R_{kn}\left(\frac{1}{r}\partial_r\eta_n + \partial_l^2\eta_n + \frac{2}{r}R^{\pi/2}_{nm}\frac{\partial_\phi}{r}\eta_m
+    -\frac{1}{r^2}\eta_n\right)                                                                                               \\
+    = & R_{kn}\left(\frac{1}{r}\partial_r\eta_n + \partial_l^2\eta_n + \frac{2}{r}\delta_{n\phi}\frac{\partial_\phi}{r}\eta_r
     -\frac{2}{r}\delta_{nr}\frac{\partial_\phi}{r}\eta_\phi - \frac{1}{r^2}\eta_n\right)
 \end{align}
 The $\kappa_2$ term is
 \begin{align}
-    \partial_k^\text{Car}\partial_i^\text{Car}\eta_i^\text{Car}= & R_{kl}\partial_l(R_{im}\partial_m(R_{in}\eta_n))                                  \\
-    =                                                            & R_{kl}\partial_l(R_{im}(\partial_mR_{in})\eta_n + R_{im}R_{in}(\partial_m\eta_n)) \\
-    =                                                            & R_{kl}\partial_l\left(\frac{1}{r}\eta_r + \partial_m\eta_m\right)                 \\
-    =                                                            & R_{kl}\left(\frac{1}{r}\partial_l\eta_r - \delta_{lr}\frac{1}{r^2}\eta_r
+    \partial_k^\text{Car}\partial_i^\text{Car}\eta_i^\text{Car}
+    = & R_{kl}\partial_l(R_{im}\partial_m(R_{in}\eta_n))                                  \\
+    = & R_{kl}\partial_l(R_{im}(\partial_mR_{in})\eta_n + R_{im}R_{in}(\partial_m\eta_n)) \\
+    = & R_{kl}\partial_l\left(\frac{1}{r}\eta_r + \partial_m\eta_m\right)                 \\
+    = & R_{kl}\left(\frac{1}{r}\partial_l\eta_r - \delta_{lr}\frac{1}{r^2}\eta_r
     + \partial_l\partial_m\eta_m\right)
 \end{align}
 The $\kappa_3$ term is
 \begin{align}
-    \partial_j^\text{Car}\partial_k^\text{Car}\eta_j^\text{Car}= & R_{jl}\partial_l(R_{km}\partial_m(R_{jn}\eta_n))                                                             \\
-    =                                                            & R_{jl}(\partial_lR_{km})\partial_m(R_{jn}\eta_n) + R_{jl}R_{km}\partial_l\partial_m(R_{jn}\eta_n)            \\
-    =                                                            & R_{j\phi}\frac{1}{r}R_{ki}R^{\pi/2}_{im}\partial_m(R_{jn}\eta_n)
-    + R_{jl}R_{ki}\partial_l\partial_i(R_{jn}\eta_n)                                                                                                                            \\
-    =                                                            & R_{ki}\bigg[R_{j\phi}\frac{1}{r}R^{\pi/2}_{im}\partial_m(R_{jn}\eta_n)
-    + R_{jl}\partial_l\partial_i(R_{jn}\eta_n)\bigg]                                                                                                                            \\
-    =                                                            & R_{ki}\bigg[R_{j\phi}\frac{1}{r}R^{\pi/2}_{im}(\partial_mR_{jn})\eta_n
-    +R_{j\phi}\frac{1}{r}R^{\pi/2}_{im}R_{jn}(\partial_m\eta_n)                                                                                                                 \\
-                                                                 & +R_{jl}(\partial_l\partial_iR_{jn})\eta_n+R_{jl}(\partial_lR_{jn})(\partial_i\eta_n)
-    +R_{jl}(\partial_iR_{jn})(\partial_l\eta_n)+R_{jl}R_{jn}(\partial_l\partial_i\eta_n)\bigg]\nonumber                                                                         \\
-    =                                                            & R_{ki}\bigg[\frac{1}{r^2}R^{\pi/2}_{i\phi}\eta_r+\frac{1}{r}R^{\pi/2}_{im}\partial_m\eta_\phi\nonumber       \\
-                                                                 & +\delta_{i\phi}R_{jl}\eta_n\partial_l\left(\frac{1}{r}R_{jn}\right) + \frac{1}{r}\partial_i\eta_r
-    +\delta_{i\phi}\frac{1}{r}R^{\pi/2}_{ln}\partial_l\eta_n + \partial_l\partial_i\eta_l\bigg]\nonumber                                                                        \\
-    =                                                            & R_{ki}\bigg[-\frac{1}{r^2}\delta_{ir}\eta_r \cancel{+ \frac{1}{r}\delta_{i\phi}\partial_r\eta_\phi}
-    -\frac{1}{r^2}\delta_{ir}\partial_\phi\eta_\phi\nonumber                                                                                                                    \\
-                                                                 & +\delta_{i\phi}R_{jl}\eta_n\left(\partial_l\frac{1}{r}\right)R_{jn}
+    \partial_j^\text{Car}\partial_k^\text{Car}\eta_j^\text{Car}
+    = & R_{jl}\partial_l(R_{km}\partial_m(R_{jn}\eta_n))                                                             \\
+    = & R_{jl}(\partial_lR_{km})\partial_m(R_{jn}\eta_n) + R_{jl}R_{km}\partial_l\partial_m(R_{jn}\eta_n)            \\
+    = & R_{j\phi}\frac{1}{r}R_{ki}R^{\pi/2}_{im}\partial_m(R_{jn}\eta_n)
+    + R_{jl}R_{ki}\partial_l\partial_i(R_{jn}\eta_n)                                                                 \\
+    = & R_{ki}\bigg[R_{j\phi}\frac{1}{r}R^{\pi/2}_{im}\partial_m(R_{jn}\eta_n)
+    + R_{jl}\partial_l\partial_i(R_{jn}\eta_n)\bigg]                                                                 \\
+    = & R_{ki}\bigg[R_{j\phi}\frac{1}{r}R^{\pi/2}_{im}(\partial_mR_{jn})\eta_n
+    +R_{j\phi}\frac{1}{r}R^{\pi/2}_{im}R_{jn}(\partial_m\eta_n)                                                      \\
+      & +R_{jl}(\partial_l\partial_iR_{jn})\eta_n+R_{jl}(\partial_lR_{jn})(\partial_i\eta_n)
+    +R_{jl}(\partial_iR_{jn})(\partial_l\eta_n)+R_{jl}R_{jn}(\partial_l\partial_i\eta_n)\bigg]\nonumber              \\
+    = & R_{ki}\bigg[\frac{1}{r^2}R^{\pi/2}_{i\phi}\eta_r+\frac{1}{r}R^{\pi/2}_{im}\partial_m\eta_\phi\nonumber       \\
+      & +\delta_{i\phi}R_{jl}\eta_n\partial_l\left(\frac{1}{r}R_{jn}\right) + \frac{1}{r}\partial_i\eta_r
+    +\delta_{i\phi}\frac{1}{r}R^{\pi/2}_{ln}\partial_l\eta_n + \partial_l\partial_i\eta_l\bigg]\nonumber             \\
+    = & R_{ki}\bigg[-\frac{1}{r^2}\delta_{ir}\eta_r \cancel{+ \frac{1}{r}\delta_{i\phi}\partial_r\eta_\phi}
+    -\frac{1}{r^2}\delta_{ir}\partial_\phi\eta_\phi\nonumber                                                         \\
+      & +\delta_{i\phi}R_{jl}\eta_n\left(\partial_l\frac{1}{r}\right)R_{jn}
     +\delta_{i\phi}R_{jl}\eta_n\frac{1}{r}\left(\partial_lR_{jn}\right) + \frac{1}{r}\partial_i\eta_r
     +\delta_{i\phi}\frac{1}{r^2}\partial_\phi\eta_r\cancel{-\delta_{i\phi}\frac{1}{r}\partial_r\eta_\phi}
-    + \partial_l\partial_i\eta_l\bigg]\nonumber                                                                                                                                 \\
-    =                                                            & R_{ki}\bigg[-\frac{1}{r^2}\delta_{ir}\eta_r
-    -\frac{1}{r^2}\delta_{ir}\partial_\phi\eta_\phi\nonumber                                                                                                                    \\
-                                                                 & \cancel{-\delta_{i\phi}\eta_r\frac{1}{r^2} +\delta_{i\phi}\eta_r\frac{1}{r^2}} + \frac{1}{r}\partial_i\eta_r
+    + \partial_l\partial_i\eta_l\bigg]\nonumber                                                                      \\
+    = & R_{ki}\bigg[-\frac{1}{r^2}\delta_{ir}\eta_r
+    -\frac{1}{r^2}\delta_{ir}\partial_\phi\eta_\phi\nonumber                                                         \\
+      & \cancel{-\delta_{i\phi}\eta_r\frac{1}{r^2} +\delta_{i\phi}\eta_r\frac{1}{r^2}} + \frac{1}{r}\partial_i\eta_r
         +\delta_{i\phi}\frac{1}{r^2}\partial_\phi\eta_r
-    + \partial_l\partial_i\eta_l\bigg]\nonumber                                                                                                                                 \\
-    =                                                            & R_{ki}\bigg[-\frac{1}{r^2}\delta_{ir}\eta_r
+    + \partial_l\partial_i\eta_l\bigg]\nonumber                                                                      \\
+    = & R_{ki}\bigg[-\frac{1}{r^2}\delta_{ir}\eta_r
         -\frac{1}{r^2}\delta_{ir}\partial_\phi\eta_\phi + \frac{1}{r}\partial_i\eta_r
         +\delta_{i\phi}\frac{1}{r^2}\partial_\phi\eta_r + \partial_l\partial_i\eta_l\bigg]
 \end{align}
@@ -377,12 +380,13 @@ For the denominator in Eq. (\ref{omega_m}), we have
 \end{align}
 For the numerator in Eq. (\ref{omega_m}), we have to pick out terms associated with $\partial_\phi$, which are
 \begin{align}
-    f_\text{grad}\sim & \frac{\kappa_1}{r^2}\bigg[3(\partial_\phi\eta_\phi)(\partial_\phi\eta_\phi)^*
-    + (\partial_\phi\eta_r)(\partial_\phi\eta_r)^*\bigg]\nonumber                                     \\
-                      & +\frac{\kappa_1}{r}\bigg[(\partial_\phi\eta_\phi)(\partial_r\eta_r)^*
+    f_\text{grad}\sim
+     & \frac{\kappa_1}{r^2}\bigg[3(\partial_\phi\eta_\phi)(\partial_\phi\eta_\phi)^*
+    + (\partial_\phi\eta_r)(\partial_\phi\eta_r)^*\bigg]\nonumber                    \\
+     & +\frac{\kappa_1}{r}\bigg[(\partial_\phi\eta_\phi)(\partial_r\eta_r)^*
         + (\partial_r\eta_r)(\partial_\phi\eta_\phi)^* + (\partial_\phi\eta_r)(\partial_r\eta_\phi)^*
-    + (\partial_r\eta_\phi)(\partial_\phi\eta_r)^*\bigg]\nonumber                                     \\
-                      & +\frac{2\kappa_1}{r^2}\Re{3\eta_r^*\partial_\phi\eta_\phi
+    + (\partial_r\eta_\phi)(\partial_\phi\eta_r)^*\bigg]\nonumber                    \\
+     & +\frac{2\kappa_1}{r^2}\Re{3\eta_r^*\partial_\phi\eta_\phi
         - \eta_\phi^*\partial_\phi\eta_r}
 \end{align}
 Substitute in Eq. (\ref{uniform_flow_eta})
