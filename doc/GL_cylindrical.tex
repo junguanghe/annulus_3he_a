@@ -737,4 +737,74 @@ The $y$ component of the GL equations is
     -3\partial_y^2\eta_y - \partial_x^2\eta_y
     -2\partial_x\partial_y\eta_x = 0
 \end{align}
+
+\section{Quasiclassical theory}
+In quasiclassical theory, assuming a constant gap $\Delta$,
+the temperature dependence of the angular momentum is
+the effective Yoshida function, $L=\pm \frac{N}{2}\hbar\mathcal{Y}(T)$,
+\begin{align}
+    \mathcal{Y}(T) = \frac{8}{\pi} \int_{0}^{1} dx \, \sqrt{1 - x^2} \pi T
+    \sum_{\varepsilon_n}
+    \frac{\Delta^2 x^2}{\varepsilon_n^2 + \Delta^2 x^2} \,
+    \frac{1}{\sqrt{\varepsilon_n^2 + \Delta^2}} \, ,
+\end{align}
+where $N=N_fp_fv_fV$ is the total number of particles,
+$p_f=m^*v_f$ is the Fermi momentum,
+$m^*$ is the quasiclassical effective mass.
+Near $T_c$ it reduces to
+\begin{align}
+    \mathcal{Y}(T)\approx\frac{7\zeta(3)}{8\pi^2}
+    \left(\frac{\Delta}{T_c}\right)^2\propto \left(1-\frac{T}{T_c}\right).
+\end{align}
+where we use
+\begin{align}
+    \sum_{n=-\infty}^\infty\frac{1}{|2n+1|^3}=\frac{7}{4}\zeta(3).
+\end{align}
+and
+\begin{align}
+    \int_0^1\sqrt{1-x^2}x^2\dd x=\frac{\pi}{16}.
+\end{align}
+
+In GL theory, under constant gap assumption, according to Eq. (\ref{l_density}) we have
+\begin{align}
+    L=\pm 4M\kappa_1 V\eta_0^2/\hbar
+\end{align}
+where $M=2m$ is the mass of a pair of Helium atoms.
+We can derive $\kappa_1$ from quasiclassical theory. Under weak-coupling limit, we have
+\begin{align}
+    \kappa_1 & =N_f\frac{\pi T_c}{16}(\hbar v_f)^2
+    \sum_{\varepsilon_n=-\infty}^{+\infty}\frac{1}{|\varepsilon_n|^3}=\kappa_2=\kappa_3 \\
+             & =N_f\frac{7\zeta(3)}{64}\left(\frac{\hbar v_f}{\pi T_c}\right)^2
+\end{align}
+Substitute in and we have
+\begin{align}
+    L=\pm \frac{N_fMv_f^2V}{2}\hbar\times\frac{7\zeta(3)}{8\pi^2}\left(\frac{\eta_0}{T_c}\right)^2
+\end{align}
+
+\section{Angular Momentum}
+In GL theory, the total angular momentum is
+\begin{align}
+    L = \int\dd[3]rl_z
+     & \equiv \frac{2M\kappa_1\eta_0^2V}{\hbar}
+    \ev{3\eta_\phi^*\partial_\phi\eta_\phi
+        +\eta_r^*\partial_\phi\eta_r
+        +4\eta_\phi^*\eta_r + r\eta_\phi^*\partial_r\eta_r
+    +r\eta_r^*\partial_r\eta_\phi}_V            \\
+     & = 2l_cV
+    \ev{3\eta_\phi^*\partial_\phi\eta_\phi
+        +\eta_r^*\partial_\phi\eta_r
+        +4\eta_\phi^*\eta_r + r\eta_\phi^*\partial_r\eta_r
+        +r\eta_r^*\partial_r\eta_\phi}_V
+\end{align}
+where $l_c = j_c\xi$, $j_c = |f_\text{min}|/v_c$, $v_c = \hbar/M\xi$,
+$\xi^2 = \kappa_1/|\alpha|$, $|f_\text{min}| = \alpha^2/4\beta_1$,
+$\eta_0^2 = |\alpha|/4\beta_1$,
+and $V$ is the volume of the system.
+For constant gap approximation, the angle bracket evaluates to $2$.
+For full numerical solution,
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../figures/L_r.pdf}
+\end{figure}
+
 \end{document}
