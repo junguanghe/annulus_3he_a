@@ -782,30 +782,76 @@ Substitute in and we have
 \end{align}
 
 \section{Angular Momentum}
-In GL theory, the total angular momentum is
+In general the total ground-state angular momentum in a cylinder is
 \begin{align}
-    L = \int\dd[3]rl_z
-     & \equiv \frac{2M\kappa_1\eta_0^2V}{\hbar}
-    \ev{3\eta_\phi^*\partial_\phi\eta_\phi
-        +\eta_r^*\partial_\phi\eta_r
-        +4\eta_\phi^*\eta_r + r\eta_\phi^*\partial_r\eta_r
-    +r\eta_r^*\partial_r\eta_\phi}_V            \\
-     & = 2l_cV
-    \ev{3\eta_\phi^*\partial_\phi\eta_\phi
-        +\eta_r^*\partial_\phi\eta_r
-        +4\eta_\phi^*\eta_r + r\eta_\phi^*\partial_r\eta_r
-        +r\eta_r^*\partial_r\eta_\phi}_V
+    \vb{L} & = \int_0^R \dd[3]r \vb{r} \times \vb{j}(\vb{r})     \\
+           & = 2\pi h\vu{z}\int_0^R \dd{r} r^2 j(r)              \\
+           & \approx 2\pi R^2 h \vu{z}\int_{R-\xi}^R \dd{r} j(r) \\
+           & \approx 2V\vu{z} \int_{R-\xi}^R \dd{r} j(r)
 \end{align}
-where $l_c = j_c\xi$, $j_c = |f_\text{min}|/v_c$, $v_c = \hbar/M\xi$,
+
+At $T=0$, we can approximate the edge mass current density as a delta function at the edge,
+\begin{align}
+    \vb{j}(\vb{r}) \approx \frac{n}{4}\hbar \delta(r-R) \vu{\phi}
+\end{align}
+and the total angular momentum in a cylinder is
+\begin{align}
+    \vb{L} = 2V \vu{z} \frac{n}{4}\hbar = \frac{N}{2}\hbar \vu{z}
+\end{align}
+where $N$ is the number of fermions in the system.
+
+In quasiclassical theory, under constant-gap assumption, at $T=0$,
+the mass current density is exponentially decaying away from the edge,
+\begin{align}
+    j_y^{C_2}(x) = 2N_f v_f \int_{-\pi/2}^{+\pi/2} \frac{d\alpha}{\pi} \hat{p}_y
+    |\Delta_1(\mathbf{p})| \Delta_2(\mathbf{p}) \times \int_0^{\infty}
+    \frac{d\epsilon}{\epsilon^2 + |\Delta_2(\mathbf{p})|^2}
+    e^{-2\sqrt{\epsilon^2 + \Delta^2}x/v_x},
+\end{align}
+When $R\gg\xi$, we can recover $\vb{L} = \frac{N}{2}\hbar \vu{z}$.
+
+But when we solve the self-consistent gap profile, we don't have an analytical expression
+for the mass current density, and the total angular momentum is likely not $\frac{N}{2}\hbar \vu{z}$.
+
+When $0<T<T_c$, under constant-gap assumption,
+the temperature dependence of the mass current density is described by the
+effective Yoshida function. Near $T_c$, the result matches the GL theory constant order-parameter result
+except for $m^* \neq M = 2m$.
+
+In GL theory, i.e. $T \rightarrow T_c$, the mass current density is
+\begin{align}
+    j_\phi = \frac{2M\kappa_1}{\hbar}
+    \Im{3\eta_\phi^*\frac{\partial_\phi}{r}\eta_\phi+\eta_r^*\frac{\partial_\phi}{r}\eta_r
+        +4\frac{\eta_\phi^*\eta_r}{r}+\eta_\phi^*\partial_r\eta_r+\eta_r^*\partial_r\eta_\phi}
+\end{align}
+Assume constant order parameter profile, the only non-zero term is the $\partial_r\eta_r$,
+where the $\eta_r$ is assumed to be a step function at the edge,
+\begin{align}
+    j_\phi(r) = \frac{2M\kappa_1 \eta_0^2}{\hbar} \delta(r-R)
+    \equiv 2l_c\delta(r-R)
+\end{align}
+where we define the `critical angular momentum density'
+$l_c = j_c\xi$, and $j_c = |f_\text{min}|/v_c$, $v_c = \hbar/M\xi$,
 $\xi^2 = \kappa_1/|\alpha|$, $|f_\text{min}| = \alpha^2/4\beta_1$,
-$\eta_0^2 = |\alpha|/4\beta_1$,
-and $V$ is the volume of the system.
-$\ev{...}_V = \int\dd[3]r(...)/\eta_0^2V$ is the dimensionless volume integral.
-For constant gap approximation, the angle bracket evaluates to $2$.
-For full numerical solution,
+$\eta_0^2 = |\alpha|/4\beta_1$.
+So we have
+\begin{align}
+    \int_0^R \dd{r} j_\phi(r) = 2l_c \qq{and}
+    L = 2V \times 2l_c = 4l_cV
+\end{align}
+But for self-consistent order parameter profile, the mass current density
+and the resulting angular momentum is totally different from the constant-gap model.
+Numerical calculation shows that
+\begin{align}
+    \int_0^R \dd{r} j_\phi(r) \approx 2.4 l_c
+\end{align}
+We can approximate the order parameter profile by hyperbolic functions and get
+an analytical approximation of the $j_\phi(r)$ to check this.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{../figures/L_r.pdf}
+    \caption{For full numerical solution of ground-state angular momentum in a cylinder}
 \end{figure}
 
 \end{document}
