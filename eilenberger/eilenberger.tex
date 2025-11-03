@@ -1,0 +1,173 @@
+\documentclass[aps,prl,preprint]{revtex4-2}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\begin{document}
+
+\title{Title of Your Paper}
+\author{Your Name}
+\affiliation{Your Institution}
+\date{\today}
+
+\begin{abstract}
+    Your abstract goes here.
+\end{abstract}
+
+% \maketitle
+\section{Mean-field theory}
+The mean-field Nambu-Gor'kov Hamiltonian is
+\begin{align}
+    H
+     & = \frac{1}{2}\iint\dd[3]\vb{r}\dd[3]\vb{r}'
+    \widehat{\Psi}^\dagger(\vb{r}')
+    \begin{pmatrix}
+        \xi(\vb{r})\delta(\vb{r}-\vb{r}')\hat{1} & \hat{\Delta}(\vb{r},\vb{r}')              \\
+        \hat{\Delta}^\dagger(\vb{r},\vb{r}')     & -\xi(\vb{r})\delta(\vb{r}-\vb{r}')\hat{1}
+    \end{pmatrix}
+    \widehat{\Psi}(\vb{r})                              \\
+     & \equiv \frac{1}{2}\iint\dd[3]\vb{r}\dd[3]\vb{r}'
+    \widehat{\Psi}^\dagger(\vb{r}')
+    \widehat{\tau}_3\left(\xi(\vb{r})\delta(\vb{r}-\vb{r}') + \widehat{\Delta}(\vb{r},\vb{r}')\right)
+    \widehat{\Psi}(\vb{r}).
+\end{align}
+where
+\begin{align}
+    \widehat{\Delta}(\vb{r},\vb{r}') =
+    \begin{pmatrix}
+        0                                     & \hat{\Delta}(\vb{r},\vb{r}') \\
+        -\hat{\Delta}^\dagger(\vb{r},\vb{r}') & 0
+    \end{pmatrix}
+\end{align}
+When the system is homogeneous, the two-point gap function only depends on the
+relative coordinate, i.e., $\hat{\Delta}(\vb{r},\vb{r}') = \hat{\Delta}(\vb{r}-\vb{r}')$.
+In this case, we can transform to momentum space, and the Hamiltonian becomes
+\begin{equation}
+    H = \frac{1}{2}\sum_{\vb{p}}
+    \widehat{\Psi}_{\vb{p}}^{\dagger}
+    \widehat{\tau}_3(\xi_{\vb{p}} + \widehat{\Delta}(\vb{p}))
+    \widehat{\Psi}_{\vb{p}}.
+\end{equation}
+where
+$\widehat{\Psi}_{\vb{p}}^\dagger = (c_{\vb{p}\uparrow}^\dagger, c_{\vb{p}\downarrow}^\dagger, c_{-\vb{p}\uparrow}, c_{-\vb{p}\downarrow})$.
+
+\section{Finite temperature}
+The imaginary time Green's function is
+\begin{align}
+    \widehat{G}(x, x') = -\ev{T_\tau \widehat{\Psi}(x) \widehat{\Psi}^\dagger(x')}.
+\end{align}
+where $x = (\vb{r}, \tau)$. The unperturbed Matsubara Green's function is
+\begin{align}
+    \widehat{G}_0(\vb{p}, i\epsilon_n)
+    = (i\epsilon_n - \widehat{\tau}_3\xi_{\vb{p}})^{-1}
+    = -\frac{i\epsilon_n + \widehat{\tau}_3\xi_{\vb{p}}}{\epsilon_n^2 + \xi_{\vb{p}}^2}.
+\end{align}
+The Gorkov Green's function satisfies
+\begin{align}
+    \widehat{G}^{-1}(\vb{p}, i\epsilon_n)
+    = \widehat{G}_0^{-1}(\vb{p}, i\epsilon_n) - \widehat{\tau}_3\widehat{\Delta}(\vb{p})
+    = i\epsilon_n - \widehat{\tau}_3\xi_{\vb{p}} - \widehat{\tau}_3\widehat{\Delta}(\vb{p}).
+\end{align}
+which gives
+\begin{align}
+    \widehat{G}(\vb{p}, i\epsilon_n)
+    = - \frac{i\epsilon_n + \widehat{\tau}_3\xi_{\vb{p}} + \widehat{\tau}_3\widehat{\Delta}(\vb{p})}
+    {\epsilon_n^2 + \xi_{\vb{p}}^2 + |\Delta|^2}
+\end{align}
+The quasiclassical Green's function is
+\begin{align}
+    \widehat{g}(\vb{p}, i\epsilon_n)
+    = \int\dd\xi_p \widehat{G}(\vb{p}, i\epsilon_n) \widehat{\tau}_3
+    = -\pi \frac{i\epsilon_n\widehat{\tau}_3 - \widehat{\Delta}(\vb{p})}
+    {\sqrt{|\Delta|^2 + \epsilon_n^2}}
+    = \frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}
+    \begin{pmatrix}
+        -i\epsilon_n          & \hat{\Delta} \\
+        -\hat{\Delta}^\dagger & i\epsilon_n
+    \end{pmatrix}
+    \equiv
+    \begin{pmatrix}
+        \hat{g}          & \hat{f}  \\
+        -\hat{f}^\dagger & -\hat{g}
+    \end{pmatrix}
+\end{align}
+and it satisfies the normalization condition
+\begin{align}
+    \widehat{g}(\vb{p}, i\epsilon_n)^2 = -\pi^2\widehat{1}.
+\end{align}
+The bulk quasiclassical Green's function satisfies
+\begin{align}
+    \comm{i\epsilon_n\widehat{\tau}_3 - \widehat{\Delta}}{\widehat{g}} = 0
+\end{align}
+But when near the boundary or impurities, the
+quasiclassical Green's function $\widehat{g}(\vb{r},\vb{p};\epsilon)$
+and the gap function $\widehat{\Delta}(\vb{r}, \vb{p})$ are
+inhomogeneous, and are described by the
+Eilenberger equation and gap equation.
+\begin{equation}
+    \comm{\epsilon\widehat{\tau}_3 - \widehat{\Delta}(\vb{r}, \vb{p})}
+    {\widehat{g}(\vb{r},\vb{p};\epsilon)} +
+    i\hbar\vb{v}_p \cdot \nabla\widehat{g}(\vb{r},\vb{p};\epsilon)
+    = 0
+\end{equation}
+and
+\begin{align}
+    \hat{\Delta}(\vb{r}, \vb{p})
+    = \ev{v(\vb{p}, \vb{p}')T\sum_{\epsilon_n=-\omega_c}^{\omega_c}
+        \hat{f}(\vb{r}, \vb{p}', \epsilon_n)}_{p'}
+\end{align}
+
+\section{Numerical solution}
+The $(1,1)$ and $(1,2)$ elements of the Eilenberger equation are
+\begin{align}
+    i\epsilon_n \hat{g} + \hat{\Delta} \hat{f}^\dagger + i\hbar \vb{v}_p \cdot \grad \hat{g} = 0 \\
+    i\epsilon_n \hat{f} + \hat{\Delta} \hat{g} + i\hbar \vb{v}_p \cdot \grad \hat{f} = 0
+\end{align}
+Note that $\hat{\Delta}$ and $\hat{f}$ has the same spin structure, so we can
+substitute in $\hat{g}$ and $\hat{f}$, divide by $T_c$, and we get
+\begin{align}
+    i (2n+1)\pi t g(\vb{r}, \vu{p}, n) + \hat{\delta}(\vb{r}, \vu{p})
+    f^*(\vb{r}, \vu{p}, n) + i(\vu{p}_x \partial_x
+    + \vu{p}_y \partial_y) g(\vb{r}, \vu{p}, n) = 0 \\
+    i (2n+1)\pi t f(\vb{r}, \vu{p}, n) + \hat{\delta}(\vb{r}, \vu{p})
+    g(\vb{r}, \vu{p}, n) + i(\vu{p}_x \partial_x
+    + \vu{p}_y \partial_y) f(\vb{r}, \vu{p}, n) = 0
+\end{align}
+where $t = T/T_c$, $\delta = \Delta/T_c$, $\xi = \hbar v_f/T_c$ and
+$\va{\partial} = \xi\grad$.
+
+For the gap equation, we ...
+\begin{align}
+    \delta =
+\end{align}
+
+We first assume an initial guess for the gap function $\delta(\vb{r}, \vu{p})$.
+For each trajectory $\vu{p}$ along which the quasiparticle propagates, we can
+solve the Eilenberger equation to get the Green's function $g(\vb{r}, \vu{p}, n)$
+and the anomalous Green's function $f(\vb{r}, \vu{p}, n)$. Then we iterate to
+update the gap function $\delta(\vb{r}, \vu{p})$ by solving the gap equation.
+Repeat until convergence.
+
+\section{$^3$He-A}
+For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\sigma_y) = \sigma_x$.
+In general, we have
+\begin{align}
+    \hat{\Delta}(\vb{r}, \vb{p})
+    = \hat{\sigma}_x (\Delta_1(\vb{r}, \vb{p}) + i\Delta_2(\vb{r}, \vb{p}))
+\end{align}
+in bulk we have $\Delta_1(\vb{p}) = \Delta p_x$ and $\Delta_2(\vb{p}) = \Delta p_y$.
+We can also write the anomalous Green's function as
+\begin{align}
+    \hat{f}(\vb{r}, \vb{p}, \epsilon_n)
+    = \hat{\sigma}_x \bigg(f_1(\vb{r}, \vb{p}, \epsilon_n) + i f_2(\vb{r}, \vb{p}, \epsilon_n) \bigg)
+\end{align}
+
+\section{Edge gap profile}
+We assume translational invariance along the edge, i.e. the $y$ direction.
+We choose the gap to be real along the $x$ direction. We assume the momentum
+dependence of the gap is given by
+\begin{align}
+    \hat{\Delta}(x, \vb{p})
+    = \hat{\sigma}_x (\Delta_1(x)p_x + i\Delta_2(x)p_y)
+\end{align}
+
+\end{document}
