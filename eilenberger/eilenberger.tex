@@ -116,6 +116,43 @@ and
         \hat{f}(\vb{r}, \vb{p}', \epsilon_n)}_{p'}
 \end{align}
 
+\section{$^3$He-A}
+For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\sigma_y) = \sigma_x$,
+and we have two components of the gap function,
+\begin{align}
+    \hat{\Delta}(\vb{r}, \vb{p})
+    = \hat{\sigma}_x (\Delta_1(\vb{r})p_x + \Delta_2(\vb{r})p_y)
+\end{align}
+In bulk we have $\hat{\Delta}(\vb{r}, \vb{p}) = \hat{\sigma}_x \Delta(p_x + ip_y)$.
+
+\section{Edge gap profile}
+We assume translational invariance along the edge, i.e. the $y$ direction.
+We also assume the gap to be real(imaginary) along the $p_x(p_y)$ direction.
+\begin{align}
+    \hat{\Delta}(x, \vb{p})
+    = \hat{\sigma}_x (\Delta_1(x)p_x + i\Delta_2(x)p_y)
+\end{align}
+Here $\Delta_1(x)$ and $\Delta_2(x)$ are real functions, and we have
+\begin{align}
+    \widehat{\Delta}(\vb{r}, \vb{p})
+     & =
+    \begin{pmatrix}
+        0                                                  & \hat{\sigma}_x (\Delta_1(x)p_x + i\Delta_2(x)p_y) \\
+        -\hat{\sigma}_x (\Delta_1(x)p_x - i\Delta_2(x)p_y) & 0
+    \end{pmatrix} \\
+     & = i\hat{\sigma}_x(\Delta_2p_y\widehat{\tau}_1 + \Delta_1p_x\widehat{\tau}_2)
+\end{align}
+We can also write the anomalous Green's function as
+\begin{align}
+    \hat{f}(\vb{r}, \vb{p}, \epsilon_n)
+    = \hat{\sigma}_x \bigg(f_1(\vb{r}, \vb{p}, \epsilon_n) + if_2(\vb{r}, \vb{p}, \epsilon_n) \bigg)
+\end{align}
+and we have
+\begin{align}
+    \widehat{g}(\vb{r}, \vb{p}, \epsilon_n)
+    = \hat{g}\widehat{\tau}_3 + i\hat{\sigma}_x(f_2\widehat{\tau}_1 + f_1\widehat{\tau}_2)
+\end{align}
+
 \section{Numerical solution}
 The $(1,1)$ and $(1,2)$ elements of the Eilenberger equation are
 \begin{align}
@@ -146,28 +183,5 @@ solve the Eilenberger equation to get the Green's function $g(\vb{r}, \vu{p}, n)
 and the anomalous Green's function $f(\vb{r}, \vu{p}, n)$. Then we iterate to
 update the gap function $\delta(\vb{r}, \vu{p})$ by solving the gap equation.
 Repeat until convergence.
-
-\section{$^3$He-A}
-For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\sigma_y) = \sigma_x$.
-In general, we have
-\begin{align}
-    \hat{\Delta}(\vb{r}, \vb{p})
-    = \hat{\sigma}_x (\Delta_1(\vb{r}, \vb{p}) + i\Delta_2(\vb{r}, \vb{p}))
-\end{align}
-in bulk we have $\Delta_1(\vb{p}) = \Delta p_x$ and $\Delta_2(\vb{p}) = \Delta p_y$.
-We can also write the anomalous Green's function as
-\begin{align}
-    \hat{f}(\vb{r}, \vb{p}, \epsilon_n)
-    = \hat{\sigma}_x \bigg(f_1(\vb{r}, \vb{p}, \epsilon_n) + i f_2(\vb{r}, \vb{p}, \epsilon_n) \bigg)
-\end{align}
-
-\section{Edge gap profile}
-We assume translational invariance along the edge, i.e. the $y$ direction.
-We choose the gap to be real along the $x$ direction. We assume the momentum
-dependence of the gap is given by
-\begin{align}
-    \hat{\Delta}(x, \vb{p})
-    = \hat{\sigma}_x (\Delta_1(x)p_x + i\Delta_2(x)p_y)
-\end{align}
 
 \end{document}
