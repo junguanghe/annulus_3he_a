@@ -155,7 +155,16 @@ and we have two components of the gap function,
     = \hat{\sigma}_x (\Delta_1(\vb{r})p_x + \Delta_2(\vb{r})p_y)
 \end{align}
 In bulk we have $\hat{\Delta}(\vb{r}, \vb{p}) = \hat{\sigma}_x \Delta(p_x + ip_y)$.
-The interaction is $v(\vb{p}, \vb{p}') = 3v_0(\vu{p}\vdot\vu{p}')$.
+The interaction is $v(\vb{p}, \vb{p}') = 3v_0\vu{p}\vdot\vu{p}'$, and the
+gap-equation reduces to
+\begin{align}
+    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
+    \left[
+        \frac{2\ev{\vb{p}\vdot\vb{p}'f(\vb{r}, \vb{p}', \epsilon_n)}_{p'}}
+        {\Delta(\vb{r}, \vb{p})}
+        - \frac{\pi}{|\epsilon_n|}
+        \right]
+\end{align}
 
 \section{s-wave pairing}
 For s-wave pairing, the spin structure is $i\hat{\sigma}_y$, and we have
@@ -164,9 +173,17 @@ For s-wave pairing, the spin structure is $i\hat{\sigma}_y$, and we have
     = i\hat{\sigma}_y \Delta(\vb{r})
 \end{align}
 In bulk we have $\hat{\Delta}(\vb{r}, \vb{p}) = i\hat{\sigma}_y \Delta$.
-The interaction is $v(\vb{p}, \vb{p}') = v_0$.
+The interaction is $v(\vb{p}, \vb{p}') = v_s$, and the gap-equation reduces to
+\begin{align}
+    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
+    \left[
+        \frac{\ev{f(\vb{r}, \vb{p}', \epsilon_n)}_{p'}}
+        {\Delta(\vb{r}, \vb{p})}
+        - \frac{\pi}{|\epsilon_n|}
+        \right]
+\end{align}
 
-\section{Edge gap profile}
+\section{$^3$He-A edge gap profile}
 We assume translational invariance along the edge, i.e. the $y$ direction.
 We also assume the gap to be real(imaginary) along the $p_x(p_y)$ direction.
 \begin{align}
@@ -212,11 +229,6 @@ substitute in $\hat{g}$ and $\hat{f}$, divide by $T_c$, and we get
 \end{align}
 where $t = T/T_c$, $\delta = \Delta/T_c$, $\xi = \hbar v_f/T_c$ and
 $\va{\partial} = \xi\grad$.
-
-For the gap equation, we ...
-\begin{align}
-    \delta =
-\end{align}
 
 We first assume an initial guess for the gap function $\delta(\vb{r}, \vu{p})$.
 For each trajectory $\vu{p}$ along which the quasiparticle propagates, we can
