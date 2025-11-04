@@ -200,15 +200,29 @@ Here $\Delta_1(x)$ and $\Delta_2(x)$ are real functions, and we have
     \end{pmatrix} \\
      & = i\hat{\sigma}_x(\Delta_2p_y\widehat{\tau}_1 + \Delta_1p_x\widehat{\tau}_2)
 \end{align}
-We can also write the anomalous Green's function as
+In this case, we can also write the anomalous Green's function as
 \begin{align}
     \hat{f}(\vb{r}, \vb{p}, \epsilon_n)
     = \hat{\sigma}_x \bigg(f_1(\vb{r}, \vb{p}, \epsilon_n) + if_2(\vb{r}, \vb{p}, \epsilon_n) \bigg)
 \end{align}
-and we have
+where $f_{1,2}$ are real functions, and we have
 \begin{align}
     \widehat{g}(\vb{r}, \vb{p}, \epsilon_n)
     = \hat{g}\widehat{\tau}_3 + i\hat{\sigma}_x(f_2\widehat{\tau}_1 + f_1\widehat{\tau}_2)
+\end{align}
+In this case, we can even write the gap equation as
+\begin{align}
+    \Delta_{1,2}(x) = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}\ev{v(\vb{p}_{x,y}, \vb{p}')
+        f_{1,2}(x, \vb{p}', \epsilon_n)}_{p'}
+\end{align}
+which becomes
+\begin{align}
+    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
+    \left[
+    \frac{\ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', \epsilon_n)}_{p'}}
+    {\Delta_{1,2}(x)}
+    - \frac{\pi}{|\epsilon_n|}
+    \right]
 \end{align}
 
 \section{Numerical solution}
