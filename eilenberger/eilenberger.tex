@@ -110,10 +110,41 @@ Eilenberger equation and gap equation.
     = 0
 \end{equation}
 and
-\begin{align}
+\begin{align}\label{gap_eq}
     \hat{\Delta}(\vb{r}, \vb{p})
-    = \ev{v(\vb{p}, \vb{p}')T\sum_{\epsilon_n=-\omega_c}^{\omega_c}
+    = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}\ev{v(\vb{p}, \vb{p}')
         \hat{f}(\vb{r}, \vb{p}', \epsilon_n)}_{p'}
+\end{align}
+In bulk, we have
+\begin{align}
+    \Delta(\vb{p}) = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}
+    \ev{v(\vb{p}, \vb{p}')
+        \frac{\pi\Delta(\vb{p}')}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}_{p'}
+\end{align}
+We have the Digamma function
+\begin{align}
+    K(T) = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}
+    \frac{\pi}{|\epsilon_n|}\approx\ln{\left(1.13\frac{\omega_c}{T}\right)}
+\end{align}
+In bulk at $T_c$, we have
+\begin{align}
+    \Delta(\vb{p}) = K(T_c)
+    \ev{v(\vb{p}, \vb{p}')\Delta(\vb{p}')}_{p'}
+\end{align}
+and we have
+\begin{align}
+    K(T_c) - K(T) = \ln{\left(T/T_c\right)}
+    =\frac{\Delta(\vb{p}'')}{\ev{v(\vb{p}'', \vb{p}')\Delta(\vb{p}')}_{p'}}\eval_{T_c}
+    - T\sum_{\epsilon_n=-\omega_c}^{\omega_c}\frac{\pi}{|\epsilon_n|}
+\end{align}
+Substitute in Eq. (\ref{gap_eq}), we get
+\begin{align}
+    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
+    \left[
+        \frac{\ev{v(\vb{p}, \vb{p}')f(\vb{r}, \vb{p}', \epsilon_n)}_{p'} / \Delta(\vb{r}, \vb{p})}
+        {\ev{v(\vb{p}'', \vb{p}')\Delta(\vb{p}')}_{p'}/\Delta(\vb{p}'')\eval_{T_c}}
+        - \frac{\pi}{|\epsilon_n|}
+        \right]
 \end{align}
 
 \section{$^3$He-A}
