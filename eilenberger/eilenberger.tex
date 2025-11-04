@@ -117,13 +117,21 @@ and
 \end{align}
 
 \section{$^3$He-A}
-For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\sigma_y) = \sigma_x$,
+For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\hat{\sigma}_y) = \hat{\sigma}_x$,
 and we have two components of the gap function,
 \begin{align}
     \hat{\Delta}(\vb{r}, \vb{p})
     = \hat{\sigma}_x (\Delta_1(\vb{r})p_x + \Delta_2(\vb{r})p_y)
 \end{align}
 In bulk we have $\hat{\Delta}(\vb{r}, \vb{p}) = \hat{\sigma}_x \Delta(p_x + ip_y)$.
+
+\section{s-wave pairing}
+For s-wave pairing, the spin structure is $i\hat{\sigma}_y$, and we have
+\begin{align}
+    \hat{\Delta}(\vb{r}, \vb{p})
+    = i\hat{\sigma}_y \Delta(\vb{r})
+\end{align}
+In bulk we have $\hat{\Delta}(\vb{r}, \vb{p}) = i\hat{\sigma}_y \Delta$.
 
 \section{Edge gap profile}
 We assume translational invariance along the edge, i.e. the $y$ direction.
@@ -162,10 +170,10 @@ The $(1,1)$ and $(1,2)$ elements of the Eilenberger equation are
 Note that $\hat{\Delta}$ and $\hat{f}$ has the same spin structure, so we can
 substitute in $\hat{g}$ and $\hat{f}$, divide by $T_c$, and we get
 \begin{align}
-    i (2n+1)\pi t g(\vb{r}, \vu{p}, n) + \hat{\delta}(\vb{r}, \vu{p})
+    i (2n+1)\pi t g(\vb{r}, \vu{p}, n) + \delta(\vb{r}, \vu{p})
     f^*(\vb{r}, \vu{p}, n) + i(\vu{p}_x \partial_x
     + \vu{p}_y \partial_y) g(\vb{r}, \vu{p}, n) = 0 \\
-    i (2n+1)\pi t f(\vb{r}, \vu{p}, n) + \hat{\delta}(\vb{r}, \vu{p})
+    i (2n+1)\pi t f(\vb{r}, \vu{p}, n) + \delta(\vb{r}, \vu{p})
     g(\vb{r}, \vu{p}, n) + i(\vu{p}_x \partial_x
     + \vu{p}_y \partial_y) f(\vb{r}, \vu{p}, n) = 0
 \end{align}
