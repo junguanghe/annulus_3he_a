@@ -226,6 +226,12 @@ which becomes
 \end{align}
 
 \section{Numerical solution}
+The iteration of the gap function is
+\begin{align}
+    \delta_{1,2}(x) =
+    \frac{t\sum_n2\ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
+    {\ln{t} + \sum_n 1/|2n+1|}
+\end{align}
 The $(1,1)$ and $(1,2)$ elements of the Eilenberger equation are
 \begin{align}
     i\epsilon_n \hat{g} + \hat{\Delta} \hat{f}^\dagger + i\hbar \vb{v}_p \cdot \grad \hat{g} = 0 \\
