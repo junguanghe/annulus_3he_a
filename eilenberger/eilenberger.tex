@@ -116,7 +116,7 @@ and
         \hat{f}(\vb{r}, \vb{p}', \epsilon_n)}_{p'}
 \end{align}
 In bulk, we have
-\begin{align}
+\begin{align}\label{gap_eq_bulk}
     \Delta(\vb{p}) = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}
     \ev{v(\vb{p}, \vb{p}')
         \frac{\pi\Delta(\vb{p}')}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}_{p'}
@@ -146,6 +146,15 @@ Substitute in Eq. (\ref{gap_eq}), we get
         - \frac{\pi}{|\epsilon_n|}
         \right]
 \end{align}
+If you want temperature dependence of bulk gap, you can substitute in Eq. (\ref{gap_eq_bulk}) to get
+\begin{align}
+    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
+    \left[
+        \frac{\pi\ev{v(\vb{p}, \vb{p}')\Delta(\vb{p}') / \Delta(\vb{p}) \sqrt{|\Delta|^2 + \epsilon_n^2}}_{p'}}
+        {\ev{v(\vb{p}'', \vb{p}')\Delta(\vb{p}')}_{p'}/\Delta(\vb{p}'')\eval_{T_c}}
+        - \frac{\pi}{|\epsilon_n|}
+        \right]
+\end{align}
 
 \section{$^3$He-A}
 For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\hat{\sigma}_y) = \hat{\sigma}_x$,
@@ -163,6 +172,14 @@ gap-equation reduces to
     \left[
         \frac{2\ev{\vb{p}_{x,y}\vdot\vb{p}'f(\vb{r}, \vb{p}', \epsilon_n)}_{p'}}
         {\Delta_{1,2}(\vb{r})}
+        - \frac{\pi}{|\epsilon_n|}
+        \right]
+\end{align}
+The 2d bulk gap equation ($|\Delta|^2$ does not depend on $\vb{p}$) is
+\begin{align}
+    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
+    \left[
+        \frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}
         - \frac{\pi}{|\epsilon_n|}
         \right]
 \end{align}
