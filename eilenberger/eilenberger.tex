@@ -156,6 +156,32 @@ If you want temperature dependence of bulk gap, you can substitute in Eq. (\ref{
         \right]
 \end{align}
 
+\section{Riccati Parameterizations}
+The Riccati parameterization of the Green's function is
+\begin{align}
+    \widehat{G}(\vb{r}, \vb{p}, \epsilon_n)
+    = -i\pi\widehat{N}
+    \begin{pmatrix}
+        1+\hat{a}\hat{\underbar{a}} & 2\hat{a}                     \\
+        -2\hat{\underbar{a}}        & -1-\hat{\underbar{a}}\hat{a}
+    \end{pmatrix}
+\end{align}
+where $\widehat{N}$ is
+\begin{align}
+    \widehat{N} =
+    \begin{pmatrix}
+        (1-\hat{a}\hat{\underbar{a}})^{-1} & 0                                  \\
+        0                                  & (1-\hat{\underbar{a}}\hat{a})^{-1}
+    \end{pmatrix}
+\end{align}
+The matrix Ricatti equation is
+\begin{align}
+    i\hbar\vb{v}_p \vdot \grad{\hat{a}} + 2\epsilon\hat{a}
+    + \hat{a}\hat{\Delta}^\dagger\hat{a} + \hat{\Delta} = 0 \\
+    i\hbar\vb{v}_p \vdot \grad{\hat{\underbar{a}}} - 2\epsilon\hat{\underbar{a}}
+    - \hat{\underbar{a}}\hat{\Delta}\hat{\underbar{a}} - \hat{\Delta}^\dagger = 0
+\end{align}
+
 \section{$^3$He-A}
 For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\hat{\sigma}_y) = \hat{\sigma}_x$,
 and we have two components of the gap function,
