@@ -53,15 +53,22 @@ $\widehat{\Psi}_{\vb{p}}^\dagger = (c_{\vb{p}\uparrow}^\dagger, c_{\vb{p}\downar
 \section{Finite temperature}
 The imaginary time Green's function is
 \begin{align}
-    \widehat{G}(x, x') = -\ev{T_\tau \widehat{\Psi}(x) \widehat{\Psi}^\dagger(x')}.
+    \widehat{G}(\vb{r}\tau, \vb{r}'\tau')
+    = \widehat{G}(\vb{r}, \vb{r}';\tau-\tau')
+    = -\ev{T_\tau \widehat{\Psi}(\vb{r}, \tau) \widehat{\Psi}^\dagger(\vb{r}', \tau')}
+    \equiv
+    \begin{pmatrix}
+        \hat{G}             & \hat{F}             \\
+        \hat{\underline{F}} & \hat{\underline{G}}
+    \end{pmatrix}
 \end{align}
-where $x = (\vb{r}, \tau)$. The unperturbed Matsubara Green's function is
+The unperturbed Matsubara Green's function is
 \begin{align}
     \widehat{G}_0(\vb{p}, i\epsilon_n)
     = (i\epsilon_n - \widehat{\tau}_3\xi_{\vb{p}})^{-1}
     = -\frac{i\epsilon_n + \widehat{\tau}_3\xi_{\vb{p}}}{\epsilon_n^2 + \xi_{\vb{p}}^2}.
 \end{align}
-The Gorkov Green's function satisfies
+In bulk, the Gorkov Green's function satisfies
 \begin{align}
     \widehat{G}^{-1}(\vb{p}, i\epsilon_n)
     = \widehat{G}_0^{-1}(\vb{p}, i\epsilon_n) - \widehat{\tau}_3\widehat{\Delta}(\vb{p})
@@ -73,7 +80,7 @@ which gives
     = - \frac{i\epsilon_n + \widehat{\tau}_3\xi_{\vb{p}} + \widehat{\tau}_3\widehat{\Delta}(\vb{p})}
     {\epsilon_n^2 + \xi_{\vb{p}}^2 + |\Delta|^2}
 \end{align}
-The quasiclassical Green's function is
+The bulk quasiclassical Green's function is
 \begin{align}
     \widehat{g}(\vb{p}, i\epsilon_n)
     = \int\dd\xi_p \widehat{G}(\vb{p}, i\epsilon_n) \widehat{\tau}_3
@@ -86,8 +93,8 @@ The quasiclassical Green's function is
     \end{pmatrix}
     \equiv
     \begin{pmatrix}
-        \hat{g}          & \hat{f}  \\
-        -\hat{f}^\dagger & -\hat{g}
+        \hat{g}             & \hat{f}             \\
+        \hat{\underline{f}} & \hat{\underline{g}}
     \end{pmatrix}
 \end{align}
 and it satisfies the normalization condition
@@ -162,24 +169,24 @@ The Riccati parameterization of the Green's function is
     \widehat{G}(\vb{r}, \vb{p}, \epsilon_n)
     = -i\pi\widehat{N}
     \begin{pmatrix}
-        1+\hat{a}\hat{\underbar{a}} & 2\hat{a}                     \\
-        -2\hat{\underbar{a}}        & -1-\hat{\underbar{a}}\hat{a}
+        1+\hat{a}\hat{\underline{a}} & 2\hat{a}                      \\
+        -2\hat{\underline{a}}        & -1-\hat{\underline{a}}\hat{a}
     \end{pmatrix}
 \end{align}
 where $\widehat{N}$ is
 \begin{align}
     \widehat{N} =
     \begin{pmatrix}
-        (1-\hat{a}\hat{\underbar{a}})^{-1} & 0                                  \\
-        0                                  & (1-\hat{\underbar{a}}\hat{a})^{-1}
+        (1-\hat{a}\hat{\underline{a}})^{-1} & 0                                   \\
+        0                                   & (1-\hat{\underline{a}}\hat{a})^{-1}
     \end{pmatrix}
 \end{align}
 The matrix Ricatti equation is
 \begin{align}
     i\hbar\vb{v}_p \vdot \grad{\hat{a}} + 2\epsilon\hat{a}
     + \hat{a}\hat{\Delta}^\dagger\hat{a} + \hat{\Delta} = 0 \\
-    i\hbar\vb{v}_p \vdot \grad{\hat{\underbar{a}}} - 2\epsilon\hat{\underbar{a}}
-    - \hat{\underbar{a}}\hat{\Delta}\hat{\underbar{a}} - \hat{\Delta}^\dagger = 0
+    i\hbar\vb{v}_p \vdot \grad{\hat{\underline{a}}} - 2\epsilon\hat{\underline{a}}
+    - \hat{\underline{a}}\hat{\Delta}\hat{\underline{a}} - \hat{\Delta}^\dagger = 0
 \end{align}
 
 \section{$^3$He-A}
