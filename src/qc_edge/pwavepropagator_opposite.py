@@ -1,23 +1,6 @@
 import numpy as np
 from pathlib import Path
-from scipy.io import loadmat
 from scipy.interpolate import PchipInterpolator
-
-
-def _load_gap_mat(gap_mat_path: Path) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Load the gap profile from a MAT file."""
-
-    data = loadmat(gap_mat_path)
-    try:
-        delta1 = np.array(data["Delta1"], dtype=float).ravel()
-        delta2 = np.array(data["Delta2"], dtype=float).ravel()
-        xspan = np.array(data["xspan"], dtype=float).ravel()
-    except KeyError as exc:  # pragma: no cover - defensive programming
-        raise KeyError(
-            f"Required key {exc} not found in {gap_mat_path}. Expected keys: 'Delta1', 'Delta2', 'xspan'."
-        ) from exc
-
-    return delta1, delta2, xspan
 
 
 def _rk4_step(
@@ -45,7 +28,7 @@ def pwave_propagator_opposite(
     theta: float,
     epsilon: complex,
     *,
-    gap_mat_path: Path | str | None = None,
+    gap_file: str | Path | None = None,
     min_step: float = 0.1,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Calculate the propagator for opposite-chirality p-wave superconductors at a point contact.
@@ -58,8 +41,8 @@ def pwave_propagator_opposite(
         Phase difference between the two superconductors.
     epsilon : complex
         Matsubara frequency (in units of the bulk gap).
-    gap_mat_path : Path | str | None, optional
-        Path to ``gap.mat``. Defaults to ``gap.mat`` in the current directory.
+    gap_file : str | Path | None, optional
+        Path to gap profile text file. Defaults to ``gap.txt`` in the current directory.
     min_step : float, optional
         Maximum step size along the trajectory in coherence-length units.
 
@@ -69,12 +52,15 @@ def pwave_propagator_opposite(
         ``(x, f1, f2, g)`` arrays along the classical trajectory.
     """
 
-    if gap_mat_path is None:
-        gap_mat_path = Path(__file__).resolve().parent / "gap.mat"
+    if gap_file is None:
+        gap_file = Path(__file__).resolve().parent / "gap.txt"
     else:
-        gap_mat_path = Path(gap_mat_path)
+        gap_file = Path(gap_file)
 
-    delta1_raw, delta2_raw, xspan = _load_gap_mat(gap_mat_path)
+    data = np.loadtxt(gap_file)
+    xspan = data[:, 0]
+    delta1_raw = data[:, 1]
+    delta2_raw = data[:, 2]
 
     px = float(np.cos(thetap))
     py = float(np.sin(thetap))

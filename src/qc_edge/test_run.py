@@ -5,7 +5,6 @@ This runs a minimal test to ensure the code can execute.
 """
 
 import numpy as np
-from scipy.io import loadmat, savemat
 import os
 import sys
 
@@ -18,14 +17,14 @@ def test_propagator():
     """Test that propagator function works"""
     print("Testing propagator function...")
     
-    # Load gap.mat
-    if not os.path.exists('gap.mat'):
-        print("Error: gap.mat not found!")
+    # Load gap.txt
+    if not os.path.exists('gap.txt'):
+        print("Error: gap.txt not found!")
         return False
     
-    gap = loadmat('gap.mat')
-    xspan = gap['xspan'].flatten()
-    print(f"Loaded gap.mat: xspan shape = {xspan.shape}")
+    data = np.loadtxt('gap.txt')
+    xspan = data[:, 0]
+    print(f"Loaded gap.txt: xspan shape = {xspan.shape}")
     
     # Test propagator with a simple case
     thetap = 0.1

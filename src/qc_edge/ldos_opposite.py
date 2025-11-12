@@ -37,7 +37,7 @@ def ldos_opposite(
     broadening: float = 0.025,
     temperature: float = 0.1,
     theta_py: Sequence[float] | None = None,
-    gap_mat_path: str | Path | None = None,
+    gap_file: str | Path | None = None,
     output_path: str | Path | None = "ldos_opposite.png",
     show_progress: bool = True,
     show: bool = False,
@@ -93,13 +93,13 @@ def ldos_opposite(
                 th,
                 theta,
                 eps + 1j * broadening,
-                gap_mat_path=gap_mat_path,
+                gap_file=gap_file,
             )
             _, _, _, propagator_tr = pwave_propagator_opposite(
                 tr,
                 theta,
                 eps + 1j * broadening,
-                gap_mat_path=gap_mat_path,
+                gap_file=gap_file,
             )
 
             mid = propagator_g.size // 2
@@ -217,10 +217,10 @@ def main(argv: Sequence[str] | None = None) -> None:
         help="Temperature for the Fermi window overlay (in units of Tc).",
     )
     parser.add_argument(
-        "--gap-mat",
+        "--gap-file",
         type=str,
         default=None,
-        help="Path to gap.mat (defaults to file in this directory).",
+        help="Path to gap.txt (defaults to file in this directory).",
     )
     parser.add_argument(
         "--output",
@@ -257,7 +257,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         py_points=args.py_points,
         broadening=args.broadening,
         temperature=args.temperature,
-        gap_mat_path=args.gap_mat,
+        gap_file=args.gap_file,
         output_path=output_path,
         show_progress=not args.no_progress,
         show=args.show,
