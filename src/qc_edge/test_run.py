@@ -24,6 +24,8 @@ def test_propagator():
     
     data = np.loadtxt('gap.txt')
     xspan = data[:, 0]
+    Delta1 = data[:, 1]
+    Delta2 = data[:, 2]
     print(f"Loaded gap.txt: xspan shape = {xspan.shape}")
     
     # Test propagator with a simple case
@@ -31,7 +33,7 @@ def test_propagator():
     epsilon = 1j * 0.1
     
     try:
-        x, f1, f2, g = propagator(thetap, epsilon)
+        x, f1, f2, g = propagator(thetap, epsilon, xspan, Delta1, Delta2)
         print(f"✓ Propagator test passed!")
         print(f"  x shape: {x.shape}, f1 shape: {f1.shape}, f2 shape: {f2.shape}, g shape: {g.shape}")
         return True

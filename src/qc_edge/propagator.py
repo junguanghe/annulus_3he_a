@@ -2,7 +2,7 @@ import numpy as np
 from scipy.interpolate import interp1d
 
 
-def propagator(thetap, epsilon, gap_file="gap.txt"):
+def propagator(thetap, epsilon, xspan, Delta1, Delta2):
     """
     Calculate the Green's function of a chiral p-wave superconductor near a wall.
 
@@ -12,8 +12,12 @@ def propagator(thetap, epsilon, gap_file="gap.txt"):
         Angle parameter
     epsilon : complex
         Energy in unit of bulk gap Delta_0, a typical value is 1j*(2*n+1)*pi*0.1/1.7639
-    gap_file : str, optional
-        Path to gap profile text file (default: 'gap.txt')
+    xspan : ndarray
+        x coordinate span
+    Delta1 : ndarray
+        First component of gap profile
+    Delta2 : ndarray
+        Second component of gap profile
 
     Returns:
     --------
@@ -26,10 +30,8 @@ def propagator(thetap, epsilon, gap_file="gap.txt"):
     g : ndarray
         Diagonal component of the Green's function
     """
-    data = np.loadtxt(gap_file)
-    xspan = data[:, 0]
-    DDelta1 = data[:, 1]
-    DDelta2 = data[:, 2]
+    DDelta1 = Delta1.copy()
+    DDelta2 = Delta2.copy()
 
     px = np.cos(thetap)
     py = np.sin(thetap)

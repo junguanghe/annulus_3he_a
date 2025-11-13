@@ -1,14 +1,9 @@
-import matplotlib
-import numpy as np
-from tqdm import tqdm
-
-matplotlib.use("Agg")  # Use non-interactive backend
 import os
 import sys
-from functools import partial
 from multiprocessing import Pool
 
-import matplotlib.pyplot as plt
+import numpy as np
+from tqdm import tqdm
 
 # Add current directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -17,12 +12,12 @@ from propagator import propagator
 
 def _propagator_wrapper(args):
     """Wrapper function for parallel processing"""
-    thetap, en, xspan_len = args
-    _, temp1, temp2, _ = propagator(thetap, 1j * en)
-    return temp1[:xspan_len], temp2[:xspan_len]
+    thetap, en, xspan, Delta1, Delta2 = args
+    _, temp1, temp2, _ = propagator(thetap, 1j * en, xspan, Delta1, Delta2)
+    return temp1[: len(xspan)], temp2[: len(xspan)]
 
 
-def gap_equation(t, delta):
+def gap_equation(t, delta, xspan, Delta1_old, Delta2_old):
     """
     Calculate the gap profile based on the Green's functions which
     are calculated based on the previous gap profile.
@@ -33,11 +28,17 @@ def gap_equation(t, delta):
         Temperature parameter
     delta : float
         Bulk gap ratio
+    xspan : ndarray
+        x coordinate span from previous iteration
+    Delta1_old : ndarray
+        First component of gap profile from previous iteration
+    Delta2_old : ndarray
+        Second component of gap profile from previous iteration
 
     Returns:
     --------
     xspan : ndarray
-        x coordinate span
+        x coordinate span (same as input)
     Delta1 : ndarray
         First component of gap profile
     Delta2 : ndarray
@@ -48,8 +49,6 @@ def gap_equation(t, delta):
     N = 500  # max Matsubara n
     thetapspan = np.linspace(-np.pi / 2, np.pi / 2, 50)
 
-    data = np.loadtxt("gap.txt")
-    xspan = data[:, 0]
     xspan_len = len(xspan)
 
     temp = 0  # store the bulk part of the gap equation
@@ -65,7 +64,9 @@ def gap_equation(t, delta):
         )  # bulk part of the gap equation, after the thetap integration
 
         # Parallel processing over thetap
-        args_list = [(thetap, en, xspan_len) for thetap in thetapspan]
+        args_list = [
+            (thetap, en, xspan, Delta1_old, Delta2_old) for thetap in thetapspan
+        ]
 
         with Pool() as pool:
             results = pool.map(_propagator_wrapper, args_list)
@@ -87,7 +88,7 @@ def gap_equation(t, delta):
         Delta1_new = f1 / temp
         Delta2_new = f2 / temp
 
-        if abs(f2[-1] / temp - Delta2[-1]) < 0.001:
+        if abs(f2[-1] / temp - Delta2_old[-1]) < 0.001:
             Delta1 = Delta1_new
             Delta2 = Delta2_new
             break

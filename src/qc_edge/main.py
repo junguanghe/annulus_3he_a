@@ -61,12 +61,19 @@ def main(t, delta):
         print("Initialized gap.txt with default values")
 
     for i in range(1, N + 1):
+        # Load current gap profile
         data_old = np.loadtxt(gap_file)
+        xspan_old = data_old[:, 0]
+        Delta1_old = data_old[:, 1]
         Delta2_old = data_old[:, 2]
 
-        xspan, Delta1, Delta2, n = gap_equation(t, delta)
+        # Calculate new gap profile
+        xspan, Delta1, Delta2, n = gap_equation(
+            t, delta, xspan_old, Delta1_old, Delta2_old
+        )
         print(f"iteration i={i}, Matsubara n={n}")
 
+        # Check convergence
         if i > 1:
             if abs(Delta2[-1] - Delta2_old[-1]) < 0.001:
                 data = np.column_stack([xspan, Delta1, Delta2])
@@ -77,8 +84,10 @@ def main(t, delta):
                     comments="#",
                     fmt="%.10e",
                 )
+                print(f"Converged after {i} iterations")
                 break
 
+        # Save updated gap profile
         data = np.column_stack([xspan, Delta1, Delta2])
         np.savetxt(
             gap_file, data, header="xspan Delta1 Delta2", comments="#", fmt="%.10e"
