@@ -8,7 +8,11 @@ import matplotlib.pyplot as plt
 from gap_equation import gap_equation
 
 
-def initialize_gap_txt(xspan, Delta1_init=None, Delta2_init=None):
+def initialize_gap_txt(
+    xspan: np.ndarray,
+    Delta1_init: np.ndarray | None = None,
+    Delta2_init: np.ndarray | None = None,
+) -> None:
     """
     Initialize gap.txt file with initial gap profile.
 
@@ -30,7 +34,7 @@ def initialize_gap_txt(xspan, Delta1_init=None, Delta2_init=None):
     np.savetxt("gap.txt", data, header="xspan Delta1 Delta2", comments="#", fmt="%.10e")
 
 
-def main(t, delta):
+def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
     Self-consistently calculate the gap profile of chiral p-wave superconductor near a wall.
 

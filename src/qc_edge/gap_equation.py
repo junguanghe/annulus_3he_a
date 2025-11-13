@@ -10,14 +10,22 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from propagator import propagator
 
 
-def _propagator_wrapper(args):
+def _propagator_wrapper(
+    args: tuple[float, float, np.ndarray, np.ndarray, np.ndarray],
+) -> tuple[np.ndarray, np.ndarray]:
     """Wrapper function for parallel processing"""
     thetap, en, xspan, Delta1, Delta2 = args
     _, temp1, temp2, _ = propagator(thetap, 1j * en, xspan, Delta1, Delta2)
     return temp1[: len(xspan)], temp2[: len(xspan)]
 
 
-def gap_equation(t, delta, xspan, Delta1_old, Delta2_old):
+def gap_equation(
+    t: float,
+    delta: float,
+    xspan: np.ndarray,
+    Delta1_old: np.ndarray,
+    Delta2_old: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, int]:
     """
     Calculate the gap profile based on the Green's functions which
     are calculated based on the previous gap profile.

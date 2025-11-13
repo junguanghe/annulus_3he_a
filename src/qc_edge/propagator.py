@@ -1,8 +1,16 @@
+from collections.abc import Callable
+
 import numpy as np
 from scipy.interpolate import interp1d
 
 
-def propagator(thetap, epsilon, xspan, Delta1, Delta2):
+def propagator(
+    thetap: float,
+    epsilon: complex,
+    xspan: np.ndarray,
+    Delta1: np.ndarray,
+    Delta2: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
     Calculate the Green's function of a chiral p-wave superconductor near a wall.
 
@@ -79,21 +87,31 @@ def propagator(thetap, epsilon, xspan, Delta1, Delta2):
     )  # initial condition for backward direction
 
     # Riccati equations
-    def ricatti1(Delta1, Delta2, y0):
+    def ricatti1(Delta1: complex, Delta2: complex, y0: complex) -> complex:
         return 1j * (
             epsilon * y0
             + 0.5 * (Delta1 - 1j * Delta2) * y0**2
             + 0.5 * (Delta1 + 1j * Delta2)
         )
 
-    def ricatti2(Delta1, Delta2, y0):
+    def ricatti2(Delta1: complex, Delta2: complex, y0: complex) -> complex:
         return -1j * (
             epsilon * y0
             + 0.5 * (Delta1 + 1j * Delta2) * y0**2
             + 0.5 * (Delta1 - 1j * Delta2)
         )
 
-    def RK4(func, Delta1_0, Delta2_0, Delta1_1, Delta2_1, Delta1_2, Delta2_2, y_0, h):
+    def RK4(
+        func: Callable[[complex, complex, complex], complex],
+        Delta1_0: complex,
+        Delta2_0: complex,
+        Delta1_1: complex,
+        Delta2_1: complex,
+        Delta1_2: complex,
+        Delta2_2: complex,
+        y_0: complex,
+        h: float,
+    ) -> complex:
         k_1 = func(Delta1_0, Delta2_0, y_0)
         k_2 = func(Delta1_1, Delta2_1, y_0 + (h / 2) * k_1)
         k_3 = func(Delta1_1, Delta2_1, y_0 + (h / 2) * k_2)
