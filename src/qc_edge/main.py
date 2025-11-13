@@ -57,45 +57,35 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     N = 100  # max iteration number
     gap_file = "gap.txt"
 
-    # Initialize gap.txt if it doesn't exist
+    # Load or initialize gap profile
     if not os.path.exists(gap_file):
         # Create a reasonable initial xspan
         xspan = np.linspace(0, 10, 201)  # Adjust range and resolution as needed
         initialize_gap_txt(xspan)
         print("Initialized gap.txt with default values")
 
-    for i in range(1, N + 1):
-        # Load current gap profile
-        data_old = np.loadtxt(gap_file)
-        xspan_old = data_old[:, 0]
-        Delta1_old = data_old[:, 1]
-        Delta2_old = data_old[:, 2]
+    # Load initial gap profile
+    data = np.loadtxt(gap_file)
+    xspan = data[:, 0]
+    Delta1 = data[:, 1]
+    Delta2 = data[:, 2]
+
+    for i in range(N):
+        # Store previous values for convergence check
+        Delta2_old = Delta2.copy()
 
         # Calculate new gap profile
-        xspan, Delta1, Delta2, n = gap_equation(
-            t, delta, xspan_old, Delta1_old, Delta2_old
-        )
-        print(f"iteration i={i}, Matsubara n={n}")
+        xspan, Delta1, Delta2, n = gap_equation(t, delta, xspan, Delta1, Delta2)
+        print(f"iteration i={i+1}, Matsubara n={n}")
 
         # Check convergence
-        if i > 1:
-            if abs(Delta2[-1] - Delta2_old[-1]) < 0.001:
-                data = np.column_stack([xspan, Delta1, Delta2])
-                np.savetxt(
-                    gap_file,
-                    data,
-                    header="xspan Delta1 Delta2",
-                    comments="#",
-                    fmt="%.10e",
-                )
-                print(f"Converged after {i} iterations")
-                break
+        if abs(Delta2[-1] - Delta2_old[-1]) < 0.001:
+            print(f"Converged after {i+1} iterations")
+            break
 
-        # Save updated gap profile
-        data = np.column_stack([xspan, Delta1, Delta2])
-        np.savetxt(
-            gap_file, data, header="xspan Delta1 Delta2", comments="#", fmt="%.10e"
-        )
+    # Save final gap profile
+    data = np.column_stack([xspan, Delta1, Delta2])
+    np.savetxt(gap_file, data, header="xspan Delta1 Delta2", comments="#", fmt="%.10e")
 
     # Final plot
     plt.figure(figsize=(8, 6))
