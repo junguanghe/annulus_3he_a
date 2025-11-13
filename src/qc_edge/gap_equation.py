@@ -62,8 +62,6 @@ def gap_equation(
     temp = 0  # store the bulk part of the gap equation
     f1 = np.zeros(xspan_len)
     f2 = np.zeros(xspan_len)
-    Delta1 = np.zeros(xspan_len)
-    Delta2 = np.zeros(xspan_len)
 
     for n in tqdm(range(N + 1), desc="Matsubara frequencies"):
         en = (2 * n + 1) * np.pi * t / delta
@@ -96,12 +94,10 @@ def gap_equation(
         Delta1_new = f1 / temp
         Delta2_new = f2 / temp
 
-        if abs(f2[-1] / temp - Delta2_old[-1]) < 0.001:
-            Delta1 = Delta1_new
-            Delta2 = Delta2_new
+        if abs(Delta2_new[-1] - Delta2_old[-1]) < 0.001:
             break
 
-        Delta1 = Delta1_new
-        Delta2 = Delta2_new
+        Delta1_old = Delta1_new
+        Delta2_old = Delta2_new
 
-    return xspan, Delta1, Delta2, n
+    return xspan, Delta1_new, Delta2_new, n
