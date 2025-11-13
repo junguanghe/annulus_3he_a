@@ -106,22 +106,23 @@ The bulk quasiclassical Green's function satisfies
     \comm{i\epsilon_n\widehat{\tau}_3 - \widehat{\Delta}}{\widehat{g}} = 0
 \end{align}
 But when near the boundary or impurities, the
-quasiclassical Green's function $\widehat{g}(\vb{r},\vb{p};\epsilon)$
-and the gap function $\widehat{\Delta}(\vb{r}, \vb{p})$ are
+quasiclassical Green's function $\widehat{g}(\vb{R},\vb{p};\epsilon)$
+and the gap function $\widehat{\Delta}(\vb{R}, \vb{p})$ are
 inhomogeneous, and are described by the
 Eilenberger equation and gap equation.
 \begin{equation}
-    \comm{\epsilon\widehat{\tau}_3 - \widehat{\Delta}(\vb{r}, \vb{p})}
-    {\widehat{g}(\vb{r},\vb{p};\epsilon)} +
-    i\hbar\vb{v}_p \cdot \nabla\widehat{g}(\vb{r},\vb{p};\epsilon)
+    \comm{\epsilon\widehat{\tau}_3 - \widehat{\Delta}(\vb{R}, \vb{p})}
+    {\widehat{g}(\vb{R},\vb{p};\epsilon)} +
+    i\hbar\vb{v}_p \cdot \nabla\widehat{g}(\vb{R},\vb{p};\epsilon)
     = 0
 \end{equation}
 and
 \begin{align}\label{gap_eq}
-    \hat{\Delta}(\vb{r}, \vb{p})
+    \hat{\Delta}(\vb{R}, \vb{p})
     = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}\ev{v(\vb{p}, \vb{p}')
-        \hat{f}(\vb{r}, \vb{p}', \epsilon_n)}_{p'}
+        \hat{f}(\vb{R}, \vb{p}', \epsilon_n)}_{p'}
 \end{align}
+Here $\vb{R} = \frac{1}{2}(\vb{r} + \vb{r}')$ is the center of the pair.
 In bulk, we have
 \begin{align}\label{gap_eq_bulk}
     \Delta(\vb{p}) = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}
@@ -148,7 +149,7 @@ Substitute in Eq. (\ref{gap_eq}), we get
 \begin{align}
     \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
     \left[
-        \frac{\ev{v(\vb{p}, \vb{p}')f(\vb{r}, \vb{p}', \epsilon_n)}_{p'} / \Delta(\vb{r}, \vb{p})}
+        \frac{\ev{v(\vb{p}, \vb{p}')f(\vb{R}, \vb{p}', \epsilon_n)}_{p'} / \Delta(\vb{R}, \vb{p})}
         {\ev{v(\vb{p}'', \vb{p}')\Delta(\vb{p}')}_{p'}/\Delta(\vb{p}'')\eval_{T_c}}
         - \frac{\pi}{|\epsilon_n|}
         \right]
@@ -278,7 +279,7 @@ which becomes
 \section{Numerical solution}
 The iteration of the gap function is
 \begin{align}
-    \delta_{1,2}(x) =
+    \Delta_{1,2}(x) =
     \frac{t\sum_n2\ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
     {\ln{t} + \sum_n 1/|2n+1|}
 \end{align}
