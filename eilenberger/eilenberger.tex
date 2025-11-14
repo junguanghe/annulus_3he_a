@@ -140,7 +140,7 @@ Move everything to the right hand side and subtract Eq. (\ref{gap_eq}) from it, 
         \right]
 \end{align}
 which gives
-\begin{align}
+\begin{align} \label{gap_iter}
     \Delta(\vb{R}, \vb{p}) =
     \frac{T\sum_{\epsilon_n}^{\infty}\ev{v(\vb{p}, \vb{p}')\hat{f}(\vb{R}, \vb{p}', \epsilon_n)}_{p'}}
     {T\sum_{\epsilon_n}^{\infty}\ev{v(\vb{p}'', \vb{p}')\frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}\frac{\Delta(\vb{p}')}{\Delta(\vb{p}'')}}_{p'}}
@@ -225,17 +225,17 @@ and we have two components of the gap function,
 \end{align}
 In bulk we have
 $\hat{\Delta}(\vb{R}, \vb{p}) = \hat{\sigma}_x \Delta(p_x + ip_y) = \hat{\sigma}_x \Delta e^{i\phi_p}$.
-The interaction is $v(\vb{p}, \vb{p}') = 3v_0\vu{p}\vdot\vu{p}'$, and the
-gap-equation reduces to
+The interaction is $v(\vb{p}, \vb{p}') = 3v_0\vu{p}\vdot\vu{p}'$. Note that
 \begin{align}
-    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
-    \left[
-        \frac{2\ev{\vb{p}_{x,y}\vdot\vb{p}'f(\vb{R}, \vb{p}', \epsilon_n)}_{p'}}
-        {\Delta_{1,2}(\vb{R})}
-        - \frac{\pi}{|\epsilon_n|}
-        \right]
+    \frac{1}{2\pi}\int_0^{2\pi} \dd\phi \cos\phi e^{i\phi} = \frac{1}{2}
 \end{align}
-The 2d bulk gap equation ($|\Delta|^2$ does not depend on $\vb{p}$) is
+In 2d case ($|\Delta|^2$ does not depend on $\vb{p}$), Eq. (\ref{gap_iter}) becomes
+\begin{align}
+    \Delta(\vb{R}, \vb{p}) =
+    \frac{2\sum_{\epsilon_n}^{\infty}\ev{\vb{p}\vdot\vb{p}'f(\vb{R}, \vb{p}', \epsilon_n)}_{p'}}
+    {\sum_{\epsilon_n}^{\infty}\frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}
+\end{align}
+The 2d bulk gap equation is
 \begin{align}
     \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
     \left[
@@ -251,13 +251,11 @@ For s-wave pairing, the spin structure is $i\hat{\sigma}_y$, and we have
     = i\hat{\sigma}_y \Delta(\vb{R})
 \end{align}
 In bulk we have $\hat{\Delta}(\vb{R}, \vb{p}) = i\hat{\sigma}_y \Delta$.
-The interaction is $v(\vb{p}, \vb{p}') = v_s$, and the gap-equation reduces to
+The interaction is $v(\vb{p}, \vb{p}') = v_s$, and Eq. (\ref{gap_iter}) reduces to
 \begin{align}
-    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
-    \left[
-        \frac{f(\vb{R}, \epsilon_n)}{\Delta(\vb{R})}
-        - \frac{\pi}{|\epsilon_n|}
-        \right]
+    \Delta(\vb{R}) =
+    \frac{\sum_n \ev{f(\vb{R}, \vb{p}', \epsilon_n)}_{p'}}
+    {\sum_n \frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}
 \end{align}
 
 \section{$^3$He-A edge gap profile}
