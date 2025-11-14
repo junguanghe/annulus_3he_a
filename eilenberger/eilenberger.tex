@@ -305,6 +305,12 @@ which becomes
 \subsection{Numerical solution}
 The iteration of the gap function is
 \begin{align}
+    \delta_{1,2}(x) =
+    \frac{\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
+    {\sum_n \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}\frac{\pi}{2}}
+\end{align}
+or equivalently
+\begin{align}
     \delta_{1,2}(x)\delta(T) =
     \frac{t\sum_n2\ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
     {\ln{t} + \sum_n 1/|2n+1|}
