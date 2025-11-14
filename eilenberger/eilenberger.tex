@@ -290,22 +290,19 @@ In this case, we can even write the gap equation as
     \Delta_{1,2}(x) = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}\ev{v(\vb{p}_{x,y}, \vb{p}')
         f_{1,2}(x, \vb{p}', \epsilon_n)}_{p'}
 \end{align}
-which becomes
+and the gap iteration becomes
 \begin{align}
-    \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
-    \left[
-    \frac{2\ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', \epsilon_n)}_{p'}}
-    {\Delta_{1,2}(x)}
-    - \frac{\pi}{|\epsilon_n|}
-    \right]
+    \Delta_{1,2}(x) =
+    \frac{2\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
+    {\sum_n \frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}
 \end{align}
 
 \subsection{Numerical solution}
-The iteration of the gap function is
+The dimensionless iteration of the gap function is
 \begin{align}
     \delta_{1,2}(x) =
-    \frac{\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
-    {\sum_n \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}\frac{\pi}{2}}
+    \frac{2\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
+    {\sum_n \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}}
 \end{align}
 or equivalently
 \begin{align}
@@ -321,7 +318,7 @@ The Ricatti equation is
 \end{align}
 where $e = \epsilon/|\Delta(T)|$,
 $\xi = \hbar v_f/|\Delta(T)|$ and $\va{\partial} = \xi\grad$.
-For Matsubara frequency, we replace $e -> i(2n+1)\pi t/\delta(T)$.
+For Matsubara frequency, we replace $e \rightarrow i(2n+1)\pi t/\delta(T)$.
 We can get $g$ and $f_{1,2}$ from
 \begin{align}
     g = -i\pi\frac{1+a\underline{a}}{1-a\underline{a}} \\
