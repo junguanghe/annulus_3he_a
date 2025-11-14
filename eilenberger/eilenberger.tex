@@ -123,11 +123,27 @@ and
         \hat{f}(\vb{R}, \vb{p}', \epsilon_n)}_{p'}
 \end{align}
 Here $\vb{R} = \frac{1}{2}(\vb{r} + \vb{r}')$ is the center of the pair.
+Now we neglect the spin structure, i.e. discard the little hats.
 In bulk, we have
 \begin{align}\label{gap_eq_bulk}
     \Delta(\vb{p}) = T\sum_{\epsilon_n=-\omega_c}^{\omega_c}
     \ev{v(\vb{p}, \vb{p}')
         \frac{\pi\Delta(\vb{p}')}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}_{p'}
+\end{align}
+Move everything to the right hand side and subtract Eq. (\ref{gap_eq}) from it, we get
+\begin{align}
+    0 = T\sum_{\epsilon_n=-\infty}^{\infty}
+    \left[
+        \ev{v(\vb{p}, \vb{p}')\frac{f(\vb{R}, \vb{p}', \epsilon_n)}{\Delta(\vb{R}, \vb{p})}}_{p'}
+        -
+        \ev{v(\vb{p}'', \vb{p}')\frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}\frac{\Delta(\vb{p}')}{\Delta(\vb{p}'')}}_{p'}
+        \right]
+\end{align}
+which gives
+\begin{align}
+    \Delta(\vb{R}, \vb{p}) =
+    \frac{T\sum_{\epsilon_n}^{\infty}\ev{v(\vb{p}, \vb{p}')\hat{f}(\vb{R}, \vb{p}', \epsilon_n)}_{p'}}
+    {T\sum_{\epsilon_n}^{\infty}\ev{v(\vb{p}'', \vb{p}')\frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}\frac{\Delta(\vb{p}')}{\Delta(\vb{p}'')}}_{p'}}
 \end{align}
 We have the Digamma function
 \begin{align}
@@ -145,7 +161,7 @@ and we have
     =\frac{\Delta(\vb{p}'')}{\ev{v(\vb{p}'', \vb{p}')\Delta(\vb{p}')}_{p'}}\eval_{T_c}
     - T\sum_{\epsilon_n=-\omega_c}^{\omega_c}\frac{\pi}{|\epsilon_n|}
 \end{align}
-Substitute in Eq. (\ref{gap_eq}), we get
+Substitute in Eq. (\ref{gap_eq}), we get another equation to determine the gap inhomogeneity:
 \begin{align}
     \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
     \left[
