@@ -204,18 +204,18 @@ The matrix Ricatti equation is
 For $^3$He-A, the spin structure is $\vu{d}\vdot(i\va{\sigma}\hat{\sigma}_y) = \hat{\sigma}_x$,
 and we have two components of the gap function,
 \begin{align}
-    \hat{\Delta}(\vb{r}, \vb{p})
-    = \hat{\sigma}_x (\Delta_1(\vb{r})p_x + \Delta_2(\vb{r})p_y)
+    \hat{\Delta}(\vb{R}, \vb{p})
+    = \hat{\sigma}_x (\Delta_1(\vb{R})p_x + \Delta_2(\vb{R})p_y)
 \end{align}
 In bulk we have
-$\hat{\Delta}(\vb{r}, \vb{p}) = \hat{\sigma}_x \Delta(p_x + ip_y) = \hat{\sigma}_x \Delta e^{i\phi_p}$.
+$\hat{\Delta}(\vb{R}, \vb{p}) = \hat{\sigma}_x \Delta(p_x + ip_y) = \hat{\sigma}_x \Delta e^{i\phi_p}$.
 The interaction is $v(\vb{p}, \vb{p}') = 3v_0\vu{p}\vdot\vu{p}'$, and the
 gap-equation reduces to
 \begin{align}
     \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
     \left[
-        \frac{2\ev{\vb{p}_{x,y}\vdot\vb{p}'f(\vb{r}, \vb{p}', \epsilon_n)}_{p'}}
-        {\Delta_{1,2}(\vb{r})}
+        \frac{2\ev{\vb{p}_{x,y}\vdot\vb{p}'f(\vb{R}, \vb{p}', \epsilon_n)}_{p'}}
+        {\Delta_{1,2}(\vb{R})}
         - \frac{\pi}{|\epsilon_n|}
         \right]
 \end{align}
@@ -231,15 +231,15 @@ The 2d bulk gap equation ($|\Delta|^2$ does not depend on $\vb{p}$) is
 \section{s-wave pairing}
 For s-wave pairing, the spin structure is $i\hat{\sigma}_y$, and we have
 \begin{align}
-    \hat{\Delta}(\vb{r}, \vb{p})
-    = i\hat{\sigma}_y \Delta(\vb{r})
+    \hat{\Delta}(\vb{R}, \vb{p})
+    = i\hat{\sigma}_y \Delta(\vb{R})
 \end{align}
-In bulk we have $\hat{\Delta}(\vb{r}, \vb{p}) = i\hat{\sigma}_y \Delta$.
+In bulk we have $\hat{\Delta}(\vb{R}, \vb{p}) = i\hat{\sigma}_y \Delta$.
 The interaction is $v(\vb{p}, \vb{p}') = v_s$, and the gap-equation reduces to
 \begin{align}
     \ln{\frac{T}{T_c}} = T\sum_{\epsilon_n=-\infty}^{\infty}
     \left[
-        \frac{f(\vb{r}, \epsilon_n)}{\Delta(\vb{r})}
+        \frac{f(\vb{R}, \epsilon_n)}{\Delta(\vb{R})}
         - \frac{\pi}{|\epsilon_n|}
         \right]
 \end{align}
@@ -253,7 +253,7 @@ We also assume the gap to be real(imaginary) along the $p_x(p_y)$ direction.
 \end{align}
 Here $\Delta_1(x)$ and $\Delta_2(x)$ are real functions, and we have
 \begin{align}
-    \widehat{\Delta}(\vb{r}, \vb{p})
+    \widehat{\Delta}(x, \vb{p})
      & =
     \begin{pmatrix}
         0                                                  & \hat{\sigma}_x (\Delta_1(x)p_x + i\Delta_2(x)p_y) \\
@@ -261,14 +261,14 @@ Here $\Delta_1(x)$ and $\Delta_2(x)$ are real functions, and we have
     \end{pmatrix} \\
      & = i\hat{\sigma}_x(\Delta_2p_y\widehat{\tau}_1 + \Delta_1p_x\widehat{\tau}_2)
 \end{align}
-In this case, we can also write the anomalous Green's function as
+We can always write the anomalous Green's function as
 \begin{align}
-    \hat{f}(\vb{r}, \vb{p}, \epsilon_n)
-    = \hat{\sigma}_x \bigg(f_1(\vb{r}, \vb{p}, \epsilon_n) + if_2(\vb{r}, \vb{p}, \epsilon_n) \bigg)
+    \hat{f}(\vb{R}, \vb{p}, \epsilon_n)
+    = \hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) + if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg)
 \end{align}
 where $f_{1,2}$ are real functions, and we have
 \begin{align}
-    \widehat{g}(\vb{r}, \vb{p}, \epsilon_n)
+    \widehat{g}
     = \hat{g}\widehat{\tau}_3 + i\hat{\sigma}_x(f_2\widehat{\tau}_1 + f_1\widehat{\tau}_2)
 \end{align}
 In this case, we can even write the gap equation as
@@ -286,30 +286,31 @@ which becomes
     \right]
 \end{align}
 
-\section{Numerical solution}
+\subsection{Numerical solution}
 The iteration of the gap function is
 \begin{align}
-    \Delta_{1,2}(x) =
+    \delta_{1,2}(x)\delta(T) =
     \frac{t\sum_n2\ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
     {\ln{t} + \sum_n 1/|2n+1|}
 \end{align}
-The $(1,1)$ and $(1,2)$ elements of the Eilenberger equation are
+where $t = T/T_c$, $\delta(\vb{p},x) = \Delta(\vb{p},x)/|\Delta(T)|$, and $\delta(T) = |\Delta(T)|/T_c$.
+The Ricatti equation is
 \begin{align}
-    i\epsilon_n \hat{g} + \hat{\Delta} \hat{f}^\dagger + i\hbar \vb{v}_p \cdot \grad \hat{g} = 0 \\
-    i\epsilon_n \hat{f} + \hat{\Delta} \hat{g} + i\hbar \vb{v}_p \cdot \grad \hat{f} = 0
+    ip_x\partial_x a(\vb{p},x) + 2ea(\vb{p},x) + a(\vb{p},x)\delta^*(\vb{p},x) a(\vb{p},x) + \delta(\vb{p},x) = 0 \\
+    ip_x\partial_x \underline{a}(\vb{p},x) - 2e \underline{a}(\vb{p},x) - \underline{a}(\vb{p},x)\delta(\vb{p},x)\underline{a}(\vb{p},x) - \delta^*(\vb{p},x) = 0
 \end{align}
-Note that $\hat{\Delta}$ and $\hat{f}$ has the same spin structure, so we can
-substitute in $\hat{g}$ and $\hat{f}$, divide by $T_c$, and we get
+where $e = \epsilon/|\Delta(T)|$,
+$\xi = \hbar v_f/|\Delta(T)|$ and $\va{\partial} = \xi\grad$.
+For Matsubara frequency, we replace $e -> i(2n+1)\pi t/\delta(T)$.
+We can get $g$ and $f_{1,2}$ from
 \begin{align}
-    i (2n+1)\pi t g(\vb{r}, \vu{p}, n) + \delta(\vb{r}, \vu{p})
-    f^*(\vb{r}, \vu{p}, n) + i(\vu{p}_x \partial_x
-    + \vu{p}_y \partial_y) g(\vb{r}, \vu{p}, n) = 0 \\
-    i (2n+1)\pi t f(\vb{r}, \vu{p}, n) + \delta(\vb{r}, \vu{p})
-    g(\vb{r}, \vu{p}, n) + i(\vu{p}_x \partial_x
-    + \vu{p}_y \partial_y) f(\vb{r}, \vu{p}, n) = 0
+    g = -i\pi\frac{1+a\underline{a}}{1-a\underline{a}} \\
+    f = f_1 + if_2 = -i\pi\frac{2a}{1-a\underline{a}}
 \end{align}
-where $t = T/T_c$, $\delta = \Delta/T_c$, $\xi = \hbar v_f/T_c$ and
-$\va{\partial} = \xi\grad$.
+The local current density is
+\begin{align}
+    \vb{j}(\vb{R}) = 2N_fT\sum_n\ev{\vb{v}_p g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
+\end{align}
 
 We first assume an initial guess for the gap function $\delta(\vb{r}, \vu{p})$.
 For each trajectory $\vu{p}$ along which the quasiparticle propagates, we can
