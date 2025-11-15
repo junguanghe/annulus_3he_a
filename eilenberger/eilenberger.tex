@@ -127,6 +127,11 @@ Here $\vb{R} = \frac{1}{2}(\vb{r} + \vb{r}')$ is the center of the pair.
 \section{Current density}
 The local current density is
 \begin{align}
+    \vb{j}(\vb{R})=2N_f\int\dd\epsilon f(\epsilon)
+    \ev{\vb{v}_p \left(-\frac{1}{\pi}\Im{g(\vb{R}, \vb{p}, \epsilon)}\right)}_p
+\end{align}
+In Matsubara representation, we have
+\begin{align}
     \vb{j}(\vb{R}) = 2N_fT\sum_n\ev{\vb{v}_p g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
 \end{align}
 Multiple it by the quasiparticle mass $p_f = m^* v_f$, and we get the mass current density:
