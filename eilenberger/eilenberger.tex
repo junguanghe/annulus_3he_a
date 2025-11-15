@@ -328,6 +328,19 @@ The local current density is
 \begin{align}
     \vb{j}(\vb{R}) = 2N_fT\sum_n\ev{\vb{v}_p g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
 \end{align}
+Multiple it by the quasiparticle mass $p_f = m^* v_f$, and we get the mass current density:
+\begin{align}
+    \vb{j}_m(\vb{R}) \equiv m^*\vb{j}(\vb{R}) = \frac{2N_fv_fp_f}{4}\hbar \times \frac{4T}{\xi(T)|\Delta(T)|}\sum_n\ev{\vu{p} g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
+\end{align}
+where $\xi(T) = \hbar v_f/|\Delta(T)|$ is the coherence length, and $n = 2N_fp_fv_f$ is the particle density.
+The ground state angular momentum in a cylinder is
+\begin{align}
+    \vb{L} & = \int_0^R \dd[3]r \vb{r} \times \vb{j}_m(\vb{r})                                                                                      \\
+           & = 2\pi h\vu{z}\int_0^R \dd{r} r^2 j_m(r)                                                                                               \\
+           & \approx 2\pi R^2 h \vu{z}\int_{R-\xi}^R \dd{r} j_m(r)                                                                                  \\
+           & \approx 2V\vu{z} \int_{R-\xi}^R \dd{r} j_m(r)                                                                                          \\
+           & = \frac{N}{2}\hbar \vu{z} \times \frac{4T}{\xi(T)|\Delta(T)|}\int_{R-\xi}^R \dd{r} \sum_n\ev{\vu{p} g(\vb{r}, \vb{p}, \epsilon_n)}_{p}
+\end{align}
 
 We first assume an initial guess for the gap function $\delta(\vb{r}, \vu{p})$.
 For each trajectory $\vu{p}$ along which the quasiparticle propagates, we can
