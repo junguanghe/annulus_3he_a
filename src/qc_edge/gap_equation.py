@@ -12,11 +12,11 @@ from propagator import propagator
 
 def _propagator_wrapper(
     args: tuple[float, float, np.ndarray, np.ndarray, np.ndarray],
-) -> tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Wrapper function for parallel processing"""
     thetap, en, xspan, Delta1, Delta2 = args
-    _, temp1, temp2, _ = propagator(thetap, 1j * en, xspan, Delta1, Delta2)
-    return temp1[: len(xspan)], temp2[: len(xspan)]
+    _, temp1, temp2, temp3 = propagator(thetap, 1j * en, xspan, Delta1, Delta2)
+    return temp1[: len(xspan)], temp2[: len(xspan)], temp3[: len(xspan)]
 
 
 def gap_equation(
@@ -62,6 +62,7 @@ def gap_equation(
     temp = 0  # store the bulk part of the gap equation
     f1 = np.zeros(xspan_len)
     f2 = np.zeros(xspan_len)
+    g = np.zeros(xspan_len)
 
     for n in tqdm(range(N + 1), desc="Matsubara frequencies"):
         en = (2 * n + 1) * np.pi * t / delta
@@ -79,6 +80,7 @@ def gap_equation(
 
         F1_thetap = np.array([r[0] for r in results])
         F2_thetap = np.array([r[1] for r in results])
+        G_thetap = np.array([r[2] for r in results])
 
         # thetap integral
         F1_integrated = np.trapz(
@@ -87,9 +89,13 @@ def gap_equation(
         F2_integrated = np.trapz(
             np.sin(thetapspan)[:, None] * F2_thetap, thetapspan, axis=0
         )
+        G_integrated = (
+            np.trapz(np.sin(thetapspan)[:, None] * G_thetap, thetapspan, axis=0) / np.pi
+        )
 
         f1 += np.real(F1_integrated)
         f2 += np.real(F2_integrated)
+        g += np.real(G_integrated)
 
         Delta1_new = f1 / temp
         Delta2_new = f2 / temp
@@ -100,4 +106,5 @@ def gap_equation(
         Delta1_old = Delta1_new
         Delta2_old = Delta2_new
 
-    return xspan, Delta1_new, Delta2_new, n
+    g *= 2 * t / delta
+    return xspan, Delta1_new, Delta2_new, g, n

@@ -75,7 +75,7 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         Delta2_old = Delta2.copy()
 
         # Calculate new gap profile
-        xspan, Delta1, Delta2, n = gap_equation(t, delta, xspan, Delta1, Delta2)
+        xspan, Delta1, Delta2, jy, n = gap_equation(t, delta, xspan, Delta1, Delta2)
         print(f"iteration i={i+1}, Matsubara n={n}")
 
         # Check convergence
@@ -103,6 +103,24 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     plt.savefig(plot_filename, dpi=150, bbox_inches="tight")
     print(f"\nPlot saved to {plot_filename}")
     plt.close()
+
+    # make another plot for jy vs x
+    plt.figure(figsize=(8, 6))
+    plt.plot(xspan, jy, "k--", linewidth=1.5, label="jy")
+    plt.title("jy vs x")
+    plt.xlabel(r"$x/\xi_\Delta$")
+    plt.ylabel(r"$j_y/j_0$")
+    plt.legend([f"T={t}T_c"])
+    plt.grid(True)
+    plt.tight_layout()
+    plot_filename = "jy_vs_x.png"
+    plt.savefig(plot_filename, dpi=150, bbox_inches="tight")
+    print(f"\nPlot saved to {plot_filename}")
+    plt.close()
+
+    # also calculate int jy(x) dx
+    jy_integrated = np.trapz(jy, xspan)
+    print(f"jy_integrated={jy_integrated}")
 
     return xspan, Delta1, Delta2
 
