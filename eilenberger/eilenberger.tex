@@ -138,16 +138,18 @@ The local current density is
 \end{align}
 Multiple it by the quasiparticle mass $p_f = m^* v_f$, and we get the mass current density:
 \begin{align}
-    \vb{j}_m(\vb{R}) \equiv m^*\vb{j}(\vb{R}) = \frac{2N_fv_fp_f}{4}\hbar \times \frac{4T}{\xi(T)|\Delta(T)|}\sum_n\ev{\vu{p} g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
+    \vb{j}_m(\vb{R}) \equiv m^*\vb{j}(\vb{R}) = \frac{2N_fv_fp_f}{4}\hbar \times
+    \frac{2T}{\xi(T)|\Delta(T)|}\sum_n\ev{\vu{p} g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
 \end{align}
-where $\xi(T) = \hbar v_f/|\Delta(T)|$ is the coherence length, and $n = 2N_fp_fv_f$ is the particle density.
+where $\xi(T) = \hbar v_f/2|\Delta(T)|$ is the coherence length, and $n = 2N_fp_fv_f$ is the particle density.
 The ground state angular momentum in a cylinder is
 \begin{align}
-    \vb{L} & = \int_0^R \dd[3]r \vb{r} \times \vb{j}_m(\vb{r})                                                                                      \\
-           & = 2\pi h\vu{z}\int_0^R \dd{r} r^2 j_m(r)                                                                                               \\
-           & \approx 2\pi R^2 h \vu{z}\int_{R-\xi}^R \dd{r} j_m(r)                                                                                  \\
-           & \approx 2V\vu{z} \int_{R-\xi}^R \dd{r} j_m(r)                                                                                          \\
-           & = \frac{N}{2}\hbar \vu{z} \times \frac{4T}{\xi(T)|\Delta(T)|}\int_{R-\xi}^R \dd{r} \sum_n\ev{\vu{p} g(\vb{r}, \vb{p}, \epsilon_n)}_{p}
+    \vb{L} & = \int_0^R \dd[3]r \vb{r} \times \vb{j}_m(\vb{r})            \\
+           & = 2\pi h\vu{z}\int_0^R \dd{r} r^2 j_m(r)                     \\
+           & \approx 2\pi R^2 h \vu{z}\int_{R-\xi}^R \dd{r} j_m(r)        \\
+           & \approx 2V\vu{z} \int_{R-\xi}^R \dd{r} j_m(r)                \\
+           & = \frac{N}{2}\hbar \vu{z} \times\frac{2T}{\xi(T)|\Delta(T)|}
+    \int_{R-\xi}^R \dd{r} \sum_n\ev{\vu{p}_y g(\vb{r}, \vb{p}, \epsilon_n)}_{p}
 \end{align}
 
 \section{Gap equation}
@@ -344,10 +346,12 @@ where $t = T/T_c$, $\delta_{1,2}(x) = \Delta_{1,2}(x)/|\Delta(T)|$,
 $e_n = \epsilon_n/T_c$ and $\delta(t) = |\Delta(T)|/T_c$.
 The Ricatti equation is
 \begin{align}
-    ip_x\partial_x a(\vb{p},x) + 2\frac{ie_n}{\delta(t)}a(\vb{p},x) + a(\vb{p},x)\delta^*(\vb{p},x) a(\vb{p},x) + \delta(\vb{p},x) = 0 \\
-    ip_x\partial_x \underline{a}(\vb{p},x) - 2\frac{ie_n}{\delta(t)} \underline{a}(\vb{p},x) - \underline{a}(\vb{p},x)\delta(\vb{p},x)\underline{a}(\vb{p},x) - \delta^*(\vb{p},x) = 0
+    ip_x\partial_x a(\vb{p},x) + \frac{ie_n}{\delta(t)}a(\vb{p},x)
+    + \frac{\delta^*(\vb{p},x)}{2} a^2(\vb{p},x) + \frac{\delta(\vb{p},x)}{2} = 0 \\
+    ip_x\partial_x \underline{a}(\vb{p},x) - \frac{ie_n}{\delta(t)} \underline{a}(\vb{p},x)
+    - \frac{\delta(\vb{p},x)}{2}\underline{a}^2(\vb{p},x) - \frac{\delta^*(\vb{p},x)}{2} = 0
 \end{align}
-where $\xi = \hbar v_f/|\Delta(T)|$ and $\va{\partial} = \xi\grad$.
+where $\xi = \hbar v_f/2|\Delta(T)|$ and $\va{\partial} = \xi\grad$.
 We can get $g$ and $f_{1,2}$ from
 \begin{align}
     g = -i\pi\frac{1+a\underline{a}}{1-a\underline{a}} \\
