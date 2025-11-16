@@ -133,36 +133,8 @@ The one-particle density matrix is
     = T\sum_{n=-\infty}^{\infty} G_{\uparrow\uparrow}(\vb{r}, \vb{r}';i\epsilon_n)e^{-i\epsilon_n 0^-}
 \end{align}
 The local current density is
-\begin{align}
+\begin{align} \label{j_eq}
     \vb{j}(\vb{R}) = 2N_fT\sum_n\ev{\vb{v}_p g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
-\end{align}
-For the integration contour $C$ being an infinite circle,
-assume function $g(z)$ has no poles inside the contour and vanishes at infinity,
-the residue theorem gives
-\begin{align}
-    \oint_C \dd z n_F(z) g(z)
-    = 2\pi i \sum_\text{poles} \Res{n_F(z) g(z)}
-    = 2\pi i \left(-T\right) \sum_{n=-\infty}^{\infty} g(\epsilon_n)
-\end{align}
-The residue of the Fermi distribution function $\Res{n_F(z)} = -T$.
-We can seperate the contour into upper and lower half circles, which gives
-\begin{align}
-    \oint_C \dd z n_F(z) g(z)
-     & = \left(\oint_\text{upper} + \oint_\text{lower}\right) \dd z n_F(z) g(z)                                    \\
-     & = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon) g^R(\epsilon+i0^+)
-    + \int_{\infty}^{-\infty}\dd\epsilon n_F(\epsilon) g^A(\epsilon-i0^+)                                          \\
-     & = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon) \left[g^R(\epsilon + i0^+) - g^A(\epsilon - i0^+)\right] \\
-     & = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon)2i\Im{g^R(\epsilon + i0^+)}
-\end{align}
-and we get
-\begin{align}
-    T\sum_{n=-\infty}^{\infty} g(\epsilon_n)
-    = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon)\left(-\frac{1}{\pi}\Im{g^R(\epsilon + i0^+)}\right)
-\end{align}
-Analytically continue to real frequency, we get
-\begin{align}
-    \vb{j}(\vb{R})=2N_f\int\dd\epsilon n_F(\epsilon)
-    \ev{\vb{v}_p \left(-\frac{1}{\pi}\Im{g(\vb{R}, \vb{p}, \epsilon)}\right)}_p
 \end{align}
 Multiple it by the quasiparticle mass $p_f = m^* v_f$, and we get the mass current density:
 \begin{align}
@@ -387,5 +359,35 @@ solve the Eilenberger equation to get the Green's function $g(\vb{r}, \vu{p}, n)
 and the anomalous Green's function $f(\vb{r}, \vu{p}, n)$. Then we iterate to
 update the gap function $\delta(\vb{r}, \vu{p})$ by solving the gap equation.
 Repeat until convergence.
+
+\section{Analytic Continuation}
+For the integration contour $C$ being an infinite circle,
+assume function $g(z)$ has no poles inside the contour and vanishes at infinity,
+the residue theorem gives
+\begin{align}
+    \oint_C \dd z n_F(z) g(z)
+    = 2\pi i \sum_\text{poles} \Res{n_F(z) g(z)}
+    = 2\pi i \left(-T\right) \sum_{n=-\infty}^{\infty} g(\epsilon_n)
+\end{align}
+The residue of the Fermi distribution function $\Res{n_F(z)} = -T$.
+We can seperate the contour into upper and lower half circles, which gives
+\begin{align}
+    \oint_C \dd z n_F(z) g(z)
+     & = \left(\oint_\text{upper} + \oint_\text{lower}\right) \dd z n_F(z) g(z)                                    \\
+     & = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon) g^R(\epsilon+i0^+)
+    + \int_{\infty}^{-\infty}\dd\epsilon n_F(\epsilon) g^A(\epsilon-i0^+)                                          \\
+     & = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon) \left[g^R(\epsilon + i0^+) - g^A(\epsilon - i0^+)\right] \\
+     & = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon)2i\Im{g^R(\epsilon + i0^+)}
+\end{align}
+and we get
+\begin{align}
+    T\sum_{n=-\infty}^{\infty} g(\epsilon_n)
+    = \int_{-\infty}^{\infty}\dd\epsilon n_F(\epsilon)\left(-\frac{1}{\pi}\Im{g^R(\epsilon + i0^+)}\right)
+\end{align}
+Analytically continue Eq. (\ref{j_eq}) to real frequency, we get
+\begin{align}
+    \vb{j}(\vb{R})=2N_f\int\dd\epsilon n_F(\epsilon)
+    \ev{\vb{v}_p \left(-\frac{1}{\pi}\Im{g(\vb{R}, \vb{p}, \epsilon)}\right)}_p
+\end{align}
 
 \end{document}
