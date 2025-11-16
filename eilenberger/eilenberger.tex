@@ -111,9 +111,9 @@ and the gap function $\widehat{\Delta}(\vb{R}, \vb{p})$ are
 inhomogeneous, and are described by the
 Eilenberger equation and gap equation.
 \begin{equation}
-    \comm{\epsilon\widehat{\tau}_3 - \widehat{\Delta}(\vb{R}, \vb{p})}
-    {\widehat{g}(\vb{R},\vb{p};\epsilon)} +
-    i\hbar\vb{v}_p \cdot \nabla\widehat{g}(\vb{R},\vb{p};\epsilon)
+    \comm{i\epsilon_n\widehat{\tau}_3 - \widehat{\Delta}(\vb{R}, \vb{p})}
+    {\widehat{g}(\vb{R},\vb{p};i\epsilon_n)} +
+    i\hbar\vb{v}_p \cdot \nabla\widehat{g}(\vb{R},\vb{p};i\epsilon_n)
     = 0
 \end{equation}
 and
@@ -233,14 +233,14 @@ The inverse is
 \end{align}
 Substitute in the bulk Green's function to get the bulk Ricatti amplitude:
 \begin{align}
-    \hat{a} = \frac{i\hat{\Delta}}{\epsilon_n + \sqrt{|\Delta|^2 + \epsilon_n^2}} \\
-    \hat{\underline{a}} = \frac{i\hat{\Delta}^\dagger}{\epsilon_n + \sqrt{|\Delta|^2 + \epsilon_n^2}}
+    \hat{a} = \frac{-\hat{\Delta}}{i\epsilon_n + i\sqrt{|\Delta|^2 + \epsilon_n^2}} \\
+    \hat{\underline{a}} = \frac{-\hat{\Delta}^\dagger}{i\epsilon_n + i\sqrt{|\Delta|^2 + \epsilon_n^2}}
 \end{align}
 The matrix Ricatti equation is
 \begin{align}
-    i\hbar\vb{v}_p \vdot \grad{\hat{a}} + 2\epsilon\hat{a}
+    i\hbar\vb{v}_p \vdot \grad{\hat{a}} + 2i\epsilon_n\hat{a}
     + \hat{a}\hat{\Delta}^\dagger\hat{a} + \hat{\Delta} = 0 \\
-    i\hbar\vb{v}_p \vdot \grad{\hat{\underline{a}}} - 2\epsilon\hat{\underline{a}}
+    i\hbar\vb{v}_p \vdot \grad{\hat{\underline{a}}} - 2i\epsilon_n\hat{\underline{a}}
     - \hat{\underline{a}}\hat{\Delta}\hat{\underline{a}} - \hat{\Delta}^\dagger = 0
 \end{align}
 
@@ -326,27 +326,28 @@ and the gap iteration becomes
 \end{align}
 
 \subsection{Numerical solution}
+The bulk gap temperature dependence is
+\begin{align}
+    \ln{t} = \pi t\sum_{n=-\infty}^{\infty}
+    \left[
+        \frac{1}{\sqrt{\delta(t)^2 + e_n^2}}
+        - \frac{1}{|e_n|}
+        \right]
+\end{align}
 The dimensionless iteration of the gap function is
 \begin{align}
     \delta_{1,2}(x) =
     \frac{2\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
     {\sum_n \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}}
 \end{align}
-or equivalently
-\begin{align}
-    \delta_{1,2}(x)\delta(T) =
-    \frac{t\sum_n2\ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
-    {\ln{t} + \sum_n 1/|2n+1|}
-\end{align}
-where $t = T/T_c$, $\delta(\vb{p},x) = \Delta(\vb{p},x)/|\Delta(T)|$, and $\delta(T) = |\Delta(T)|/T_c$.
+where $t = T/T_c$, $\delta_{1,2}(x) = \Delta_{1,2}(x)/|\Delta(T)|$,
+$e_n = \epsilon_n/T_c$ and $\delta(t) = |\Delta(T)|/T_c$.
 The Ricatti equation is
 \begin{align}
-    ip_x\partial_x a(\vb{p},x) + 2ea(\vb{p},x) + a(\vb{p},x)\delta^*(\vb{p},x) a(\vb{p},x) + \delta(\vb{p},x) = 0 \\
-    ip_x\partial_x \underline{a}(\vb{p},x) - 2e \underline{a}(\vb{p},x) - \underline{a}(\vb{p},x)\delta(\vb{p},x)\underline{a}(\vb{p},x) - \delta^*(\vb{p},x) = 0
+    ip_x\partial_x a(\vb{p},x) + 2\frac{ie_n}{\delta(t)}a(\vb{p},x) + a(\vb{p},x)\delta^*(\vb{p},x) a(\vb{p},x) + \delta(\vb{p},x) = 0 \\
+    ip_x\partial_x \underline{a}(\vb{p},x) - 2\frac{ie_n}{\delta(t)} \underline{a}(\vb{p},x) - \underline{a}(\vb{p},x)\delta(\vb{p},x)\underline{a}(\vb{p},x) - \delta^*(\vb{p},x) = 0
 \end{align}
-where $e = \epsilon/|\Delta(T)|$,
-$\xi = \hbar v_f/|\Delta(T)|$ and $\va{\partial} = \xi\grad$.
-For Matsubara frequency, we replace $e \rightarrow i(2n+1)\pi t/\delta(T)$.
+where $\xi = \hbar v_f/|\Delta(T)|$ and $\va{\partial} = \xi\grad$.
 We can get $g$ and $f_{1,2}$ from
 \begin{align}
     g = -i\pi\frac{1+a\underline{a}}{1-a\underline{a}} \\
