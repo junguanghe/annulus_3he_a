@@ -125,6 +125,13 @@ and
 Here $\vb{R} = \frac{1}{2}(\vb{r} + \vb{r}')$ is the center of the pair.
 
 \section{Current density}
+The one-particle density matrix is
+\begin{align}
+    \rho_{\uparrow\uparrow}(\vb{r}, \vb{r}')
+    \equiv \ev{\psi^\dagger_\uparrow(\vb{r}')\psi_\uparrow(\vb{r})}
+    = G_{\uparrow\uparrow}(\vb{r}, \vb{r}';0^-)
+    = T\sum_{n=-\infty}^{\infty} G_{\uparrow\uparrow}(\vb{r}, \vb{r}';i\epsilon_n)e^{-i\epsilon_n 0^-}
+\end{align}
 The local current density is
 \begin{align}
     \vb{j}(\vb{R})=2N_f\int\dd\epsilon f(\epsilon)
