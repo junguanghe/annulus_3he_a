@@ -100,7 +100,10 @@ def gap_equation(
         Delta1_new = f1 / temp
         Delta2_new = f2 / temp
 
-        if abs(Delta2_new[-1] - Delta2_old[-1]) < 0.001:
+        # Check convergence: largest difference of Delta1 and Delta2 must be less than threshold
+        max_diff_Delta1 = np.max(np.abs(Delta1_new - Delta1_old))
+        max_diff_Delta2 = np.max(np.abs(Delta2_new - Delta2_old))
+        if max_diff_Delta1 < 0.001 and max_diff_Delta2 < 0.001:
             break
 
         Delta1_old = Delta1_new

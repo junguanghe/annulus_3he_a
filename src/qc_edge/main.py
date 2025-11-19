@@ -72,14 +72,18 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
     for i in range(N):
         # Store previous values for convergence check
+        Delta1_old = Delta1.copy()
         Delta2_old = Delta2.copy()
 
         # Calculate new gap profile
         xspan, Delta1, Delta2, jy, n = gap_equation(t, delta, xspan, Delta1, Delta2)
         print(f"iteration i={i+1}, Matsubara n={n}")
 
-        # Check convergence
-        if abs(Delta2[-1] - Delta2_old[-1]) < 0.001:
+        # Check convergence: largest difference of Delta1 and Delta2 must be less than threshold
+        max_diff_Delta1 = np.max(np.abs(Delta1 - Delta1_old))
+        max_diff_Delta2 = np.max(np.abs(Delta2 - Delta2_old))
+        print(f"max_diff_Delta1={max_diff_Delta1}, max_diff_Delta2={max_diff_Delta2}")
+        if max_diff_Delta1 < 0.001 and max_diff_Delta2 < 0.001:
             print(f"Converged after {i+1} iterations")
             break
 
