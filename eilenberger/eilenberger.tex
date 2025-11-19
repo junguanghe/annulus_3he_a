@@ -305,15 +305,22 @@ Here $\Delta_1(x)$ and $\Delta_2(x)$ are real functions, and we have
     \end{pmatrix} \\
      & = i\hat{\sigma}_x(\Delta_2p_y\widehat{\tau}_1 + \Delta_1p_x\widehat{\tau}_2)
 \end{align}
-We can always write the anomalous Green's function as
+We can also write the anomalous Green's function as
 \begin{align}
     \hat{f}(\vb{R}, \vb{p}, \epsilon_n)
-    = \hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) + if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg)
+    = \hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) + if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg) \\
+    \hat{\underline{f}}(\vb{R}, \vb{p}, \epsilon_n)
+    = -\hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) - if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg)
 \end{align}
-where $f_{1,2}$ are real functions, and we have
+where $f_{1,2}$ are complex functions, and we have
 \begin{align}
     \widehat{g}
     = \hat{g}\widehat{\tau}_3 + i\hat{\sigma}_x(f_2\widehat{\tau}_1 + f_1\widehat{\tau}_2)
+\end{align}
+and
+\begin{align}
+    f_1 = \frac{f - \underline{f}}{2} \qq{and}
+    f_2 = \frac{f + \underline{f}}{2i}
 \end{align}
 In this case, we can even write the gap equation as
 \begin{align}
