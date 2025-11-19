@@ -365,6 +365,38 @@ and the anomalous Green's function $f(\vb{r}, \vu{p}, n)$. Then we iterate to
 update the gap function $\delta(\vb{r}, \vu{p})$ by solving the gap equation.
 Repeat until convergence.
 
+\section{4-th order Runge-Kutta method}
+We can use the 4-th order Runge-Kutta method to solve the Riccati equation.
+\begin{align}
+    \partial_x a(\vb{p}, x) = \frac{i}{p_x}
+    \left(
+    \frac{ie_n}{\delta(t)}a(\vb{p},x)
+    + \frac{\delta_1(x)p_x - i\delta_2(x)p_y}{2} a^2(\vb{p},x)
+    + \frac{\delta_1(x)p_x + i\delta_2(x)p_y}{2}
+    \right) \\
+    \partial_x \underline{a}(\vb{p}, x) = \frac{-i}{p_x}
+    \left(
+    \frac{ie_n}{\delta(t)} \underline{a}(\vb{p},x)
+    + \frac{\delta_1(x)p_x + i\delta_2(x)p_y}{2} \underline{a}^2(\vb{p},x)
+    + \frac{\delta_1(x)p_x - i\delta_2(x)p_y}{2}
+    \right)
+\end{align}
+For an ODE
+\begin{align}
+    \dv{a}{x} = f(x, a)
+\end{align}
+when step size is $h$, RK4 method gives
+\begin{align}
+    k_1     & = f\left(x_n, a_n\right)                                \\
+    k_2     & = f\left(x_n + \frac{h}{2}, a_n + \frac{h}{2}k_1\right) \\
+    k_3     & = f\left(x_n + \frac{h}{2}, a_n + \frac{h}{2}k_2\right) \\
+    k_4     & = f\left(x_n + h, a_n + hk_3\right)                     \\
+    a_{n+1} & = a_n + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\end{align}
+When iteratively solving the Ricatti equation and the gap equation,
+we can interpolate the gap function to get the half step value
+$\delta_{1,2}(x_n + h/2)$.
+
 \section{Analytic Continuation}
 For the integration contour $C$ being an infinite circle,
 assume function $g(z)$ has no poles inside the contour and vanishes at infinity,
