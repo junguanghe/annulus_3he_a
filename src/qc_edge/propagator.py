@@ -81,10 +81,13 @@ def propagator(
     g = -np.pi * epsilon / np.sqrt(1 - epsilon**2)
     f1 = np.pi / np.sqrt(1 - epsilon**2) * px
     f2 = np.pi / np.sqrt(1 - epsilon**2) * py
-    a[0] = -(f1 + 1j * f2) / (1j * np.pi - g)
-    abar[-1] = -(-f1 - 1j * f2) / (
-        1j * np.pi - g
-    )  # initial condition for backward direction
+    f = f1 + 1j * f2
+    a[0] = f / (g - 1j * np.pi)
+    # gbar = -g
+    # fbar = -f^* = -f1 + 1j * f2
+    # abar[0] = fbar / (gbar + 1j * np.pi)
+    # for abar[-1], the x component f1 in the numerator gain an extra minus sign
+    abar[-1] = f / (-g + 1j * np.pi)
 
     # Riccati equations
     def ricatti1(Delta1: complex, Delta2: complex, y0: complex) -> complex:
@@ -130,23 +133,17 @@ def propagator(
             a[i],
             T[i + 1] - T[i],
         )
-        # Backward integration: MATLAB i goes from 1 to length(T)-1
-        # Python i goes from 0 to len(T)-2
-        # MATLAB end+1-i when i=1 → end = len(T)-1 in Python
-        # MATLAB end-i when i=1 → end-1 = len(T)-2 in Python
-        # So: end+1-i → len(T)-(i+1), end-i → len(T)-(i+2)
-        matlab_i = i + 1  # Convert Python i to MATLAB i
-        idx = len(T) - 1 - matlab_i  # abar[end-i] in MATLAB
+        idx = len(T) - i - 2
         abar[idx] = RK4(
             ricatti2,
-            Delta1[len(T) - matlab_i],
-            Delta2[len(T) - matlab_i],
+            Delta1[idx + 1],
+            Delta2[idx + 1],
             delta1[idx],
             delta2[idx],
             Delta1[idx],
             Delta2[idx],
-            abar[len(T) - matlab_i],
-            T[idx] - T[len(T) - matlab_i],
+            abar[idx + 1],
+            T[idx] - T[idx + 1],
         )
 
     g = -1j * np.pi * (1 + a * abar) / (1 - a * abar)
