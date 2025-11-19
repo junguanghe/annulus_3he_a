@@ -38,14 +38,10 @@ def propagator(
     g : ndarray
         Diagonal component of the Green's function
     """
-    DDelta1 = Delta1.copy()
-    DDelta2 = Delta2.copy()
 
     px = np.cos(thetap)
     py = np.sin(thetap)
-    x = np.concatenate(
-        [xspan, -np.flip(xspan[:-1])]
-    )  # x coordinate of the classical trajectory
+    x = np.concatenate([xspan, -np.flip(xspan[:-1])])
 
     if abs(thetap - np.pi / 2) < 1e-10 or abs(thetap + np.pi / 2) < 1e-10:
         f1 = np.zeros(len(x))
@@ -53,30 +49,20 @@ def propagator(
         g = -epsilon * np.pi / np.sqrt(1 - epsilon**2) * np.ones(len(x))
         return x, f1, f2, g
 
-    t = x / px  # coordinate along a classical trajectory
-    DDelta1 = np.concatenate(
-        [px * DDelta1, -px * np.flip(DDelta1[:-1])]
-    )  # encode a '-' from -px after bouncing off the wall
-    DDelta2 = np.concatenate([py * DDelta2, py * np.flip(DDelta2[:-1])])
-
-    # step size no bigger than 0.1xi
-    t1 = np.arange(t[0] + 0.1, t[-1] - 0.1 + 0.1, 0.1)
-    T = np.sort(np.concatenate([t, t1]))
-    sort_indices = np.argsort(np.concatenate([t, t1]))
-    revert_indices = np.argsort(sort_indices)
+    # encode a '-' from -px after bouncing off the wall for Delta1
+    Delta1 = np.concatenate([px * Delta1, -px * np.flip(Delta1[:-1])])
+    Delta2 = np.concatenate([py * Delta2, py * np.flip(Delta2[:-1])])
 
     # Interpolation
-    interp_Delta1 = interp1d(t, DDelta1, kind="cubic", fill_value="extrapolate")
-    interp_Delta2 = interp1d(t, DDelta2, kind="cubic", fill_value="extrapolate")
-    Delta1 = interp_Delta1(T)
-    Delta2 = interp_Delta2(T)
+    interp_Delta1 = interp1d(x, Delta1, kind="cubic", fill_value="extrapolate")
+    interp_Delta2 = interp1d(x, Delta2, kind="cubic", fill_value="extrapolate")
 
-    Tq = (T[:-1] + T[1:]) / 2  # half step (used in 4th-order Runge Kutta method)
-    delta1 = interp_Delta1(Tq)
-    delta2 = interp_Delta2(Tq)
+    xq = (x[:-1] + x[1:]) / 2  # half step (used in 4th-order Runge Kutta method)
+    delta1 = interp_Delta1(xq)
+    delta2 = interp_Delta2(xq)
 
-    a = np.zeros(len(T), dtype=complex)
-    abar = np.zeros(len(T), dtype=complex)
+    a = np.zeros(len(x), dtype=complex)
+    abar = np.zeros(len(x), dtype=complex)
 
     g = -np.pi * epsilon / np.sqrt(1 - epsilon**2)
     f1 = np.pi / np.sqrt(1 - epsilon**2) * px
@@ -121,7 +107,7 @@ def propagator(
         k_4 = func(Delta1_2, Delta2_2, y_0 + h * k_3)
         return y_0 + (h / 6) * (k_1 + 2 * k_2 + 2 * k_3 + k_4)
 
-    for i in range(len(T) - 1):
+    for i in range(len(x) - 1):
         a[i + 1] = RK4(
             ricatti1,
             Delta1[i],
@@ -131,9 +117,9 @@ def propagator(
             Delta1[i + 1],
             Delta2[i + 1],
             a[i],
-            T[i + 1] - T[i],
+            x[i + 1] - x[i],
         )
-        idx = len(T) - i - 2
+        idx = len(x) - i - 2
         abar[idx] = RK4(
             ricatti2,
             Delta1[idx + 1],
@@ -143,7 +129,7 @@ def propagator(
             Delta1[idx],
             Delta2[idx],
             abar[idx + 1],
-            T[idx] - T[idx + 1],
+            x[idx] - x[idx + 1],
         )
 
     g = -1j * np.pi * (1 + a * abar) / (1 - a * abar)
@@ -151,11 +137,5 @@ def propagator(
     fbar = -1j * np.pi * (-2 * abar) / (1 - abar * a)
     f1 = (f - fbar) / 2
     f2 = (f + fbar) / 2 / 1j
-
-    # Extract original x points
-    num_x = len(x)
-    g = g[revert_indices[:num_x]]
-    f1 = f1[revert_indices[:num_x]]
-    f2 = f2[revert_indices[:num_x]]
 
     return x, f1, f2, g
