@@ -305,7 +305,7 @@ Here $\Delta_1(x)$ and $\Delta_2(x)$ are real functions, and we have
     \end{pmatrix} \\
      & = i\hat{\sigma}_x(\Delta_2p_y\widehat{\tau}_1 + \Delta_1p_x\widehat{\tau}_2)
 \end{align}
-We can also write the anomalous Green's function as
+We can also write the anomalous Green's function as corresponding components to $\Delta_{1,2}$
 \begin{align}
     \hat{f}(\vb{R}, \vb{p}, \epsilon_n)
     = \hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) + if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg) \\
@@ -317,7 +317,7 @@ where $f_{1,2}$ are complex functions, and we have
     \widehat{g}
     = \hat{g}\widehat{\tau}_3 + i\hat{\sigma}_x(f_2\widehat{\tau}_1 + f_1\widehat{\tau}_2)
 \end{align}
-and
+where
 \begin{align}
     f_1 = \frac{f - \underline{f}}{2} \qq{and}
     f_2 = \frac{f + \underline{f}}{2i}
@@ -333,6 +333,10 @@ and the gap iteration becomes
     \frac{2\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
     {\sum_n \frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}
 \end{align}
+We can only sum over the positive Matsubara frequencies and take real part because
+\begin{align}
+    f_{1,2}(\epsilon_n) = f_{1,2}^*(-\epsilon_n)
+\end{align}
 
 \subsection{Numerical solution}
 The bulk gap temperature dependence is
@@ -346,8 +350,8 @@ The bulk gap temperature dependence is
 The dimensionless iteration of the gap function is
 \begin{align}
     \delta_{1,2}(x) =
-    \frac{2\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
-    {\sum_n \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}}
+    \frac{2\sum_{n>0} \ev{\vb{p}_{x,y}\vdot\vb{p}'\Re{f_{1,2}(x, \vb{p}', n)}}_{p'}}
+    {\sum_{n>0} \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}}
 \end{align}
 where $t = T/T_c$, $\delta_{1,2}(x) = \Delta_{1,2}(x)/|\Delta(T)|$,
 $e_n = \epsilon_n/T_c$ and $\delta(t) = |\Delta(T)|/T_c$.
