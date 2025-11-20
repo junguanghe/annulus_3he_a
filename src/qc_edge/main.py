@@ -32,7 +32,6 @@ def initialize_gap_txt(
     Delta2_init = np.ones_like(xspan)
     if single_iteration:
         Delta1_init = np.ones_like(xspan)
-        Delta1_init[-1] = 0
     else:
         Delta1_init = np.tanh(xspan[-1] - xspan)
 
@@ -159,8 +158,8 @@ def main(
     plt.close()
 
     # also calculate int jy(x) dx
-    jy_integrated = np.trapz(jy, xspan)
-    print(f"jy_integrated={jy_integrated}")
+    angular_momentum = np.trapz(jy, xspan) * 2 * t / delta
+    print(f"angular_momentum={angular_momentum} N hbar / 2")
 
     return xspan, Delta1, Delta2
 
