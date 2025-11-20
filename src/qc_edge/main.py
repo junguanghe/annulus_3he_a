@@ -13,8 +13,7 @@ from gap_equation import gap_equation
 def initialize_gap_txt(
     xspan: np.ndarray,
     gap_file: str = "gap.txt",
-    Delta1_init: np.ndarray | None = None,
-    Delta2_init: np.ndarray | None = None,
+    single_iteration: bool = False,
 ) -> None:
     """
     Initialize gap.txt file with initial gap profile.
@@ -30,10 +29,12 @@ def initialize_gap_txt(
     Delta2_init : ndarray, optional
         Initial Delta2 profile. If None, uses tanh profile
     """
-    if Delta1_init is None:
+    Delta2_init = np.ones_like(xspan)
+    if single_iteration:
         Delta1_init = np.ones_like(xspan)
-    if Delta2_init is None:
-        Delta2_init = np.tanh(xspan[-1] - xspan)
+        Delta1_init[-1] = 0
+    else:
+        Delta1_init = np.tanh(xspan[-1] - xspan)
 
     data = np.column_stack([xspan, Delta1_init, Delta2_init])
     np.savetxt(gap_file, data, header="xspan Delta1 Delta2", comments="#", fmt="%.10e")
@@ -93,7 +94,7 @@ def main(
     if not os.path.exists(gap_file):
         # Create a reasonable initial xspan
         xspan = np.linspace(-15, 0, 100)  # Adjust range and resolution as needed
-        initialize_gap_txt(xspan, gap_file)
+        initialize_gap_txt(xspan, gap_file, single_iteration)
         print(f"Initialized {gap_file} with default values")
 
     # Load initial gap profile
