@@ -357,13 +357,13 @@ where $t = T/T_c$, $\delta_{1,2}(x) = \Delta_{1,2}(x)/|\Delta(T)|$,
 $e_n = \epsilon_n/T_c$ and $\delta(t) = |\Delta(T)|/T_c$.
 The Ricatti equation is
 \begin{align}
-    i\partial_x a(\vb{p},x) + \frac{ie_n}{\delta(t)}a(\vb{p},x)
+    ip_x\partial_x a(\vb{p},x) + \frac{ie_n}{\delta(t)}a(\vb{p},x)
     + \frac{\delta^*(\vb{p},x)}{2} a^2(\vb{p},x) + \frac{\delta(\vb{p},x)}{2} = 0 \\
-    i\partial_x \underline{a}(\vb{p},x) - \frac{ie_n}{\delta(t)} \underline{a}(\vb{p},x)
+    ip_x\partial_x \underline{a}(\vb{p},x) - \frac{ie_n}{\delta(t)} \underline{a}(\vb{p},x)
     - \frac{\delta(\vb{p},x)}{2}\underline{a}^2(\vb{p},x) - \frac{\delta^*(\vb{p},x)}{2} = 0
 \end{align}
 where $\xi = \hbar v_f/2|\Delta(T)|$,
-and $\partial_x = p_x\xi\nabla_x$. The $p_x$ can be interpreted as the
+and $\partial_x = \xi\nabla_x$. The $p_x$ can be interpreted as the
 projection of quasiparticle trajectory along the $x$ direction.
 We can get $g$ and $f_{1,2}$ from
 \begin{align}
@@ -381,13 +381,13 @@ Repeat until convergence.
 \section{4-th order Runge-Kutta method}
 We can use the 4-th order Runge-Kutta method to solve the Riccati equation.
 \begin{align}
-    \partial_x a(\vb{p}, x) = i
+    \partial_x a(\vb{p}, x) = \frac{i}{p_x}
     \left(
     \frac{ie_n}{\delta(t)}a(\vb{p},x)
     + \frac{\delta_1(x)p_x - i\delta_2(x)p_y}{2} a^2(\vb{p},x)
     + \frac{\delta_1(x)p_x + i\delta_2(x)p_y}{2}
     \right) \\
-    \partial_x \underline{a}(\vb{p}, x) = -i
+    \partial_x \underline{a}(\vb{p}, x) = \frac{-i}{p_x}
     \left(
     \frac{ie_n}{\delta(t)} \underline{a}(\vb{p},x)
     + \frac{\delta_1(x)p_x + i\delta_2(x)p_y}{2} \underline{a}^2(\vb{p},x)
