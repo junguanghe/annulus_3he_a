@@ -105,8 +105,13 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     # Save plot to file
     plot_filename = "edge_gap_profile.png"
     plt.savefig(plot_filename, dpi=150, bbox_inches="tight")
-    print(f"\nPlot saved to {plot_filename}")
+    print(f"Plot saved to {plot_filename}")
     plt.close()
+
+    # Save jy and x to txt file
+    jy_data = np.column_stack([xspan, jy])
+    np.savetxt("jy_vs_x.txt", jy_data, header="xspan jy", comments="#", fmt="%.10e")
+    print("jy and x data saved to jy_vs_x.txt")
 
     # make another plot for jy vs x
     plt.figure(figsize=(8, 6))
@@ -119,7 +124,7 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     plt.tight_layout()
     plot_filename = "jy_vs_x.png"
     plt.savefig(plot_filename, dpi=150, bbox_inches="tight")
-    print(f"\nPlot saved to {plot_filename}")
+    print(f"Plot saved to {plot_filename}")
     plt.close()
 
     # also calculate int jy(x) dx
