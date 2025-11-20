@@ -60,7 +60,7 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     # Load or initialize gap profile
     if not os.path.exists(gap_file):
         # Create a reasonable initial xspan
-        xspan = np.linspace(0, 10, 201)  # Adjust range and resolution as needed
+        xspan = np.linspace(-15, 0, 100)  # Adjust range and resolution as needed
         initialize_gap_txt(xspan)
         print("Initialized gap.txt with default values")
 
