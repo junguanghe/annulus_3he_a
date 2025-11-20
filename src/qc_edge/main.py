@@ -1,3 +1,5 @@
+import argparse
+
 import matplotlib
 import numpy as np
 
@@ -10,6 +12,7 @@ from gap_equation import gap_equation
 
 def initialize_gap_txt(
     xspan: np.ndarray,
+    gap_file: str = "gap.txt",
     Delta1_init: np.ndarray | None = None,
     Delta2_init: np.ndarray | None = None,
 ) -> None:
@@ -20,6 +23,8 @@ def initialize_gap_txt(
     -----------
     xspan : ndarray
         x coordinate span
+    gap_file : str
+        Filename to save gap data to
     Delta1_init : ndarray, optional
         Initial Delta1 profile. If None, uses bulk value of 1.0
     Delta2_init : ndarray, optional
@@ -31,10 +36,12 @@ def initialize_gap_txt(
         Delta2_init = np.tanh(xspan[-1] - xspan)
 
     data = np.column_stack([xspan, Delta1_init, Delta2_init])
-    np.savetxt("gap.txt", data, header="xspan Delta1 Delta2", comments="#", fmt="%.10e")
+    np.savetxt(gap_file, data, header="xspan Delta1 Delta2", comments="#", fmt="%.10e")
 
 
-def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def main(
+    t: float, delta: float, reset_gap: bool = False, single_iteration: bool = False
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
     Self-consistently calculate the gap profile of chiral p-wave superconductor near a wall.
 
@@ -44,6 +51,11 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         Temperature parameter (e.g., 0.1 for T=0.1*Tc)
     delta : float
         Bulk gap ratio. when t=0.1, delta=1.7639. when t=0.5, delta=1.688
+    reset_gap : bool, optional
+        If True, delete gap.txt and start from scratch. Default is False.
+    single_iteration : bool, optional
+        If True, only iterate once (N=1) and automatically reset gap.txt.
+        Also saves files with _1iter suffix. Default is False.
 
     Returns:
     --------
@@ -54,15 +66,35 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     Delta2 : ndarray
         Second component of gap profile
     """
-    N = 100  # max iteration number
-    gap_file = "gap.txt"
+    N = 1 if single_iteration else 100  # max iteration number
+
+    # If single_iteration, automatically reset gap and use _1iter suffix
+    if single_iteration:
+        reset_gap = True
+
+    # Set filenames based on single_iteration flag
+    if single_iteration:
+        gap_file = "gap_1iter.txt"
+        jy_file = "jy_vs_x_1iter.txt"
+        gap_plot_file = "edge_gap_profile_1iter.png"
+        jy_plot_file = "jy_vs_x_1iter.png"
+    else:
+        gap_file = "gap.txt"
+        jy_file = "jy_vs_x.txt"
+        gap_plot_file = "edge_gap_profile.png"
+        jy_plot_file = "jy_vs_x.png"
+
+    # Delete gap file if reset_gap is True
+    if reset_gap and os.path.exists(gap_file):
+        os.remove(gap_file)
+        print(f"Deleted {gap_file}, starting from scratch")
 
     # Load or initialize gap profile
     if not os.path.exists(gap_file):
         # Create a reasonable initial xspan
         xspan = np.linspace(-15, 0, 100)  # Adjust range and resolution as needed
-        initialize_gap_txt(xspan)
-        print("Initialized gap.txt with default values")
+        initialize_gap_txt(xspan, gap_file)
+        print(f"Initialized {gap_file} with default values")
 
     # Load initial gap profile
     data = np.loadtxt(gap_file)
@@ -103,15 +135,14 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     plt.tight_layout()
 
     # Save plot to file
-    plot_filename = "edge_gap_profile.png"
-    plt.savefig(plot_filename, dpi=150, bbox_inches="tight")
-    print(f"Plot saved to {plot_filename}")
+    plt.savefig(gap_plot_file, dpi=150, bbox_inches="tight")
+    print(f"Plot saved to {gap_plot_file}")
     plt.close()
 
     # Save jy and x to txt file
     jy_data = np.column_stack([xspan, jy])
-    np.savetxt("jy_vs_x.txt", jy_data, header="xspan jy", comments="#", fmt="%.10e")
-    print("jy and x data saved to jy_vs_x.txt")
+    np.savetxt(jy_file, jy_data, header="xspan jy", comments="#", fmt="%.10e")
+    print(f"jy and x data saved to {jy_file}")
 
     # make another plot for jy vs x
     plt.figure(figsize=(8, 6))
@@ -122,9 +153,8 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     plt.legend([f"T={t}T_c"])
     plt.grid(True)
     plt.tight_layout()
-    plot_filename = "jy_vs_x.png"
-    plt.savefig(plot_filename, dpi=150, bbox_inches="tight")
-    print(f"Plot saved to {plot_filename}")
+    plt.savefig(jy_plot_file, dpi=150, bbox_inches="tight")
+    print(f"Plot saved to {jy_plot_file}")
     plt.close()
 
     # also calculate int jy(x) dx
@@ -135,7 +165,21 @@ def main(t: float, delta: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Calculate gap profile of chiral p-wave superconductor near a wall"
+    )
+    parser.add_argument(
+        "--reset-gap", action="store_true", help="Delete gap.txt and start from scratch"
+    )
+    parser.add_argument(
+        "--single-iteration", action="store_true", help="Only iterate once (set N=1)"
+    )
+
+    args = parser.parse_args()
+
     # Example usage
     t = 0.1
     delta = 1.7639
-    xspan, Delta1, Delta2 = main(t, delta)
+    xspan, Delta1, Delta2 = main(
+        t, delta, reset_gap=args.reset_gap, single_iteration=args.single_iteration
+    )
