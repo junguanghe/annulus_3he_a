@@ -77,18 +77,20 @@ def propagator(
 
     # Riccati equations
     def ricatti1(Delta1: complex, Delta2: complex, y0: complex) -> complex:
-        return 1j * (
+        ret = 1j * (
             epsilon * y0
             + 0.5 * (Delta1 - 1j * Delta2) * y0**2
             + 0.5 * (Delta1 + 1j * Delta2)
         )
+        return ret / px
 
     def ricatti2(Delta1: complex, Delta2: complex, y0: complex) -> complex:
-        return -1j * (
+        ret = -1j * (
             epsilon * y0
             + 0.5 * (Delta1 + 1j * Delta2) * y0**2
             + 0.5 * (Delta1 - 1j * Delta2)
         )
+        return ret / px
 
     def RK4(
         func: Callable[[complex, complex, complex], complex],

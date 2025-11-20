@@ -7,8 +7,9 @@ from tqdm import tqdm
 
 # Add current directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-# from propagator_scipy import propagator
-from propagator import propagator
+from propagator_scipy import propagator
+
+# from propagator import propagator
 
 
 def _propagator_wrapper(
@@ -111,4 +112,5 @@ def gap_equation(
         Delta2_old = Delta2_new
 
     g *= 2 * t / delta
+    return xspan, Delta1_new, Delta2_new, g, n
     return xspan, Delta1_new, Delta2_new, g, n

@@ -26,7 +26,7 @@ def test_propagator_basic():
     # Test parameters
     t = 0.1
     delta = 1.7639
-    thetap = 0.1  # Angle parameter
+    thetap = np.pi / 2 * 0.96  # Angle parameter
 
     # Calculate epsilon for first Matsubara frequency (n=0)
     n = 0

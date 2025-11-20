@@ -100,6 +100,7 @@ def propagator(
             + 0.5 * (Delta1_t - 1j * Delta2_t) * a**2
             + 0.5 * (Delta1_t + 1j * Delta2_t)
         )
+        da_dx /= px
 
         # Convert back to real array
         return np.array([da_dx.real, da_dx.imag])
@@ -120,6 +121,7 @@ def propagator(
             + 0.5 * (Delta1_t + 1j * Delta2_t) * abar**2
             + 0.5 * (Delta1_t - 1j * Delta2_t)
         )
+        dabar_dx /= px
 
         # Convert back to real array
         return np.array([dabar_dx.real, dabar_dx.imag])
