@@ -176,16 +176,16 @@ Multiple it by the quasiparticle mass $p_f = m^* v_f$, and we get the mass curre
 where $\xi(T) = \hbar v_f/2|\Delta(T)|$ is the coherence length, and $n = N_fp_fv_f$ is the particle density.
 The ground state angular momentum in a cylinder is
 \begin{align} \label{L_eq}
-    \vb{L} & = \int_0^R \dd[3]r \vb{r} \times \vb{j}_m(\vb{r})            \\
-           & = 2\pi h\vu{z}\int_0^R \dd{r} r^2 j_m(r)                     \\
-           & \approx 2\pi R^2 h \vu{z}\int_{R-\xi}^R \dd{r} j_m(r)        \\
-           & \approx 2V\vu{z} \int_{R-\xi}^R \dd{r} j_m(r)                \\
+    \vb{L} & = \int_0^R \dd[2]r \vb{r} \times \vb{j}_m(\vb{r})            \\
+           & = 2\pi\vu{z}\int_0^R \dd{r} r^2 j_m(r)                       \\
+           & \approx 2\pi R^2\vu{z}\int_{R-\xi}^R \dd{r} j_m(r)           \\
+           & \approx 2V\vu{z} \int_0^R \dd{r} j_m(r)                      \\
            & = \frac{N}{2}\hbar \vu{z} \times\frac{4T}{\xi(T)|\Delta(T)|}
-    \int_{R-\xi}^R \dd{r} \sum_n\ev{p_y g(\vb{r}, \vb{p}, \epsilon_n)}_{p}
+    \int_0^R \dd{r} \sum_n\ev{p_y g(\vb{r}, \vb{p}, \epsilon_n)}_{p}
 \end{align}
 
 \section{Constant Gap}
-For constant gap, we have
+For constant gap, reference Sauls 2011, we have
 \begin{align}
     g(x, \vb{p}, \epsilon_n) = -\frac{\pi i\epsilon_n}{\lambda}
     - \frac{\pi\Delta_1}{\lambda}
@@ -200,7 +200,7 @@ as its Matsubara sum gives zero. After we integrate over the radial coordinate, 
     L = \frac{N}{2}\hbar \times \frac{4T}{\Delta}\sum_n
     \ev{p_y \pi\frac{\Delta_1^2}{\lambda} \frac{\Delta_2}{\Delta_2^2 + \epsilon_n^2}}_{p}
 \end{align}
-The angle integral gives
+According to ChatGPT and Gemini, the angle integral gives
 \begin{align}
     \int_0^{2\pi}\dd\theta_p \frac{p_x^2 p_y^2}{p_y^2 + a^2}
     = \pi \left(\sqrt{a^2 + 1} - |a|\right)^2
