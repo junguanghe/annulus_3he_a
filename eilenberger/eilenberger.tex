@@ -288,7 +288,7 @@ If you want temperature dependence of bulk gap, you can substitute in Eq. (\ref{
 
 \section{Riccati Parameterizations}
 The Riccati parameterization of the Green's function is
-\begin{align}
+\begin{align} \label{riccati_param}
     \widehat{g}
     = -i\pi\widehat{N}
     \begin{pmatrix}
@@ -385,6 +385,7 @@ We can also write the anomalous Green's function as corresponding components to 
 \begin{align} \label{f_decomp}
     \hat{f}(\vb{R}, \vb{p}, \epsilon_n)
     = \hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) + if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg) \\
+    \label{f_decomp_2}
     \hat{\underline{f}}(\vb{R}, \vb{p}, \epsilon_n)
     = -\hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) - if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg)
 \end{align}
@@ -394,7 +395,7 @@ where $f_{1,2}$ are complex functions, and we have
     = \hat{g}\widehat{\tau}_3 + i\hat{\sigma}_x(f_2\widehat{\tau}_1 + f_1\widehat{\tau}_2)
 \end{align}
 where
-\begin{align}
+\begin{align} \label{f_decomp_3}
     f_1 = \frac{f - \underline{f}}{2} \qq{and}
     f_2 = \frac{f + \underline{f}}{2i}
 \end{align}
@@ -409,16 +410,20 @@ and the gap iteration becomes
     \frac{2\sum_n \ev{\vb{p}_{x,y}\vdot\vb{p}'f_{1,2}(x, \vb{p}', n)}_{p'}}
     {\sum_n \frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}
 \end{align}
-We can only sum over the positive Matsubara frequencies and take real part because
-if we substitute Eq. (\ref{symmetry_relation}) into Eq. (\ref{f_decomp}), we get
+We only need to sum over the positive Matsubara frequencies and take real part because
+if we substitute Eq. (\ref{f_decomp},\ref{f_decomp_2}) into Eq. (\ref{symmetry_relation}), we get
+\begin{align}
+    f_1(\epsilon_n) - if_2(\epsilon_n) = f_1^*(-\epsilon_n) - if_2^*(-\epsilon_n)
+\end{align}
+Since $f_{1,2}$ are seperate components in the (particle-hole $\otimes$ spin) space, we have
 \begin{align}
     f_{1,2}(\epsilon_n) = f_{1,2}^*(-\epsilon_n)
 \end{align}
-and
+Similarly we also have
 \begin{align}
     -f_{1,2}(-\vb{p}, \vb{R}, \epsilon_n) = f_{1,2}(\vb{p}, \vb{R}, -\epsilon_n)
 \end{align}
-and we can also only average the angular part over a half circle, because
+and we also only need to average the angular part over a half circle, because
 \begin{align}
       & \int_{0}^{2\pi}\frac{\dd\theta_{p'}}{2\pi}  \vb{p}_{x,y}\vdot\vb{p}' f_{1,2}(\vb{p}', \vb{R}, \epsilon_n)     \\
     = & \left(\int_{-\pi/2}^{\pi/2} + \int_{\pi/2}^{3\pi/2}\right)\frac{\dd\theta_{p'}}{2\pi}\vb{p}_{x,y}\vdot\vb{p}'
@@ -460,10 +465,11 @@ The Ricatti equation is
 where $\xi = \hbar v_f/2|\Delta(T)|$,
 and $\partial_x = \xi\nabla_x$. The $p_x$ can be interpreted as the
 projection of quasiparticle trajectory along the $x$ direction.
-We can get $g$ and $f_{1,2}$ from
+We can get $g$ and $f_{1,2}$ from Eq. (\ref{f_decomp_3}) and Eq. (\ref{riccati_param}),
 \begin{align}
-    g = -i\pi\frac{1+a\underline{a}}{1-a\underline{a}} \\
-    f = f_1 + if_2 = -i\pi\frac{2a}{1-a\underline{a}}
+    g = -i\pi\frac{1+a\underline{a}}{1-a\underline{a}}    \\
+    f_1 = -i\pi\frac{a + \underline{a}}{1-a\underline{a}} \\
+    f_2 = -\pi\frac{a - \underline{a}}{1-a\underline{a}}
 \end{align}
 
 We first assume an initial guess for the gap function $\delta(\vb{r}, \vu{p})$.
