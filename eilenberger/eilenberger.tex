@@ -125,6 +125,18 @@ and
 \end{align}
 Here $\vb{R} = \frac{1}{2}(\vb{r} + \vb{r}')$ is the center of the pair.
 
+Reference Kita's book section 14.1 and Vorontsov 2003,
+from the definition of the Green's function,
+we have symmetry relations
+\begin{align} \label{symmetry_relation}
+    \hat{\underline{f}}(\vb{p}, \vb{R}; \epsilon_n)
+    = \hat{f}(-\vb{p}, \vb{R}; \epsilon_n)^*
+    = -\hat{f}(\vb{p}, \vb{R}; -\epsilon_n)^\dagger \\
+    \hat{\underline{g}}(\vb{p}, \vb{R}; \epsilon_n)
+    = \hat{g}(-\vb{p}, \vb{R}; \epsilon_n)^*
+    = \hat{g}(-\vb{p}, \vb{R}; -\epsilon_n)^T
+\end{align}
+
 \section{Current density}
 Reference Kita's book, section 14.3.3.
 The one-particle density matrix is
@@ -370,7 +382,7 @@ Here $\Delta_1(x)$ and $\Delta_2(x)$ are real functions, and we have
      & = i\hat{\sigma}_x(\Delta_2p_y\widehat{\tau}_1 + \Delta_1p_x\widehat{\tau}_2)
 \end{align}
 We can also write the anomalous Green's function as corresponding components to $\Delta_{1,2}$
-\begin{align}
+\begin{align} \label{f_decomp}
     \hat{f}(\vb{R}, \vb{p}, \epsilon_n)
     = \hat{\sigma}_x \bigg(f_1(\vb{R}, \vb{p}, \epsilon_n) + if_2(\vb{R}, \vb{p}, \epsilon_n) \bigg) \\
     \hat{\underline{f}}(\vb{R}, \vb{p}, \epsilon_n)
@@ -398,8 +410,27 @@ and the gap iteration becomes
     {\sum_n \frac{\pi}{\sqrt{|\Delta|^2 + \epsilon_n^2}}}
 \end{align}
 We can only sum over the positive Matsubara frequencies and take real part because
+if we substitute Eq. (\ref{symmetry_relation}) into Eq. (\ref{f_decomp}), we get
 \begin{align}
     f_{1,2}(\epsilon_n) = f_{1,2}^*(-\epsilon_n)
+\end{align}
+and
+\begin{align}
+    -f_{1,2}(-\vb{p}, \vb{R}, \epsilon_n) = f_{1,2}(\vb{p}, \vb{R}, -\epsilon_n)
+\end{align}
+and we can also only average the angular part over a half circle, because
+\begin{align}
+      & \int_{0}^{2\pi}\frac{\dd\theta_{p'}}{2\pi}  \vb{p}_{x,y}\vdot\vb{p}' f_{1,2}(\vb{p}', \vb{R}, \epsilon_n)     \\
+    = & \left(\int_{-\pi/2}^{\pi/2} + \int_{\pi/2}^{3\pi/2}\right)\frac{\dd\theta_{p'}}{2\pi}\vb{p}_{x,y}\vdot\vb{p}'
+    f_{1,2}(\vb{p}', \vb{R}, \epsilon_n)                                                                              \\
+    = & \int_{-\pi/2}^{\pi/2}\frac{\dd\theta_{p'} }{2\pi}\vb{p}_{x,y}\vdot\vb{p}'
+    \bigg[f_{1,2}(\vb{p}', \vb{R}, \epsilon_n) - f_{1,2}(-\vb{p}', \vb{R}, \epsilon_n)\bigg]                          \\
+    = & \int_{-\pi/2}^{\pi/2}\frac{\dd\theta_{p'} }{2\pi}\vb{p}_{x,y}\vdot\vb{p}'
+    \bigg[f_{1,2}(\vb{p}', \vb{R}, \epsilon_n) + f_{1,2}(\vb{p}', \vb{R}, -\epsilon_n)\bigg]                          \\
+    = & \int_{-\pi/2}^{\pi/2}\frac{\dd\theta_{p'} }{2\pi}\vb{p}_{x,y}\vdot\vb{p}'
+    \bigg[f_{1,2}(\vb{p}', \vb{R}, \epsilon_n) + f_{1,2}^*(\vb{p}', \vb{R}, \epsilon_n)\bigg]                         \\
+    = & \int_{-\pi/2}^{\pi/2}\frac{\dd\theta_{p'} }{\pi}\vb{p}_{x,y}\vdot\vb{p}'
+    \Re{f_{1,2}(\vb{p}', \vb{R}, \epsilon_n)}
 \end{align}
 
 \subsection{Numerical solution}
@@ -414,8 +445,8 @@ The bulk gap temperature dependence is
 The dimensionless iteration of the gap function is
 \begin{align}
     \delta_{1,2}(x) =
-    \frac{2\sum_{n>0} \ev{\vb{p}_{x,y}\vdot\vb{p}'\Re{f_{1,2}(x, \vb{p}', n)}}_{p'}}
-    {\sum_{n>0} \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}}
+    \frac{2\sum_{n\geq0} \ev{\vb{p}_{x,y}\vdot\vb{p}'\Re{f_{1,2}(x, \vb{p}', n)}}_{p'}}
+    {\sum_{n\geq0} \frac{\pi}{\sqrt{1 + e_n^2/\delta(t)^2}}}
 \end{align}
 where $t = T/T_c$, $\delta_{1,2}(x) = \Delta_{1,2}(x)/|\Delta(T)|$,
 $e_n = \epsilon_n/T_c$ and $\delta(t) = |\Delta(T)|/T_c$.
