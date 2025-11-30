@@ -137,97 +137,6 @@ we have symmetry relations
     = \hat{g}(-\vb{p}, \vb{R}; -\epsilon_n)^T
 \end{align}
 
-\section{Current density}
-Reference Kita's book, section 14.3.3.
-The one-particle density matrix is
-\begin{align}
-    \rho_{\uparrow\uparrow}(\vb{r}, \vb{r}')
-    \equiv \ev{\psi^\dagger_\uparrow(\vb{r}')\psi_\uparrow(\vb{r})}
-    = G_{\uparrow\uparrow}(\vb{r}, \vb{r}';0^-)
-    = T\sum_{n=-\infty}^{\infty} G_{\uparrow\uparrow}(\vb{r}, \vb{r}';i\epsilon_n)e^{-i\epsilon_n 0^-}
-\end{align}
-The local current density is
-\begin{align}
-    \vb{j}(\vb{R}) = T\sum_n\frac{1}{V}\sum_p\frac{\vb{p}}{m^*}
-    \Tr{\hat{G}(\vb{R}, \vb{p};i\epsilon_n)}
-\end{align}
-In 2d case, we have
-\begin{align}
-    \frac{1}{V}\sum_p = \int\frac{\dd[2]p}{(2\pi\hbar)^2}
-    =\iint \frac{p\dd\theta_p\dd p}{(2\pi\hbar)^2}
-    = \int N_f\dd\xi_p\int\frac{\dd\theta_p}{2\pi}
-    \qq{where} N_f = \frac{m^*}{2\pi\hbar^2}
-\end{align}
-The particle density is derived by dividing the total phase space volume $\pi k_f^2$
-by the volume of the unit cell $(2\pi/L)^2$, times 2 for spin.
-\begin{align}
-    N = 2\times\frac{\pi p_f^2/\hbar^2}{(2\pi/L)^2} = \frac{p_f^2}{2\pi\hbar^2}V
-    \rightarrow n = \frac{N}{V} = \frac{p_f^2}{2\pi\hbar^2} = N_fp_fv_f
-\end{align}
-In 3d case, we have
-\begin{align}
-    \frac{1}{V}\sum_p = \int\frac{\dd[3]p}{(2\pi\hbar)^3}
-    =\int\frac{m^*p\dd\xi_p}{2\pi^2\hbar^3} \frac{\dd\Omega_p}{4\pi}
-    \approx \int N_f\dd\xi_p\int\frac{\dd\Omega_p}{4\pi}
-    \qq{where} N_f = \frac{m^*p_f}{2\pi^2\hbar^3}
-\end{align}
-and
-\begin{align}
-    N = 2\times\frac{\frac{4}{3}\pi p_f^3/\hbar^3}{(2\pi/L)^3} = \frac{p_f^3}{3\pi^2\hbar^3}V
-    \rightarrow n = \frac{N}{V} = \frac{2}{3}N_fp_fv_f
-\end{align}
-Do the $\xi_p$ integration, we get
-\begin{align} \label{j_eq}
-    \vb{j}(\vb{R}) = 2N_fT\sum_n\ev{\vb{v}_p g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
-\end{align}
-Multiple it by the quasiparticle mass $p_f = m^* v_f$, and we get the mass current density:
-\begin{align}
-    \vb{j}_m(\vb{R}) \equiv m^*\vb{j}(\vb{R}) = \frac{N_fv_fp_f}{4}\hbar \times
-    \frac{4T}{\xi(T)|\Delta(T)|}\sum_n\ev{\vu{p} g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
-\end{align}
-where $\xi(T) = \hbar v_f/2|\Delta(T)|$ is the coherence length, and $n = N_fp_fv_f$ is the particle density.
-The ground state angular momentum in a cylinder is
-\begin{align} \label{L_eq}
-    \vb{L} & = \int_0^R \dd[2]r \vb{r} \times \vb{j}_m(\vb{r})            \\
-           & = 2\pi\vu{z}\int_0^R \dd{r} r^2 j_m(r)                       \\
-           & \approx 2\pi R^2\vu{z}\int_{R-\xi}^R \dd{r} j_m(r)           \\
-           & \approx 2V\vu{z} \int_0^R \dd{r} j_m(r)                      \\
-           & = \frac{N}{2}\hbar \vu{z} \times\frac{4T}{\xi(T)|\Delta(T)|}
-    \int_0^R \dd{r} \sum_n\ev{p_y g(\vb{r}, \vb{p}, \epsilon_n)}_{p}
-\end{align}
-
-\section{Constant Gap}
-For constant gap, reference Sauls 2011, we have
-\begin{align}
-    g(x, \vb{p}, \epsilon_n) = -\frac{\pi i\epsilon_n}{\lambda}
-    - \frac{\pi\Delta_1}{\lambda}
-    \frac{i\epsilon_n\Delta_1 + \lambda\Delta_2}{\Delta_2^2 + \epsilon_n^2}
-    e^{-\frac{\lambda}{\Delta_1}\frac{x}{\xi}}
-\end{align}
-where here we denote $\Delta_{1,2} \equiv \Delta p_{x,y}$,
-and $\lambda = \sqrt{\Delta^2 + \epsilon_n^2}$.
-The $i\epsilon_n$ term doesn't contribute to the angular momentum,
-as its Matsubara sum gives zero. After we integrate over the radial coordinate, we get
-\begin{align}
-    L = \frac{N}{2}\hbar \times \frac{4T}{\Delta}\sum_n
-    \ev{p_y \pi\frac{\Delta_1^2}{\lambda} \frac{\Delta_2}{\Delta_2^2 + \epsilon_n^2}}_{p}
-\end{align}
-According to ChatGPT and Gemini, the angle integral gives
-\begin{align}
-    \int_0^{2\pi}\dd\theta_p \frac{p_x^2 p_y^2}{p_y^2 + a^2}
-    = \pi \left(\sqrt{a^2 + 1} - |a|\right)^2
-\end{align}
-and we have
-\begin{align}
-    L=\frac{N}{2}\hbar \times
-    4\pi^2T\sum_n\frac{\left(\lambda-|\epsilon_n|\right)^2}{\Delta^2\lambda}
-\end{align}
-According to ChatGPT and Gemini, the Matsubara sum gives
-\begin{align}
-    L=\frac{N}{2}\hbar \times 2\pi
-\end{align}
-we are clearly missing a factor of $2\pi$ here.
-
 \section{Gap equation}
 Now we neglect the spin structure, i.e. discard the little hats.
 In bulk, we have
@@ -510,6 +419,97 @@ when step size is $h$, RK4 method gives
 When iteratively solving the Ricatti equation and the gap equation,
 we can interpolate the gap function to get the half step value
 $\delta_{1,2}(x_n + h/2)$.
+
+\section{Current density}
+Reference Kita's book, section 14.3.3.
+The one-particle density matrix is
+\begin{align}
+    \rho_{\uparrow\uparrow}(\vb{r}, \vb{r}')
+    \equiv \ev{\psi^\dagger_\uparrow(\vb{r}')\psi_\uparrow(\vb{r})}
+    = G_{\uparrow\uparrow}(\vb{r}, \vb{r}';0^-)
+    = T\sum_{n=-\infty}^{\infty} G_{\uparrow\uparrow}(\vb{r}, \vb{r}';i\epsilon_n)e^{-i\epsilon_n 0^-}
+\end{align}
+The local current density is
+\begin{align}
+    \vb{j}(\vb{R}) = T\sum_n\frac{1}{V}\sum_p\frac{\vb{p}}{m^*}
+    \Tr{\hat{G}(\vb{R}, \vb{p};i\epsilon_n)}
+\end{align}
+In 2d case, we have
+\begin{align}
+    \frac{1}{V}\sum_p = \int\frac{\dd[2]p}{(2\pi\hbar)^2}
+    =\iint \frac{p\dd\theta_p\dd p}{(2\pi\hbar)^2}
+    = \int N_f\dd\xi_p\int\frac{\dd\theta_p}{2\pi}
+    \qq{where} N_f = \frac{m^*}{2\pi\hbar^2}
+\end{align}
+The particle density is derived by dividing the total phase space volume $\pi k_f^2$
+by the volume of the unit cell $(2\pi/L)^2$, times 2 for spin.
+\begin{align}
+    N = 2\times\frac{\pi p_f^2/\hbar^2}{(2\pi/L)^2} = \frac{p_f^2}{2\pi\hbar^2}V
+    \rightarrow n = \frac{N}{V} = \frac{p_f^2}{2\pi\hbar^2} = N_fp_fv_f
+\end{align}
+In 3d case, we have
+\begin{align}
+    \frac{1}{V}\sum_p = \int\frac{\dd[3]p}{(2\pi\hbar)^3}
+    =\int\frac{m^*p\dd\xi_p}{2\pi^2\hbar^3} \frac{\dd\Omega_p}{4\pi}
+    \approx \int N_f\dd\xi_p\int\frac{\dd\Omega_p}{4\pi}
+    \qq{where} N_f = \frac{m^*p_f}{2\pi^2\hbar^3}
+\end{align}
+and
+\begin{align}
+    N = 2\times\frac{\frac{4}{3}\pi p_f^3/\hbar^3}{(2\pi/L)^3} = \frac{p_f^3}{3\pi^2\hbar^3}V
+    \rightarrow n = \frac{N}{V} = \frac{2}{3}N_fp_fv_f
+\end{align}
+Do the $\xi_p$ integration, we get
+\begin{align} \label{j_eq}
+    \vb{j}(\vb{R}) = 2N_fT\sum_n\ev{\vb{v}_p g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
+\end{align}
+Multiple it by the quasiparticle mass $p_f = m^* v_f$, and we get the mass current density:
+\begin{align}
+    \vb{j}_m(\vb{R}) \equiv m^*\vb{j}(\vb{R}) = \frac{N_fv_fp_f}{4}\hbar \times
+    \frac{4T}{\xi(T)|\Delta(T)|}\sum_n\ev{\vu{p} g(\vb{R}, \vb{p}, \epsilon_n)}_{p}
+\end{align}
+where $\xi(T) = \hbar v_f/2|\Delta(T)|$ is the coherence length, and $n = N_fp_fv_f$ is the particle density.
+The ground state angular momentum in a cylinder is
+\begin{align} \label{L_eq}
+    \vb{L} & = \int_0^R \dd[2]r \vb{r} \times \vb{j}_m(\vb{r})            \\
+           & = 2\pi\vu{z}\int_0^R \dd{r} r^2 j_m(r)                       \\
+           & \approx 2\pi R^2\vu{z}\int_{R-\xi}^R \dd{r} j_m(r)           \\
+           & \approx 2V\vu{z} \int_0^R \dd{r} j_m(r)                      \\
+           & = \frac{N}{2}\hbar \vu{z} \times\frac{4T}{\xi(T)|\Delta(T)|}
+    \int_0^R \dd{r} \sum_n\ev{p_y g(\vb{r}, \vb{p}, \epsilon_n)}_{p}
+\end{align}
+
+\section{Constant Gap}
+For constant gap, reference Sauls 2011, we have
+\begin{align}
+    g(x, \vb{p}, \epsilon_n) = -\frac{\pi i\epsilon_n}{\lambda}
+    - \frac{\pi\Delta_1}{\lambda}
+    \frac{i\epsilon_n\Delta_1 + \lambda\Delta_2}{\Delta_2^2 + \epsilon_n^2}
+    e^{-\frac{\lambda}{\Delta_1}\frac{x}{\xi}}
+\end{align}
+where here we denote $\Delta_{1,2} \equiv \Delta p_{x,y}$,
+and $\lambda = \sqrt{\Delta^2 + \epsilon_n^2}$.
+The $i\epsilon_n$ term doesn't contribute to the angular momentum,
+as its Matsubara sum gives zero. After we integrate over the radial coordinate, we get
+\begin{align}
+    L = \frac{N}{2}\hbar \times \frac{4T}{\Delta}\sum_n
+    \ev{p_y \pi\frac{\Delta_1^2}{\lambda} \frac{\Delta_2}{\Delta_2^2 + \epsilon_n^2}}_{p}
+\end{align}
+According to ChatGPT and Gemini, the angle integral gives
+\begin{align}
+    \int_0^{2\pi}\dd\theta_p \frac{p_x^2 p_y^2}{p_y^2 + a^2}
+    = \pi \left(\sqrt{a^2 + 1} - |a|\right)^2
+\end{align}
+and we have
+\begin{align}
+    L=\frac{N}{2}\hbar \times
+    4\pi^2T\sum_n\frac{\left(\lambda-|\epsilon_n|\right)^2}{\Delta^2\lambda}
+\end{align}
+According to ChatGPT and Gemini, the Matsubara sum gives
+\begin{align}
+    L=\frac{N}{2}\hbar \times 2\pi
+\end{align}
+we are clearly missing a factor of $2\pi$ here.
 
 \section{Analytic Continuation}
 For the integration contour $C$ being an infinite circle,
